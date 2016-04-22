@@ -1,6 +1,6 @@
 Router.configure({
   // the default layout
-  layoutTemplate: 'layout'
+  layoutTemplate: 'about'
 });
 
 Router.route('/', function () {
@@ -13,3 +13,4 @@ Router.route('/register', function () {
   this.render('register');
   this.layout('logRegHeader');
 });
+
