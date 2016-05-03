@@ -15,12 +15,12 @@ Router.route('/login', function () {
   this.render('login');
 });
 
-Router.route('/school', function () {
-  this.render('school');
+Router.route('/find-pi', function () {
+  this.render('find-pi');
 });
 
-Router.route('/school', function () {
-  this.render('school');
+Router.route('/rate-pi', function () {
+  this.render('rate-pi');
 });
 // Router.route('/register', function () {
 //   this.render('register');
