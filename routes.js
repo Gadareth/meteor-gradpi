@@ -1,7 +1,3 @@
-// Router.configure({
-//   // the default layout
-//   layoutTemplate: 'about'
-// });
 
 Router.route('/', function () {
   this.render('about');
@@ -22,8 +18,3 @@ Router.route('/find-pi', function () {
 Router.route('/rate-pi', function () {
   this.render('rate-pi');
 });
-// Router.route('/register', function () {
-//   this.render('register');
-//   this.layout('logRegHeader');
-// });
-
