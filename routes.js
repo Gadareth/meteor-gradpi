@@ -18,3 +18,7 @@ Router.route('/find-pi', function () {
 Router.route('/rate-pi', function () {
   this.render('rate-pi');
 });
+
+Router.route('/contact', function () {
+  this.render('contact');
+});
