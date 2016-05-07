@@ -22,3 +22,11 @@ Router.route('/rate-pi', function () {
 Router.route('/contact', function () {
   this.render('contact');
 });
+
+Router.route('/apprentice-bio', function () {
+  this.render('apprenticeBio');
+});
+
+Router.route('/profile', function () {
+  this.render('apprenticeProfileCopy');
+});

@@ -1,0 +1,48 @@
+<template name="apprenticeProfileCopy">
+    <div class="container-fluid">
+      <div id="main-body" class="row">
+         <div class="col-xs-12 col-md-4">
+           <div id="pic-container-apprentice">
+               <img class="img-responsive profile-pic" src="assets/placeholder_pic.jpg">
+          </div>
+         </div>
+
+         <div id="right-container-apprentice" class="col-xs-12 col-md-8">
+           {{#each find_apprentices}}
+           <div class="content-apprentice">
+             <h2 class="heading" id="name"> About Me </h2>
+              <p> {{ profile.summary }}</p>
+           </div>
+
+
+
+
+           <div class="content-apprentice" id="education">
+             <h3 class="heading"> Education </h3>
+                <p> {{ profile.education }} </p>
+                <p> {{ profile.education2 }} </p>
+
+           </div>
+
+           <div class="content-apprentice" id="links">
+             <h3 class="heading"> Links </h3>
+               <ul>
+                 <li> 
+                    <a href="{{ profile.gitHub }}"> GitHub </a>
+                 </li>
+                 <li>
+                   <a href="{{ profile.linkedIn }}"> LinkedIn </a>
+                 </li>
+
+               </ul>
+           </div>
+
+           <div class="content-apprentice" id="skills">
+             <h3 class="heading"> Proficient in: </h3>
+             {{ profile.proficiencies }}
+           </div>
+           {{/each}}
+          </div>
+         </div>
+       </div>
+</template>

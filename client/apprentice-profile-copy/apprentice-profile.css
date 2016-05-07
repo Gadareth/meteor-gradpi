@@ -1,0 +1,87 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,600italic,700italic,700);
+
+* {
+	margin: 0;
+	padding: 0;
+
+}
+
+body {
+	font-family: "Source Sans Pro", sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: white;
+}
+
+div#main-body {
+	width: 100%;
+	min-height: 500px;
+	background-color: white;
+
+}
+
+#pic-container-apprentice div{
+}
+
+#pic-container-apprentice img {
+	width: auto;
+	height: 100%;
+	display: block;
+}
+
+
+#center-container-apprentice {
+	min-height:500px;
+	margin: 0px 0px 0px 0px;
+}
+.heading {
+	font-weight: bold;
+}
+
+.content-apprentice {
+	width: 80%;
+	font-size: 115%;
+
+}
+
+.content-apprentice p {
+	/*margin-left: 10px;*/
+}
+
+.language-icons {
+	height: 15%;
+	width: 15%;
+}
+
+#bottom-row {
+
+	width: 100%;
+	height: 50px;
+	margin: 1px 0px 1px 0px;
+	background-color: #40AF83;
+	padding-left: 30px;
+
+}
+
+#bottom-row a {
+	text-decoration: none;
+	cursor: pointer;
+	color: white;
+
+}
+
+#bottom-row a:hover {
+	text-decoration: underline;
+	-moz-text-decoration-color: white;
+	text-decoration-color: white;
+
+}
+
+#bottom-row h3 {
+	font-weight: normal;
+	color: white;
+}
+
+.divider {
+	height: 50px;
+}

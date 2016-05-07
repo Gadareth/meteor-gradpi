@@ -1,0 +1,125 @@
+<!-- template for registration form -->
+<!-- template for registration form -->
+<template name="apprenticeBio">
+<form id="apprenticeBio">
+<div id="apprenticeBioDiv" class="container">
+
+  <fieldset class="form-group">
+    <label for="summary">Self-Summary</label>
+    <textarea class="form-control" id="summary" rows="3"></textarea>
+  </fieldset>
+
+  <!-- Cohort -->
+
+  <!-- <fieldset class="form-group">
+    <label for="checkbox-inline">Cohort</label>
+  </fieldset>
+
+  <div class="radio">
+    <label>
+      <input type="radio" name="optionsRadios" id="hartford" value="hartford" checked>
+      Hartford
+    </label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" name="optionsRadios" id="newhaven" value="newhaven">
+      New Haven
+    </label>
+  </div> -->
+
+  <!-- Availability -->
+
+  <div class="form-divider"></div>
+  <fieldset class="form-group">
+    <label for="checkbox-inline">Availability</label>
+  </fieldset>
+  <fieldset class="form-group">
+    <label class="checkbox-inline">
+      <input type="checkbox" id="fullTime" value="fullTime"> Full-time
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" id="partTime" value="partTime"> Part-time
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" id="internship" value="internship"> Internship
+    </label>
+  </fieldset>
+
+  <!-- Education -->
+
+  <fieldset class="form-group">
+    <label for="formGroupExampleInput" class="col-sm-2 form-control-label">Education</label>
+    <input type="text" class="col-sm-10 form-control" id="education" placeholder="School Name, Graduation Date (Degree/Certificate/Diploma) ">
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="formGroupExampleInput2" class="col-sm-2 form-control-label">Education 2</label>
+    <input type="text" class="col-sm-10 form-control" id="education2" placeholder="School Name, Graduation Date (Degree/Certificate/Diploma)">
+  </fieldset>
+
+  <!-- Links -->
+
+  <div class="form-group row">
+    <label for="githublink" class="col-sm-1 form-control-label">GitHub</label>
+    <div class="col-sm-11">
+      <input type="text" class="form-control" id="gitHub" placeholder="Github URL">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="linkedinlink" class="col-sm-1 form-control-label">LinkedIn</label>
+    <div class="col-sm-11">
+      <input type="text" class="form-control" id="linkedIn" placeholder="LinkedIn URL">
+    </div>
+  </div>
+
+  <!-- Proficiencies -->
+  <fieldset class="form-group">
+    <label for="checkbox-inline">Proficiency</label>
+  </fieldset>
+  <fieldset class="form-group">
+
+    <label class="checkbox-inline">
+      <input type="checkbox" id="git" value="git"> Git
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" id="htmlcss" value="htmlcss"> HTML &amp; CSS
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" id="javascript" value="javascript"> JavaScript
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" id="meteor" value="meteor"> Meteor
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" id="mongo" value="mongo"> MongoDB
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" id="nodeJS" value="nodeJS"> NodeJS
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" id="java" value="java"> Java
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" id="ruby" value="ruby"> Ruby
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" id="rubyOnRails" value="rubyNnRails"> Ruby on Rails
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" id="cPlusPlus" value="cPlusPlus"> C++
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" id="cSharp" value="cSharp"> C#
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" id="drupal" value="drupal"> Drupal
+    </label>
+
+  </fieldset>
+
+
+  <button type="submit" id="bioFormSubmit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+
+</template>
