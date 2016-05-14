@@ -30,3 +30,7 @@ Router.route('/apprentice-bio', function () {
 Router.route('/profile', function () {
   this.render('apprenticeProfileCopy');
 });
+
+Router.route('/choose-pi', function () {
+  this.render('choose-pi');
+});
