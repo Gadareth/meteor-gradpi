@@ -1,7 +1,8 @@
 import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 
-export const Apprentices = new Mongo.Collection('apprentices');
+export const Students = new Mongo.Collection('students');
+export const Advisors = new Mongo.Collection('advisors');
 
 // begin using Autoform to create sign up form
 //
@@ -21,13 +22,17 @@ export const Apprentices = new Mongo.Collection('apprentices');
 if (Meteor.isServer) {
 	// This code runs only on server
 	// Only publish apprentices that are public or belong to the current user
-	Meteor.publish('apprentices', function() {
-	return Apprentices.find({"_id": 1});
-	});
+	// If you retain autopublish you don't need these lines.
+	// Meteor.publish('students', function() {
+	// return Students.find({"_id": 1});
+	// });
 
 	Meteor.methods({
-	'add_apprentice'(profile){
-		Apprentices.update({ "_id": 1  }, { "profile": profile, createdAt: new Date() }, { upsert: true });
-			}
-		});
+	'add_student'(profile, id){
+		Students.update({ "_id": id }, { "profile": profile, createdAt: new Date() }, { upsert: true });
+			},
+	'add_advisor'(profile, id){
+		Advisors.update({ "_id": id }, { "profile": profile, createdAt: new Date() }, { upsert: true });
+			},
+	});
 }
