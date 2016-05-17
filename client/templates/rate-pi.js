@@ -1,5 +1,5 @@
 Template.ratepi.events({
-	'click #submit': function(event,template) {
+	'click #ratingSubmit': function(event,template) {
 		event.preventDefault();
 		var s,m,a,r,t;
 		var f;
