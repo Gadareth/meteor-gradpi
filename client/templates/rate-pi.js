@@ -2,7 +2,7 @@ Template.ratepi.events({
 	'click #submit': function(event,template) {
 		event.preventDefault();
 		var s,m,a,r,t;
-		var freeresponse;
+		var f;
 		let s1 = template.find("#sstar-1").checked;
 		let s2 = template.find("#sstar-2").checked;
 		let s3 = template.find("#sstar-3").checked;
@@ -93,10 +93,10 @@ Template.ratepi.events({
 		}	else {
 				alert("You didn't enter a rating for tact!")
 		}
-		freeresponse = template.find("submit").val;
-		let sid = 165;
-		let id = 421;
-		Meteor.call('rate_advisor',s,m,a,r,t,sid,id);
+		f = template.find("submit");
+		let sid = 265;
+		let id = 321;
+		Meteor.call('rate_advisor',s,m,a,r,t,sid,id,f);
 	}
 
 })

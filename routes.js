@@ -28,12 +28,16 @@ Router.route('/choose-pi', function () {
   this.render('choose-pi');
 });
 
-Router.route('/ratepi', function () {
+Router.route('/rate-pi', function () {
   this.render('ratepi');
 });
 
 Router.route('/contact', function () {
   this.render('contact');
+});
+
+Router.route('/add-pi', function () {
+  this.render('addpi');
 });
 
 

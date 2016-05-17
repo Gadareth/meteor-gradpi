@@ -46,7 +46,7 @@ if (Meteor.isServer) {
 			tact: 0, 
 		}, { upsert: true });
 	},
-	'rate_advisor'(s,m,a,r,t,sid,id){
+	'rate_advisor'(s,m,a,r,t,f,sid,id){
 		Advisors.update(
 			{ "_id": id }, 
 			{$push:{ 
@@ -57,7 +57,8 @@ if (Meteor.isServer) {
 					mentorship: m,
 					autonomy: a,
 					resources: r,
-					tact: t
+					tact: t,
+					free_response: f
 					}
 				}
 			},
