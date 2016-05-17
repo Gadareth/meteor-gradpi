@@ -93,9 +93,7 @@ Template.ratepi.events({
 		}	else {
 				alert("You didn't enter a rating for tact!")
 		}
-		f = template.find("submit");
-		let sid = 265;
-		let id = 321;
+		f = template.find("#comments");
 		Meteor.call('rate_advisor',s,m,a,r,t,sid,id,f);
 	}
 

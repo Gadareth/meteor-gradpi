@@ -2,7 +2,7 @@ Template.addpi.events({
 	'click #submit': function(event,template) {
 		event.preventDefault();
 		
-		db.advisors.insert({
+		advisors.insert({
 			name: "name",
 			school: "school",
 			s: 0,
@@ -11,5 +11,6 @@ Template.addpi.events({
 			r: 0,
 			t: 0
 		})
+	Meteor.call('add_advisor',s,m,a,r,t,sid,id,f);
 	}
 })
