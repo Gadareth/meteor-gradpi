@@ -1,4 +1,4 @@
-Template.apprenticeBio.events({
+Template.studentBio.events({
   'submit #apprenticeBio': function(event, template) {
 
     event.preventDefault();

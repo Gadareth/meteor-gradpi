@@ -1,3 +1,5 @@
+// Router.configure({layoutTemplate: "layout"});
+
 Router.route('/', function () {
   this.render('about');
 });
@@ -10,26 +12,30 @@ Router.route('/login', function () {
   this.render('login');
 });
 
+Router.route('/student-bio', function () {
+  this.render('studentBio');
+});
+
+Router.route('/profile', function () {
+  this.render('studentProfile');
+});
+
 Router.route('/find-pi', function () {
   this.render('find-pi');
 });
 
-Router.route('/rate-pi', function () {
-  this.render('rate-pi');
+Router.route('/choose-pi', function () {
+  this.render('choose-pi');
+});
+
+Router.route('/ratepi', function () {
+  this.render('ratepi');
 });
 
 Router.route('/contact', function () {
   this.render('contact');
 });
 
-Router.route('/apprentice-bio', function () {
-  this.render('apprenticeBio');
-});
 
-Router.route('/profile', function () {
-  this.render('apprenticeProfileCopy');
-});
 
-Router.route('/choose-pi', function () {
-  this.render('choose-pi');
-});
+

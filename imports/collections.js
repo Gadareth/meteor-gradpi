@@ -29,10 +29,39 @@ if (Meteor.isServer) {
 
 	Meteor.methods({
 	'add_student'(profile, id){
-		Students.update({ "_id": id }, { "profile": profile, createdAt: new Date() }, { upsert: true });
-			},
+		Students.update(
+			{ "_id": id }, 
+			{ "profile": profile, createdAt: new Date() }, 
+			{ upsert: true }
+		);
+	},
 	'add_advisor'(profile, id){
-		Advisors.update({ "_id": id }, { "profile": profile, createdAt: new Date() }, { upsert: true });
+		Advisors.insert({
+			//{ "_id": id }, 
+			"profile": profile, createdAt: new Date(),
+			stature: 0,
+			mentorship: 0,
+			autonomy: 0,
+			resources: 0,
+			tact: 0, 
+		}, { upsert: true });
+	},
+	'rate_advisor'(s,m,a,r,t,sid,id){
+		Advisors.update(
+			{ "_id": id }, 
+			{$push:{ 
+				"rating": 
+					{
+					student_id: sid,
+					stature: s,
+					mentorship: m,
+					autonomy: a,
+					resources: r,
+					tact: t
+					}
+				}
 			},
+			{ upsert: true });
+		},
 	});
 }
