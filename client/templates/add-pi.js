@@ -9,8 +9,9 @@ Template.addpi.events({
 			m: 0,
 			a: 0,
 			r: 0,
-			t: 0
+			t: 0,
+			f: null
 		})
-	Meteor.call('add_advisor',s,m,a,r,t,sid,id,f);
+	Meteor.call('add_advisor',s,m,a,r,t,f,name,school);
 	}
 })
