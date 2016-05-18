@@ -93,8 +93,8 @@ Template.ratepi.events({
 		}	else {
 				alert("You didn't enter a rating for tact!")
 		}
-		let name = ;
-		let school = ;
+		let name = "Jeffrey Townsend";
+		let school = "Yale";
 		f = template.find("#comments").val;
 		Meteor.call('rate_advisor',s,m,a,r,t,f,name,school);
 	}

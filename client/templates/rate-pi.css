@@ -7,13 +7,13 @@ p {
 }
 .tooltip-wrap .tooltip-content {
   display: none;
-  position: absolute;
+  position: relative;
   bottom: 5%;
   left: 5%;
   right: 5%;
   background-color: #fff;
-  padding: .5em;
+  /*padding: .5em;*/
 }
 .tooltip-wrap:hover .tooltip-content {
-  display: block;
+  display: inline;
 }
