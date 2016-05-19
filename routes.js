@@ -40,6 +40,10 @@ Router.route('/add-pi', function () {
   this.render('addpi');
 });
 
+Router.route('/advisor', function () {
+  this.render('advisor');
+});
+
 // Add route for schools. Google URL parameters for iron router.
 // Router.route('/school/:id', function (id) {
 //   wait

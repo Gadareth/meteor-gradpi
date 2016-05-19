@@ -22,3 +22,4 @@ twbs:bootstrap
 mrt:jquery-validate
 themeteorchef:jquery-validation
 fortawesome:fontawesome
+autopublish

@@ -24,32 +24,37 @@ if (Meteor.isServer) {
 	// This code runs only on server
 	// Only publish apprentices that are public or belong to the current user
 	// If you retain autopublish you don't need these lines.
-	// Meteor.publish('students', function() {
-	// return Students.find({"_id": 1});
-	// });
+	Meteor.publish('advisors', function() {
+	 	return Advisors.find();
+	});
 
 	Meteor.methods({
-	'add_student'(profile, id){
-		Students.update(
-			{ "_id": id }, 
-			{ "profile": profile, createdAt: new Date() }, 
-			{ upsert: true }
-		);
-	},
-	'add_advisor'(profile, id){
+	// 'add_student'(profile, id){
+	// 	Students.update(
+	// 		{ "_id": id }, 
+	// 		{ "profile": profile, createdAt: new Date() }, 
+	// 		{ upsert: true }
+	// 	);
+	// },
+	'add_advisor'(name,school){
+		console.log("add_advisor");
+		// console.log(name);
+		// console.log(school);
 		Advisors.insert({
-			//{ "_id": id }, 
-			"profile": profile, createdAt: new Date(),
+			// { "_id": id }, 
+			name: name,
+			school: school,
 			stature: 0,
 			mentorship: 0,
 			autonomy: 0,
 			resources: 0,
-			tact: 0, 
-		}, { upsert: true });
+			tact: 0,
+			free_response: null 
+		});
 	},
 	'rate_advisor'(s,m,a,r,t,f,name,school){
 		Advisors.update(
-			{ "_id": id }, 
+			// { "_id": "id" }, 
 			{$push:{ 
 				"rating": 
 					{

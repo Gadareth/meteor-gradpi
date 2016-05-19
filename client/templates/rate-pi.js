@@ -94,7 +94,13 @@ Template.ratepi.events({
 		}
 		let name = "Jeffrey";
 		let school = "Yale";
-		f = template.find("#comments").val;
+		f = template.find("#comments").value;
+
+		function removeTextAreaWhiteSpace() {
+			var myTxtArea = document.getElementById('#comments');
+			myTxtArea.value = myTxtArea.value.replace(/^\s*|\s*$/g,'');
+		}
+		
 		Meteor.call('rate_advisor',s,m,a,r,t,f,name,school);
 		Router.go('/');
 	}

@@ -1,17 +1,21 @@
 Template.addpi.events({
-	'click #submit': function(event,template) {
+	'click #piSubmit': function(event,template) {
 		event.preventDefault();
-		
-		advisors.insert({
-			name: "name",
-			school: "school",
-			s: 0,
-			m: 0,
-			a: 0,
-			r: 0,
-			t: 0,
-			f: null
-		})
-	Meteor.call('add_advisor',s,m,a,r,t,f,name,school);
+		// advisors.insert({	
+     	var name = template.find("#name").value;
+     	var school = template.find("#school").value;
+      	// Advisors.insert({
+       //    	name: name,
+       //    	school: school
+       //  });
+			// s: 0,
+			// m: 0,
+			// a: 0,
+			// r: 0,
+			// t: 0,
+			// f: null
+		// })
+	Meteor.call('add_advisor',name,school);
+	Router.go('/');
 	}
 })
