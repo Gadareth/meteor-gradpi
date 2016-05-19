@@ -4,8 +4,8 @@ Router.route('/', function () {
   this.render('about');
 });
 
-Router.route('/school', function () {
-  this.render('school');
+Router.route('/schools', function () {
+  this.render('schools');
 });
 
 Router.route('/login', function () {
@@ -40,6 +40,20 @@ Router.route('/add-pi', function () {
   this.render('addpi');
 });
 
+// Add route for schools. Google URL parameters for iron router.
+// Router.route('/school/:id', function (id) {
+//   wait
+// })
+
+// Add routes for advisor
+// Steps
+// 1. Create collection for schools, fill with data
+// 2. Make iron router routes for schools and advisors
+// 3. Make template for school (needs helper to load lists of advisors) 
+// 4. Make template for advisor
+// Derek
+// Make a page to choose PIs
+// Create a page showing the scores/rankings of each PIs
 
 
 

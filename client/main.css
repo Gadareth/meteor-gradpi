@@ -105,8 +105,3 @@ label.star:before {
   content: '\f006';
   font-family: FontAwesome;
 }
-
-textarea {
-	min-height: 200px;
-	min-width: 320px;
-}

@@ -5,15 +5,23 @@ p {
 .tooltip-wrap {
   position: relative;
 }
+
 .tooltip-wrap .tooltip-content {
   display: none;
-  position: relative;
-  bottom: 5%;
-  left: 5%;
-  right: 5%;
+  position: absolute;
+  top: 5%;
+  left: 10%;
+  /*right: 5%;*/
   background-color: #fff;
   /*padding: .5em;*/
+
 }
+
 .tooltip-wrap:hover .tooltip-content {
   display: inline;
+}
+
+textarea {
+  min-height: 200px;
+  min-width: 280px;
 }

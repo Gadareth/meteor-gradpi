@@ -1,4 +1,4 @@
-<template name = "school">
+<template name = "schools">
 	<body>
 		<!--Navigation Bar Code including links to IDs-->
 		{{>navbar}}
@@ -22,8 +22,11 @@
 								<b>Schools</b>
 								<br>
 								<ul>
-									<li>Albertus Magnus College</li>
-									<li>Gateway Community College</li>
+									{{#each school}}
+									<li><a href="/school/{{this._id}}">{{this.name}}</a></li>
+									{{/each}}
+
+									<!-- <li>Gateway Community College</li>
 									<li>Naugatuck Valley Community College</li>
 									<li>Paier College of Art</li>
 									<li>Post University</li>
@@ -31,7 +34,7 @@
 									<li>Southern Connecticut University</li>
 									<li>University of New Haven</li>
 									<li>University of Connecticut</li>
-									<li>Yale University</li>
+									<li>Yale University</li> -->
 								</ul>
 							</p>
 						</div>

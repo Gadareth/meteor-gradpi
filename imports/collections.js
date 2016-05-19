@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 
 export const Students = new Mongo.Collection('students');
 export const Advisors = new Mongo.Collection('advisors');
+export const Schools = new Mongo.Collection('schools');
 
 // begin using Autoform to create sign up form
 //
@@ -46,19 +47,20 @@ if (Meteor.isServer) {
 			tact: 0, 
 		}, { upsert: true });
 	},
-	'rate_advisor'(s,m,a,r,t,f,sid,id){
+	'rate_advisor'(s,m,a,r,t,f,name,school){
 		Advisors.update(
 			{ "_id": id }, 
 			{$push:{ 
 				"rating": 
 					{
-					student_id: sid,
 					stature: s,
 					mentorship: m,
 					autonomy: a,
 					resources: r,
 					tact: t,
-					free_response: f
+					free_response: f,
+					name: name,
+					school: school,
 					}
 				}
 			},

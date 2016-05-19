@@ -1,8 +1,7 @@
 Template.ratepi.events({
 	'click #ratingSubmit': function(event,template) {
 		event.preventDefault();
-		var s,m,a,r,t;
-		var f;
+		var s,m,a,r,t,f;
 		let s1 = template.find("#sstar-1").checked;
 		let s2 = template.find("#sstar-2").checked;
 		let s3 = template.find("#sstar-3").checked;
@@ -93,10 +92,11 @@ Template.ratepi.events({
 		}	else {
 				alert("You didn't enter a rating for tact!")
 		}
-		let name = "Jeffrey Townsend";
+		let name = "Jeffrey";
 		let school = "Yale";
 		f = template.find("#comments").val;
 		Meteor.call('rate_advisor',s,m,a,r,t,f,name,school);
+		Router.go('/');
 	}
 
 })
