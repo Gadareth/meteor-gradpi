@@ -28,7 +28,7 @@ Router.route('/choose-pi', function () {
   this.render('choose-pi');
 });
 
-Router.route('/rate-pi', function () {
+Router.route('/rate-pi/:id', function () {
   this.render('ratepi');
 });
 

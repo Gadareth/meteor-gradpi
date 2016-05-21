@@ -15,7 +15,16 @@ Template.addpi.events({
 			// t: 0,
 			// f: null
 		// })
-	Meteor.call('add_advisor',name,school);
-	Router.go('/');
+	Meteor.call('add_advisor',name,school, function(error,result){
+		console.info("Added PI");
+		console.log(result);
+		if(error){
+			console.log(error);
+		} else {
+			Router.go('/rate-pi/'+result);
+		}
+	});
+	// Router.go('/rate-pi');
+	// Session.set("name")= Advisor.name;
 	}
 })

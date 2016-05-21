@@ -28,6 +28,10 @@ if (Meteor.isServer) {
 	 	return Advisors.find();
 	});
 
+	Meteor.publish('advisor', function(id) {
+		return Advisors.findOne({_id: id});
+	});
+
 	Meteor.methods({
 	// 'add_student'(profile, id){
 	// 	Students.update(
@@ -40,7 +44,7 @@ if (Meteor.isServer) {
 		console.log("add_advisor");
 		// console.log(name);
 		// console.log(school);
-		Advisors.insert({
+		return Advisors.insert({
 			// { "_id": id }, 
 			name: name,
 			school: school,

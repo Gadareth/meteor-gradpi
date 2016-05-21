@@ -1,3 +1,11 @@
+import { Advisors } from '../../imports/collections.js';
+
+Template.ratepi.onCreated(function ratepiOnCreated() {
+	// console.log(id);
+	Meteor.subscribe('advisor');
+	console.log(Router.current().params);
+});
+
 Template.ratepi.events({
 	'click #ratingSubmit': function(event,template) {
 		event.preventDefault();
@@ -92,17 +100,42 @@ Template.ratepi.events({
 		}	else {
 				alert("You didn't enter a rating for tact!")
 		}
-		let name = "Jeffrey";
-		let school = "Yale";
 		f = template.find("#comments").value;
 
 		function removeTextAreaWhiteSpace() {
 			var myTxtArea = document.getElementById('#comments');
 			myTxtArea.value = myTxtArea.value.replace(/^\s*|\s*$/g,'');
 		}
-		
 		Meteor.call('rate_advisor',s,m,a,r,t,f,name,school);
 		Router.go('/');
 	}
+});
 
-})
+Template.ratepi.helpers({
+	thisAdvisor: function (){
+		console.log(advisors.find().count());
+		return Advisors.findOne({_id: Router.current().params});
+	}
+});
+
+// var name = Advisors.findOne({_id:});
+// name.name;
+// Sessions.
+
+
+
+// Meteor.call("api.go", payload, function(error, result) {
+// 	if(error){
+
+// 	}
+// }
+
+// advisor.rating = []
+
+// for (var i = Things.length - 1; i >= 0; i--) {
+// 	Things[i]
+// };
+
+//Step 1: route and page with professor at that route
+//Step 2: create methods for inserting and updating
+//
