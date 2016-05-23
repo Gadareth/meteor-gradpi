@@ -1,8 +1,7 @@
 import { Advisors } from '../../imports/collections.js';
 
 Template.ratepi.onCreated(function ratepiOnCreated() {
-	// console.log(id);
-	Meteor.subscribe('advisor');
+	Meteor.subscribe('advisors');
 	console.log(Router.current().params);
 });
 
@@ -109,8 +108,10 @@ Template.ratepi.events({
 
 Template.ratepi.helpers({
 	thisAdvisor: function (){
-		console.log(advisors.find().count());
-		return Advisors.findOne({_id: Router.current().params});
+		console.log(Advisors.find().count());
+		let returnVar = Advisors.findOne({_id: Router.current().params.id});
+		console.log(Advisors.find().fetch());
+		return returnVar;
 	}
 });
 
