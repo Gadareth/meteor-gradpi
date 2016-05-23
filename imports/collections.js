@@ -35,8 +35,8 @@ if (Meteor.isServer) {
 	Meteor.methods({
 	// 'add_student'(profile, id){
 	// 	Students.update(
-	// 		{ "_id": id }, 
-	// 		{ "profile": profile, createdAt: new Date() }, 
+	// 		{ "_id": id },
+	// 		{ "profile": profile, createdAt: new Date() },
 	// 		{ upsert: true }
 	// 	);
 	// },
@@ -45,7 +45,7 @@ if (Meteor.isServer) {
 		// console.log(name);
 		// console.log(school);
 		return Advisors.insert({
-			// { "_id": id }, 
+			// { "_id": id },
 			name: name,
 			school: school,
 			stature: 0,
@@ -53,27 +53,24 @@ if (Meteor.isServer) {
 			autonomy: 0,
 			resources: 0,
 			tact: 0,
-			free_response: null 
+			free_response: null
 		});
 	},
-	'rate_advisor'(s,m,a,r,t,f,name,school){
+	'rate_advisor'(id,s,m,a,r,t,f){
 		Advisors.update(
-			// { "_id": "id" }, 
-			{$push:{ 
-				"rating": 
+		 	{ "_id": id },
+			{$push:{
+				"rating":
 					{
 					stature: s,
 					mentorship: m,
 					autonomy: a,
 					resources: r,
 					tact: t,
-					free_response: f,
-					name: name,
-					school: school,
+					free_response: f
 					}
 				}
-			},
-			{ upsert: true });
+			});
 		},
 	});
 }

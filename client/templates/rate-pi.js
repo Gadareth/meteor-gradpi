@@ -1,13 +1,13 @@
 import { Advisors } from '../../imports/collections.js';
 
 Template.ratepi.onCreated(function ratepiOnCreated() {
-	// console.log(id);
-	Meteor.subscribe('advisor');
+	Meteor.subscribe('advisors');
 	console.log(Router.current().params);
 });
 
 Template.ratepi.events({
 	'click #ratingSubmit': function(event,template) {
+		console.log ("rate submit clicked");
 		event.preventDefault();
 		var s,m,a,r,t,f;
 		let s1 = template.find("#sstar-1").checked;
@@ -101,22 +101,25 @@ Template.ratepi.events({
 				alert("You didn't enter a rating for tact!")
 		}
 		f = template.find("#comments").value;
-
-		function removeTextAreaWhiteSpace() {
-			var myTxtArea = document.getElementById('#comments');
-			myTxtArea.value = myTxtArea.value.replace(/^\s*|\s*$/g,'');
-		}
-		Meteor.call('rate_advisor',s,m,a,r,t,f,name,school);
+		Meteor.call('rate_advisor',Router.current().params.id,s,m,a,r,t,f);
 		Router.go('/');
 	}
 });
 
 Template.ratepi.helpers({
 	thisAdvisor: function (){
-		console.log(advisors.find().count());
-		return Advisors.findOne({_id: Router.current().params});
+		console.log(Advisors.find().count());
+		let returnVar = Advisors.findOne({_id: Router.current().params.id});
+		console.log(Advisors.find().fetch());
+		return returnVar;
 	}
 });
+
+
+function removeTextAreaWhiteSpace() {
+	var myTxtArea = document.getElementById('#comments');
+	myTxtArea.value = myTxtArea.value.replace(/^\s*|\s*$/g,'');
+}
 
 // var name = Advisors.findOne({_id:});
 // name.name;
