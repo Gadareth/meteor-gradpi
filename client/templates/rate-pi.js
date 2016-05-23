@@ -8,6 +8,7 @@ Template.ratepi.onCreated(function ratepiOnCreated() {
 
 Template.ratepi.events({
 	'click #ratingSubmit': function(event,template) {
+		console.log ("rate submit clicked");
 		event.preventDefault();
 		var s,m,a,r,t,f;
 		let s1 = template.find("#sstar-1").checked;
@@ -101,11 +102,6 @@ Template.ratepi.events({
 				alert("You didn't enter a rating for tact!")
 		}
 		f = template.find("#comments").value;
-
-		function removeTextAreaWhiteSpace() {
-			var myTxtArea = document.getElementById('#comments');
-			myTxtArea.value = myTxtArea.value.replace(/^\s*|\s*$/g,'');
-		}
 		Meteor.call('rate_advisor',s,m,a,r,t,f,name,school);
 		Router.go('/');
 	}
@@ -117,6 +113,12 @@ Template.ratepi.helpers({
 		return Advisors.findOne({_id: Router.current().params});
 	}
 });
+
+
+function removeTextAreaWhiteSpace() {
+	var myTxtArea = document.getElementById('#comments');
+	myTxtArea.value = myTxtArea.value.replace(/^\s*|\s*$/g,'');
+}
 
 // var name = Advisors.findOne({_id:});
 // name.name;
