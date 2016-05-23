@@ -101,7 +101,7 @@ Template.ratepi.events({
 				alert("You didn't enter a rating for tact!")
 		}
 		f = template.find("#comments").value;
-		Meteor.call('rate_advisor',s,m,a,r,t,f,name,school);
+		Meteor.call('rate_advisor',Router.current().params.id,s,m,a,r,t,f);
 		Router.go('/');
 	}
 });
