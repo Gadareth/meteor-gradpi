@@ -120,25 +120,3 @@ function removeTextAreaWhiteSpace() {
 	var myTxtArea = document.getElementById('#comments');
 	myTxtArea.value = myTxtArea.value.replace(/^\s*|\s*$/g,'');
 }
-
-// var name = Advisors.findOne({_id:});
-// name.name;
-// Sessions.
-
-
-
-// Meteor.call("api.go", payload, function(error, result) {
-// 	if(error){
-
-// 	}
-// }
-
-// advisor.rating = []
-
-// for (var i = Things.length - 1; i >= 0; i--) {
-// 	Things[i]
-// };
-
-//Step 1: route and page with professor at that route
-//Step 2: create methods for inserting and updating
-//
