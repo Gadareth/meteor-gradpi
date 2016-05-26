@@ -22,3 +22,5 @@ twbs:bootstrap
 mrt:jquery-validate
 themeteorchef:jquery-validation
 fortawesome:fontawesome
+accounts-ui
+accounts-password
