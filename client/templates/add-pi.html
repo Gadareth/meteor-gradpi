@@ -3,6 +3,7 @@
 	<br>
 	<br>
 	<br>
+	{{#if currentUser}}
 	<form id="addpi">
 		<div id="addPiDiv" class="container">
 			<fieldset class>
@@ -31,4 +32,7 @@
 			</div>
 		</div>
 	</form>
+	{{else}}
+	<h2>Please login or register to add a PI!</h2>
+	{{/if}}
 </template>

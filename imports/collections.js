@@ -46,6 +46,9 @@ if (Meteor.isServer) {
 		// console.log(school);
 		return Advisors.insert({
 			// { "_id": id },
+			createdAt: new Date(),
+			owner: Meteor.userId(),
+      		username: Meteor.user().username,
 			name: name,
 			school: school,
 			stature: 0,
