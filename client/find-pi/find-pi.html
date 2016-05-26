@@ -2,37 +2,85 @@
 	<body>
 		<!--Navigation Bar Code including links to IDs-->
 		{{>navbar}}
-			<div class="section" id="about">
-				<div class="container">
-					<div class="row">
-						<!--First Column of About Section-->
-						<div class="col-sm-1">
-							<br>
-							<br>
-							<br>
-							<img src="images/GradPI-logo.png">
-						</div>
-						<!--Second Column of About Section-->
-						<div class="col-sm-5 col-sm-offset-3">
-							<p>
-								<br>
-								<br>
-								<br>
-								<br>
-								<b>PIs</b>
-								<br>
-								<ul>
-									<li>Hongyu Zhao</li>
-									<li>Jeffrey Townsend</li>
-									<li>Yuval Kluger</li>
-									<li>Ronald Breaker</li>
-									<li>Craig Crews</li>
-									<li>Forrest Crawford</li>
-								</ul>
-							</p>
-						</div>
+		<div class="section" id="about">
+			<div class="container">
+				<div class="row">
+					<!--First Column of About Section-->
+					<div class="col-sm-1">
+						<br>
+						<br>
+						<br>
+						<img src="images/GradPI-logo.png">
+					</div>
+					<!--Second Column of About Section-->
+					
+
+					<div class="col-sm-5 col-sm-offset-3">
+
+						<form class="controls" id="Filters">
+    						<div class="checkbox-dropdown" id= "ten">
+    							School
+        						<fieldset>
+        							<ul class="checkbox-dropdown-list">
+						            	<li>
+						                	<label>
+						                    	<input type="checkbox" value=".yale" name="school" />Yale
+						                	</label>
+						            	</li>
+						            	<li>
+						                	<label>
+						                    	<input type="checkbox" value=".columbia" name="school" />Columbia
+						                	</label>
+						            	</li>
+					            	</ul>
+					        	</fieldset>
+					        </div>
+							<div class="checkbox-dropdown" id= "eight">
+							Department
+        						<fieldset>
+						        	<ul class="checkbox-dropdown-list">
+							            <li>
+							                <label>
+							                    <input type="checkbox" value=".bioinfo" name="dept" />Bioinformatics</label>
+							            </li>
+							            <li>
+							                <label>
+							                    <input type="checkbox" value=".publichealth" name="dept" />Public Health</label>
+							            </li>
+						        	</ul>
+						        </fieldset>
+							</div>
+						</form>
 					</div>
 				</div>
-			</div>	
+			</div>
+		</div>
+
+		<div id="Container" class="container">
+		{{#each find_pi }}
+				{{> advisor }}
+
+		{{/each}}
+		</div>    							
+						<!-- <p>
+							<br>
+							<br>
+							<br>
+							<br>
+							<b>PIs</b>
+							<br>
+							<ul>
+								<li>Hongyu Zhao</li>
+								<li>Jeffrey Townsend</li>
+								<li>Yuval Kluger</li>
+								<li>Ronald Breaker</li>
+								<li>Craig Crews</li>
+								<li>Forrest Crawford</li>
+							</ul>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>	 -->
 	</body>
 </template>
