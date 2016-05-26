@@ -21,7 +21,7 @@ Router.route('/profile', function () {
 });
 
 Router.route('/find-pi', function () {
-  this.render('find-pi');
+  this.render('findPi');
 });
 
 Router.route('/choose-pi', function () {
