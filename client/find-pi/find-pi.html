@@ -13,7 +13,6 @@
 						<img src="images/GradPI-logo.png">
 					</div>
 					<!--Second Column of About Section-->
-					
 
 					<div class="col-sm-5 col-sm-offset-3">
 						<br>
@@ -49,7 +48,8 @@
 							            </li>
 							            <li>
 							                <label>
-							                    <input type="checkbox" value=".publichealth" name="dept" />Public Health</label>
+							                    <input type="checkbox" value=".publichealth" name="dept" />Public Health
+							                </label>
 							            </li>
 						        	</ul>
 						        </fieldset>
@@ -61,9 +61,10 @@
 		</div>
 
 		<div id="Container" class="container">
-		{{#each find_pi }}
-				{{> advisor }}
-
+		{{#each findAdvisors }}
+			{{name}} : {{school}}
+			<br>
+			<!-- {{> advisor }} -->
 		{{/each}}
 		</div>    							
 						<!-- <p>
