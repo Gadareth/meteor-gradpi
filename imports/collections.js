@@ -5,6 +5,12 @@ export const Students = new Mongo.Collection('students');
 export const Advisors = new Mongo.Collection('advisors');
 export const Schools = new Mongo.Collection('schools');
 
+var imageStore = new FS.Store.GridFS(“images”);
+
+Images = new FS.Collection(“images”, {
+ stores: [imageStore]
+});
+
 // begin using Autoform to create sign up form
 //
 // Apprentices.attachSchema(new SimpleSchema({
