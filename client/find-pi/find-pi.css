@@ -1,5 +1,5 @@
 .checkbox{
-  display: inline-block;
+  display: inline;
   position: relative;
   cursor: pointer;
   margin-bottom: 8px;
@@ -8,7 +8,7 @@
 
 .checkbox input[type="checkbox"]{
   position: absolute;
-  display: inline-block;
+  display: inline;
   top: 0;
   left: 0;
   height: 100%;
@@ -20,7 +20,7 @@
 }
 
 .checkbox label{
-  display: inline-block;
+  display: inline;
   vertical-align: top;
   text-align: left;
 }
@@ -28,7 +28,7 @@
 .checkbox label:before,
 .checkbox label:after{
   content: '';
-  display: inline-block;
+  display: inline;
   position: absolute;
 }
 
