@@ -24,3 +24,5 @@ themeteorchef:jquery-validation
 fortawesome:fontawesome
 accounts-ui
 accounts-password
+cfs:standard-packages
+cfs:gridfs
