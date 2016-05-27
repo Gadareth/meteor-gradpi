@@ -5,10 +5,40 @@ export const Students = new Mongo.Collection('students');
 export const Advisors = new Mongo.Collection('advisors');
 export const Schools = new Mongo.Collection('schools');
 
-var imageStore = new FS.Store.GridFS(“images”);
+var imageStore = new FS.Store.GridFS('images');
 
-Images = new FS.Collection(“images”, {
- stores: [imageStore]
+Images = new FS.Collection('images', {
+ 	stores: [imageStore]
+});
+
+Images.deny({
+	insert: function(){
+		return false;
+	},
+	update: function(){
+		return false;
+	},
+	remove: function(){
+		return false;
+	},
+	download: function(){
+		return false;
+	}
+});
+
+Images.allow({
+	insert: function(){
+		return true;
+	},
+	update: function(){
+		return true;
+	},
+	remove: function(){
+		return true;
+	},
+	download: function(){
+		return true;
+	}
 });
 
 // begin using Autoform to create sign up form
@@ -83,34 +113,5 @@ if (Meteor.isServer) {
 				}
 			});
 		},
-		Images.deny({
-	 		insert: function(){
-			return false;
-			},
-			update: function(){
-			return false;
-			},
-			remove: function(){
-			return false;
-			},
-			download: function(){
-			return false;
-			}
-		});
-
-		Images.allow({
-			insert: function(){
-			return true;
-			},
-			update: function(){
-			return true;
-			},
-			remove: function(){
-			return true;
-			},
-			download: function(){
-			return true;
-			}
-		});
 	});
 }
