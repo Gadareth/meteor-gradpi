@@ -65,10 +65,12 @@ if (Meteor.isServer) {
 			free_response: null
 		});
 	},
-	'rate_advisor'(id,s,m,a,r,t,f){
+	'rate_advisor'(id,s,m,a,r,t,f)
+		{
 		Advisors.update(
 		 	{ "_id": id },
-			{$push:{
+			{$push:
+				{
 				"rating":
 					{
 					stature: s,
@@ -81,5 +83,34 @@ if (Meteor.isServer) {
 				}
 			});
 		},
+		Images.deny({
+	 		insert: function(){
+			return false;
+			},
+			update: function(){
+			return false;
+			},
+			remove: function(){
+			return false;
+			},
+			download: function(){
+			return false;
+			}
+		});
+
+		Images.allow({
+			insert: function(){
+			return true;
+			},
+			update: function(){
+			return true;
+			},
+			remove: function(){
+			return true;
+			},
+			download: function(){
+			return true;
+			}
+		});
 	});
 }
