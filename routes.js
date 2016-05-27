@@ -40,7 +40,7 @@ Router.route('/add-pi', function () {
   this.render('addpi');
 });
 
-Router.route('/advisor', function () {
+Router.route('/advisor/:id', function () {
   this.render('advisor');
 });
 

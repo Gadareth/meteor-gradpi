@@ -16,16 +16,15 @@
     </div>
   </div>
   <div class="container">
-
-      <div class="mix">
-        <a href={{linker}}>
-          <div class = "crop">
-            <img src={{find_advisor_info}} alt=''>
-          </div>
-          <h4><b>{{ Advisors.name }} {{ Advisors.school }}</b></h4>
-          <p></p>
-        </a>
-      </div>
+    <div class="mix">
+      <a href={{linker}}>
+        <div class = "crop">
+          <img src={{find_advisor_info}} alt=''>
+        </div>
+        <h4><b>{{ thisAdvisor.name }} {{ thisAdvisor.school }}</b></h4>
+        <p></p>
+      </a>
+    </div>
   </div>
 </template>
 <!-- {{#each school}}
