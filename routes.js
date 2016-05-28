@@ -16,9 +16,9 @@ Router.route('/student-bio', function () {
   this.render('studentBio');
 });
 
-Router.route('/profile', function () {
-  this.render('studentProfile');
-});
+// Router.route('/profile', function () {
+//   this.render('studentProfile');
+// });
 
 Router.route('/find-pi', function () {
   this.render('findPi');
