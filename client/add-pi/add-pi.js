@@ -13,7 +13,7 @@ Template.addpi.events({
 			Router.go('/rate-pi/'+result);
 		}
 	});
-	}
+	},
 	'change .myFileInput': function(event, template) {
       FS.Utility.eachFile(event, function(file) {
         Images.insert(file, function (err, fileObj) {
@@ -23,7 +23,7 @@ Template.addpi.events({
              // handle success depending what you need to do
             var userId = Meteor.userId();
             var imagesURL = {
-              “profile.image”: “/cfs/files/images/“ + fileObj._id
+              "profile.image": "/cfs/files/images/" + fileObj._id
             };
             Meteor.users.update(userId, {$set: imagesURL});
           }
