@@ -44,6 +44,18 @@ Router.route('/advisor/:id', function () {
   this.render('advisor');
 });
 
+Router.route('/profile',{
+  waitOn: function () {
+  return Meteor.subscribe('images')
+  },
+  action: function () {
+  if (this.ready())
+  this.render('Profile');
+  else
+  this.render('Loading');
+  }
+});
+
 // Add route for schools. Google URL parameters for iron router.
 // Router.route('/school/:id', function (id) {
 //   wait
