@@ -76,7 +76,7 @@ if (Meteor.isServer) {
 	// 		{ upsert: true }
 	// 	);
 	// },
-	'add_advisor'(name,school){
+	'add_advisor'(name,school,dept){
 		console.log("add_advisor");
 		// console.log(name);
 		// console.log(school);
@@ -87,6 +87,7 @@ if (Meteor.isServer) {
       		username: Meteor.user().username,
 			name: name,
 			school: school,
+			dept: dept,
 			stature: 0,
 			mentorship: 0,
 			autonomy: 0,

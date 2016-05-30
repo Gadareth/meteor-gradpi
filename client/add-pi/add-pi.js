@@ -3,8 +3,9 @@ Template.addpi.events({
 		event.preventDefault();	
      	var name = template.find("#name").value;
      	var school = template.find("#school").value;
+      var dept = template.find("#dept").value;
       	
-	Meteor.call('add_advisor',name,school, function(error,result){
+	Meteor.call('add_advisor',name,school,dept, function(error,result){
 		console.info("Added PI");
 		console.log(result);
 		if(error){
