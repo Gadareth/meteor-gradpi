@@ -149,7 +149,7 @@ Template.findPi.onRendered(function(){
 
     $('#Container').mixItUp({
       controls: {
-        enable: true // we won't be needing these
+        enable: true
       },
       animation: {
         easing: 'cubic-bezier(0.86, 0, 0.07, 1)',

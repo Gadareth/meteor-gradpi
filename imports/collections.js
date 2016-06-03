@@ -76,7 +76,7 @@ if (Meteor.isServer) {
 	// 		{ upsert: true }
 	// 	);
 	// },
-	'add_advisor'(name,school,dept){
+	'add_advisor'(name,school,dept,image){
 		console.log("add_advisor");
 		// console.log(name);
 		// console.log(school);
@@ -88,6 +88,7 @@ if (Meteor.isServer) {
 			name: name,
 			school: school,
 			dept: dept,
+			image: image,
 			stature: 0,
 			mentorship: 0,
 			autonomy: 0,
