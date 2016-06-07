@@ -11,21 +11,6 @@ Images = new FS.Collection('images', {
  	stores: [imageStore]
 });
 
-Images.deny({
-	insert: function(){
-		return false;
-	},
-	update: function(){
-		return false;
-	},
-	remove: function(){
-		return false;
-	},
-	download: function(){
-		return false;
-	}
-});
-
 Images.allow({
 	insert: function(){
 		return true;
@@ -67,6 +52,10 @@ if (Meteor.isServer) {
 	Meteor.publish('advisor', function(id) {
 		return Advisors.findOne({_id: id});
 	});
+
+	Meteor.publish('images', function() {
+		return Images.find({});
+	}); 
 
 	Meteor.methods({
 	// 'add_student'(profile, id){
