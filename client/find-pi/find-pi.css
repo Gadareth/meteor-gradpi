@@ -81,14 +81,6 @@
     font-size: 125%;
 }
 
-#ten {
-  z-index: 10;
-}
-
-#eight {
-  z-index: 8;
-}
-
 .checkbox-dropdown:after {
     content:'';
     height: 0;
@@ -126,7 +118,7 @@
     transition: opacity 0.4s ease-in-out;
     pointer-events: none; /* avoid mouse click events inside the dropdown */
 }
-.is-active .checkbox-dropdown-list {
+.checkbox-dropdown-list .is-active {
     opacity: 1; /* display the dropdown */
     pointer-events: auto; /* make sure that the user still can select checkboxes */
 }
@@ -147,4 +139,16 @@
 .checkbox-dropdown-list li label:hover {
     background-color: #00619C;
     color: white;
+}
+
+#eight {
+  z-index: 8;
+}
+
+#ten {
+  z-index: 10;
+}
+
+img {
+  width: 200px;
 }
