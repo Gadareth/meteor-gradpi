@@ -23,11 +23,11 @@ Template.addpi.events({
 		event.preventDefault();	
      	var name = template.find("#name").value;
      	var school = template.find("#school").value;
-      var dept = template.find("#dept").value;
-      var image = imagesURL;
+      	var dept = template.find("#dept").value;
+      	var image = imagesURL;
       	
 	Meteor.call('add_advisor',name,school,dept,image, function(error,result){
-		console.info("Added PI");
+		// console.info("Added PI");
 		console.log(result);
 		if(error){
 			console.log(error);
@@ -37,8 +37,5 @@ Template.addpi.events({
 		}
 	});
 
-
-
- 
   }
 });

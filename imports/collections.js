@@ -5,10 +5,6 @@ export const Students = new Mongo.Collection('students');
 export const Advisors = new Mongo.Collection('advisors');
 export const Schools = new Mongo.Collection('schools');
 
-Advisors._ensureIndex({name: 1}, {unique: 1});
-Schools._ensureIndex({name: 1}, {unique: 1});
-Students._ensureIndex({name: 1}, {unique: 1});
-
 var imageStore = new FS.Store.GridFS('images');
 
 Images = new FS.Collection('images', {
@@ -29,6 +25,9 @@ Images.allow({
 		return true;
 	}
 });
+
+//Code for Unique Name and School
+//Advisors.createIndex({name: 1, school: 1}, {unique: true});
 
 // begin using Autoform to create sign up form
 //
@@ -73,8 +72,8 @@ if (Meteor.isServer) {
 		console.log("add_advisor");
 		// console.log(name);
 		// console.log(school);
+		Advisors._ensureIndex('name', {unique: 1});
 		return Advisors.insert({
-			// { "_id": id },
 			createdAt: new Date(),
 			owner: Meteor.userId(),
       		username: Meteor.user().username,
