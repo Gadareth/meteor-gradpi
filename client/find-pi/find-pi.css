@@ -25,12 +25,12 @@
   text-align: left;
 }
 
-.checkbox label:before,
+/*.checkbox label:before,
 .checkbox label:after{
   content: '';
   display: inline;
   position: absolute;
-}
+}*/
 
 .checkbox label:before{
   left: 0;
@@ -98,6 +98,7 @@
     border-bottom-color: #000;
     border-top-color: #fff;
     margin-top: -9px;
+    z-index: 1;
 }
 
 .checkbox-dropdown-list {
@@ -110,7 +111,7 @@
     border-top: none;
     left: -1px; /* align the dropdown to the left */
     right: -1px; /* align the dropdown to the right */
-    opacity: 0; /* hide the dropdown */
+    opacity: 0; /* show the dropdown */
     -webkit-transition: opacity 0.4s ease-in-out;
     -moz-transition: opacity 0.4s ease-in-out;
     -o-transition: opacity 0.4s ease-in-out;
@@ -118,7 +119,7 @@
     transition: opacity 0.4s ease-in-out;
     pointer-events: none; /* avoid mouse click events inside the dropdown */
 }
-.checkbox-dropdown-list .is-active {
+.is-active .checkbox-dropdown-list {
     opacity: 1; /* display the dropdown */
     pointer-events: auto; /* make sure that the user still can select checkboxes */
 }
@@ -134,6 +135,7 @@
     transition: all 0.2s ease-out;
     background-color: #0090BE;
     margin-bottom: 0px;
+    z-index: 2;
 }
 
 .checkbox-dropdown-list li label:hover {
