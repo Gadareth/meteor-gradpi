@@ -1,3 +1,7 @@
+img {
+  width: 200px;
+}
+
 .checkbox{
   display: inline;
   position: relative;
@@ -19,27 +23,18 @@
   z-index: 1;
 }
 
+.checkbox input:checked ~ label:after{
+  opacity: 1;
+}
+
+.checkbox input:focus ~ label:before{
+  background: #eee;
+}
+
 .checkbox label{
   display: inline;
   vertical-align: top;
   text-align: left;
-}
-
-/*.checkbox label:before,
-.checkbox label:after{
-  content: '';
-  display: inline;
-  position: absolute;
-}*/
-
-.checkbox label:before{
-  left: 0;
-  top: 0;
-  width: 18px;
-  height: 18px;
-  margin-right: 10px;
-  background: #ddd;
-  border-radius: 3px;
 }
 
 .checkbox label:after{
@@ -55,12 +50,14 @@
   pointer-events: none;
 }
 
-.checkbox input:checked ~ label:after{
-  opacity: 1;
-}
-
-.checkbox input:focus ~ label:before{
-  background: #eee;
+.checkbox label:before{
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  background: #ddd;
+  border-radius: 3px;
 }
 
 .checkbox-dropdown {
@@ -94,7 +91,7 @@
 }
 
 /* Reverse the CSS arrow when the dropdown is active */
-.checkbox-dropdown.is-active:after {
+.checkbox-dropdown .is-active:after {
     border-bottom-color: #000;
     border-top-color: #fff;
     margin-top: -9px;
@@ -119,7 +116,8 @@
     transition: opacity 0.4s ease-in-out;
     pointer-events: none; /* avoid mouse click events inside the dropdown */
 }
-.is-active .checkbox-dropdown-list {
+
+.checkbox-dropdown-list .is-active {
     opacity: 1; /* display the dropdown */
     pointer-events: auto; /* make sure that the user still can select checkboxes */
 }
@@ -143,14 +141,19 @@
     color: white;
 }
 
+#Container{
+  min-height: 400px;
+  min-width: 250px;
+  text-align: justify;
+  position: relative;
+  vertical-align: top;
+  text-align: center;
+}
+
 #eight {
   z-index: 8;
 }
 
 #ten {
   z-index: 10;
-}
-
-img {
-  width: 200px;
 }
