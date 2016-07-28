@@ -115,7 +115,6 @@ Template.ratepi.helpers({
 	}
 });
 
-
 function removeTextAreaWhiteSpace() {
 	var myTxtArea = document.getElementById('#comments');
 	myTxtArea.value = myTxtArea.value.replace(/^\s*|\s*$/g,'');

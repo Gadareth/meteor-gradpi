@@ -1,6 +1,7 @@
 // Router.configure({layoutTemplate: "layout"});
 
 Router.route('/', function () {
+  // console.log('about');
   this.render('about');
 });
 
@@ -21,6 +22,7 @@ Router.route('/student-bio', function () {
 // });
 
 Router.route('/find-pi', function () {
+  console.log("find PI");
   this.render('findPi');
 });
 
@@ -55,6 +57,8 @@ Router.route('/profile',{
   this.render('Loading');
   }
 });
+
+
 
 // Add route for schools. Google URL parameters for iron router.
 // Router.route('/school/:id', function (id) {
