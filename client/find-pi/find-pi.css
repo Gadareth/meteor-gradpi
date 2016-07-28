@@ -1,3 +1,7 @@
+img {
+  width: 200px;
+}
+
 .checkbox{
   display: inline;
   position: relative;
@@ -19,27 +23,18 @@
   z-index: 1;
 }
 
+.checkbox input:checked ~ label:after{
+  opacity: 1;
+}
+
+.checkbox input:focus ~ label:before{
+  background: #eee;
+}
+
 .checkbox label{
   display: inline;
   vertical-align: top;
   text-align: left;
-}
-
-.checkbox label:before,
-.checkbox label:after{
-  content: '';
-  display: inline;
-  position: absolute;
-}
-
-.checkbox label:before{
-  left: 0;
-  top: 0;
-  width: 18px;
-  height: 18px;
-  margin-right: 10px;
-  background: #ddd;
-  border-radius: 3px;
 }
 
 .checkbox label:after{
@@ -55,12 +50,14 @@
   pointer-events: none;
 }
 
-.checkbox input:checked ~ label:after{
-  opacity: 1;
-}
-
-.checkbox input:focus ~ label:before{
-  background: #eee;
+.checkbox label:before{
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  background: #ddd;
+  border-radius: 3px;
 }
 
 .checkbox-dropdown {
@@ -81,14 +78,6 @@
     font-size: 125%;
 }
 
-#ten {
-  z-index: 10;
-}
-
-#eight {
-  z-index: 8;
-}
-
 .checkbox-dropdown:after {
     content:'';
     height: 0;
@@ -102,10 +91,11 @@
 }
 
 /* Reverse the CSS arrow when the dropdown is active */
-.checkbox-dropdown.is-active:after {
+.checkbox-dropdown .is-active:after {
     border-bottom-color: #000;
     border-top-color: #fff;
     margin-top: -9px;
+    z-index: 1;
 }
 
 .checkbox-dropdown-list {
@@ -118,7 +108,7 @@
     border-top: none;
     left: -1px; /* align the dropdown to the left */
     right: -1px; /* align the dropdown to the right */
-    opacity: 0; /* hide the dropdown */
+    opacity: 0; /* show the dropdown */
     -webkit-transition: opacity 0.4s ease-in-out;
     -moz-transition: opacity 0.4s ease-in-out;
     -o-transition: opacity 0.4s ease-in-out;
@@ -126,7 +116,8 @@
     transition: opacity 0.4s ease-in-out;
     pointer-events: none; /* avoid mouse click events inside the dropdown */
 }
-.is-active .checkbox-dropdown-list {
+
+.checkbox-dropdown-list .is-active {
     opacity: 1; /* display the dropdown */
     pointer-events: auto; /* make sure that the user still can select checkboxes */
 }
@@ -142,9 +133,95 @@
     transition: all 0.2s ease-out;
     background-color: #0090BE;
     margin-bottom: 0px;
+    z-index: 2;
 }
 
 .checkbox-dropdown-list li label:hover {
     background-color: #00619C;
     color: white;
+}
+
+/* Container class and ID selectors */
+
+.container .mix,
+.container .gap{
+  width: 5px;
+  display: inline-flex;
+  margin: 0 1%;
+}
+
+.container .mix{
+  width: 200px;
+  height: 60px;
+  margin: 5%;
+  background: white;
+  display: flex;
+}
+
+/*Fail message styles*/
+
+.container .fail-message{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+
+  -webkit-transition: 150ms;
+  -moz-transition: 150ms;
+  transition: 150ms;
+}
+
+.container .fail-message:before{
+  content: '';
+  display: inline-flex;
+  vertical-align: middle;
+  height: 100%;
+}
+
+.container .fail-message span{
+  display: inline-flex;
+  vertical-align: middle;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.container.fail .fail-message{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.container img {
+  width: 200px;
+  height: auto;
+  text-align: center;
+  vertical-align: top;
+}
+
+.container h1 {
+  text-align: center;
+}
+
+.container div {
+  text-align: center;
+}
+
+#Container{
+  min-height: 400px;
+  min-width: 250px;
+  text-align: justify;
+  position: relative;
+  vertical-align: top;
+  text-align: center;
+}
+
+#eight {
+  z-index: 8;
+}
+
+#ten {
+  z-index: 10;
 }
