@@ -133,9 +133,9 @@ Template.findPi.onRendered(function(){
 
       // Send the output string to MixItUp via the 'filter' method:
 
-  	  if(self.$container.mixItUp('isLoaded')){
-      	self.$container.mixItUp('filter', self.outputString);
-  	  }
+  	  // if(self.$container.mixItUp('isLoaded')){
+     //  	self.$container.mixItUp('filter', self.outputString);
+  	  // }
     }
   };
 
@@ -147,25 +147,27 @@ Template.findPi.onRendered(function(){
 
     // Instantiate MixItUp
 
-    $('#Container').mixItUp({
-      controls: {
-        enable: true
-      },
-      animation: {
-        easing: 'cubic-bezier(0.86, 0, 0.07, 1)',
-        duration: 600
-      }
-    });
+    // $('#Container').mixItUp({
+    //   controls: {
+    //     enable: true
+    //   },
+    //   animation: {
+    //     easing: 'cubic-bezier(0.86, 0, 0.07, 1)',
+    //     duration: 600
+    //   }
+    // });
   });
 
 //Dropdown Checkbox Functionality
 
   $(".checkbox-dropdown").click(function () {
     $(this).toggleClass("is-active");
+    console.error("No dropdown!");
   });
 
   $(".checkbox-dropdown ul").click(function(e) {
     e.stopPropagation();
+    console.error("No dropdown!");
   });
 
 });
