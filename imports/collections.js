@@ -75,8 +75,8 @@ if (Meteor.isServer) {
 		//Advisors._ensureIndex('name', {unique: 1});
 		return Advisors.insert({
 			createdAt: new Date(),
-			owner: Meteor.userId(),
-      		username: Meteor.user().username,
+			//owner: Meteor.userId(),
+      		//username: Meteor.user().username,
 			name: name,
 			school: school,
 			dept: dept,

@@ -98,17 +98,19 @@
 		</div>
 
 		<div id="Container" class="container">
-		{{#each findAdvisors }}
-			{{name}}
-			<br>
-			{{school}}
-			<br>
-			{{dept}}
-			<br>
-			<img src={{image}}>
-			<br>
-			<br>
-		{{/each}}
+			{{#each findAdvisors }}
+				<div class="col-sm-3">
+					{{name}}
+					<br>
+					{{school}}
+					<br>
+					{{dept}}
+					<br>
+					<img src={{image}}>
+					<br>
+					<br>
+				</div>
+			{{/each}}}
 		</div>    							
 	</body>
 </template>
