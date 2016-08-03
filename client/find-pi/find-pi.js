@@ -178,12 +178,23 @@ Template.findPi.helpers({
     findAdvisors: function(){
       const instance = Template.instance();
       let clicked_school = instance.state.get('school');
-      if(clicked_school) {
-        return Advisors.find({school: clicked_school});
+      let clicked_dept = instance.state.get('dept');
+      if(clicked_school || clicked_dept) {
+        if(clicked_school && clicked_dept){ 
+          return Advisors.find({school: clicked_school, dept: clicked_dept });
+        }
+        else if(clicked_school && !(clicked_dept)){
+          return Advisors.find({school: clicked_school });
+        }
+        else if(clicked_dept && !(clicked_school)){
+          return Advisors.find({dept: clicked_dept });
+        }
       }
       return Advisors.find();
     }
 });
+
+let state_arr = [];
 
 Template.findPi.events({
     'click'(event){
@@ -191,10 +202,19 @@ Template.findPi.events({
     },
     'change .school'(event, instance) {
       if(event.target.checked){
+        
         instance.state.set('school', event.target.value);
       } 
       else {
         instance.state.set('school', false);
+      }
+    },
+    'change .dept'(event, instance) {
+      if(event.target.checked){
+        instance.state.set('dept', event.target.value);
+      } 
+      else {
+        instance.state.set('dept', false);
       }
     }
 });
