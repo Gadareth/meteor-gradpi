@@ -190,6 +190,11 @@ Template.findPi.events({
         console.log(event.target.value);
     },
     'change .school'(event, instance) {
+      if(event.target.checked){
         instance.state.set('school', event.target.value);
+      } 
+      else {
+        instance.state.set('school', false);
+      }
     }
 });
