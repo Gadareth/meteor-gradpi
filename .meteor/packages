@@ -29,3 +29,4 @@ cfs:gridfs
 accounts-facebook
 accounts-google
 accounts-github
+reactive-dict

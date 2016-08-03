@@ -1,8 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Advisors } from '../../imports/collections.js';
+import { ReactiveDict } from 'meteor/reactive-dict';
 
 Template.findPi.onCreated(function bodyOnCreated() {
+  this.state = new ReactiveDict();
   Meteor.subscribe('advisors',function () {
     // console.log(advisors.find().count());
   })
@@ -165,15 +167,29 @@ Template.findPi.onRendered(function(){
     console.error("No dropdown!");
   });
 
-  $(".checkbox-dropdown ul").click(function(e) {
-    e.stopPropagation();
-    console.error("No dropdown!");
-  });
+  // $(".checkbox-dropdown ul").click(function(e) {
+  //   e.stopPropagation();
+  //   console.error("No dropdown!");
+  // });
 
 });
 
 Template.findPi.helpers({
     findAdvisors: function(){
+      const instance = Template.instance();
+      let clicked_school = instance.state.get('school');
+      if(clicked_school) {
+        return Advisors.find({school: clicked_school});
+      }
       return Advisors.find();
+    }
+});
+
+Template.findPi.events({
+    'click'(event){
+        console.log(event.target.value);
+    },
+    'change .school'(event, instance) {
+        instance.state.set('school', event.target.value);
     }
 });
