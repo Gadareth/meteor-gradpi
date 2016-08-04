@@ -11,21 +11,6 @@ Images = new FS.Collection('images', {
  	stores: [imageStore]
 });
 
-Images.deny({
-	insert: function(){
-		return false;
-	},
-	update: function(){
-		return false;
-	},
-	remove: function(){
-		return false;
-	},
-	download: function(){
-		return false;
-	}
-});
-
 Images.allow({
 	insert: function(){
 		return true;
@@ -40,6 +25,9 @@ Images.allow({
 		return true;
 	}
 });
+
+//Code for Unique Name and School
+//Advisors.createIndex({name: 1, school: 1}, {unique: true});
 
 // begin using Autoform to create sign up form
 //
@@ -68,6 +56,10 @@ if (Meteor.isServer) {
 		return Advisors.findOne({_id: id});
 	});
 
+	Meteor.publish('images', function() {
+		return Images.find({});
+	}); 
+
 	Meteor.methods({
 	// 'add_student'(profile, id){
 	// 	Students.update(
@@ -80,8 +72,8 @@ if (Meteor.isServer) {
 		console.log("add_advisor");
 		// console.log(name);
 		// console.log(school);
+		Advisors._ensureIndex('name', {unique: 1});
 		return Advisors.insert({
-			// { "_id": id },
 			createdAt: new Date(),
 			owner: Meteor.userId(),
       		username: Meteor.user().username,

@@ -26,3 +26,6 @@ accounts-ui
 accounts-password
 cfs:standard-packages
 cfs:gridfs
+accounts-facebook
+accounts-google
+accounts-github
