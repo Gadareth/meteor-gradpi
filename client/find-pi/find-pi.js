@@ -1,8 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Advisors } from '../../imports/collections.js';
+import { ReactiveDict } from 'meteor/reactive-dict';
 
 Template.findPi.onCreated(function bodyOnCreated() {
+  this.state = new ReactiveDict();
   Meteor.subscribe('advisors',function () {
     // console.log(advisors.find().count());
   })
@@ -165,15 +167,58 @@ Template.findPi.onRendered(function(){
     console.error("No dropdown!");
   });
 
-  $(".checkbox-dropdown ul").click(function(e) {
-    e.stopPropagation();
-    console.error("No dropdown!");
-  });
+  // $(".checkbox-dropdown ul").click(function(e) {
+  //   e.stopPropagation();
+  //   console.error("No dropdown!");
+  // });
 
 });
 
 Template.findPi.helpers({
     findAdvisors: function(){
+      const instance = Template.instance();
+      let clicked_school = instance.state.get('school');
+      let clicked_dept = instance.state.get('dept');
+      if(clicked_school || clicked_dept) {
+        if(clicked_school && clicked_dept){ 
+          return Advisors.find({school: clicked_school, dept: clicked_dept });
+        }
+        else if(clicked_school && !(clicked_dept)){
+          return Advisors.find({school: clicked_school });
+        }
+        else if(clicked_dept && !(clicked_school)){
+          return Advisors.find({dept: clicked_dept });
+        }
+      }
       return Advisors.find();
+    }
+});
+
+let state_arr = [];
+
+Template.findPi.events({
+    'click'(event){
+      let clicked_list = event.target.options
+      console.log(clicked_list[clicked_list.selectedIndex].value);
+        if(clicked_list[clicked_list.selectedIndex].className == "school" || clicked_list[clicked_list.selectedIndex].className == "dept"){
+          console.log('clicked select');
+        }
+    },
+    'change .school'(event, instance) {
+      if(event.target.checked){
+        
+        instance.state.set('school', event.target.value);
+      } 
+      else {
+        instance.state.set('school', false);
+      }
+    },
+    'change .dept'(event, instance) {
+      if(event.target.checked){
+        instance.state.set('dept', event.target.value);
+      } 
+      else {
+        instance.state.set('dept', false);
+      }
     }
 });

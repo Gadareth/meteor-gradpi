@@ -21,94 +21,116 @@
 						<br>
 						<br>
 
-						<form class="controls" id="Filters">
+						<div class="form-group">
+    						<label for="School">School</label>
+							    <select class="form-control" id="schoolSelect">
+							      <option class="school" value="Albertus Magnus College">Albertus Magnus College</option>
+							      <option class="school" value="Columbia">Columbia</option>
+							      <option class="school" value="Quinnipiac">Quinnipiac</option>
+							      <option class="school" value="Southern Connecticut State University">Southern Connecticut State University</option>
+							      <option class="school" value="University of New Haven">University of New Haven</option>
+							      <option class="school" value="Yale">Yale</option>
+							    </select>
+						</div>
+
+
+
+
+
+						<!-- <div class="form-group">
+							<label for="school">School</label>
 							<div class="checkbox-dropdown" id= "ten">
+							<select class="form-control" id=""
 								School
 								<fieldset>
 									<ul class="checkbox-dropdown-list">
 						            	<li>
 						                	<label>
-						                    	<input type="checkbox" value=".amc" name="school" />Albertus Magnus College
+						                    	<input type="checkbox" value="Albertus Magnus College" class="school" />Albertus Magnus College
 						                	</label>
 						            	</li>
 						            	<li>
 						                	<label>
-						                    	<input type="checkbox" value=".columbia" name="school" />Columbia
+						                    	<input type="checkbox" value="Columbia" class="school" />Columbia
 						                	</label>
 						            	</li>
 						            	<li>
 						                	<label>
-						                    	<input type="checkbox" value=".quinnipiac" name="school" />Quinnipiac
+						                    	<input type="checkbox" value="Quinnipiac" class="school" />Quinnipiac
 						                	</label>
 						            	</li>
 						            	<li>
 						                	<label>
-						                    	<input type="checkbox" value=".scsu" name="school" />Southern Connecticut State University
+						                    	<input type="checkbox" value="Southern Connecticut State University" class="school" />Southern Connecticut State University
 						                	</label>
 						            	</li>
 						            	<li>
 						                	<label>
-						                    	<input type="checkbox" value=".unh" name="school" />University of New Haven
+						                    	<input type="checkbox" value="University of New Haven" class="school" />University of New Haven
 						                	</label>
 						            	</li>
 						            	<li>
 						                	<label>
-						                    	<input type="checkbox" value=".yale" name="school" />Yale
+						                    	<input type="checkbox" value="Yale" class="school" />Yale
 						                	</label>
 						            	</li>
 					            	</ul>
 					        	</fieldset>
-					        </div>
+					        </div> -->
+
+
 							<div class="checkbox-dropdown" id= "eight">
 							Department
 								<fieldset>
 						        	<ul class="checkbox-dropdown-list">
 							            <li>
 							                <label>
-							                    <input type="checkbox" value=".cbb" name="dept" />Bioinformatics
+							                    <input type="checkbox" value="Bioinformatics" class="dept" />Bioinformatics
 							                </label>
 							            </li>
 							            <li>
 							                <label>
-							                    <input type="checkbox" value=".bms" name="dept" />Biomedical Sciences
+							                    <input type="checkbox" value="Biomedical Sciences" class="dept" />Biomedical Sciences
 							                </label>
 							            </li>
 							      		<li>
 							                <label>
-							                    <input type="checkbox" value=".seas" name="dept" />Engineering
+							                    <input type="checkbox" value="Engineering" class="dept" />Engineering
 							                </label>
 							            </li>
 							            <li>
 							                <label>
-							                    <input type="checkbox" value=".humanities" name="dept" />Humanities
+							                    <input type="checkbox" value="Humanities" class="dept" />Humanities
 							                </label>
 							            </li>
 							            <li>
 							                <label>
-							                    <input type="checkbox" value=".ph" name="dept" />Public Health
+							                    <input type="checkbox" value="Public Health" class="dept" />Public Health
 							                </label>
 							            </li>
 						        	</ul>
 						        </fieldset>
 							</div>
-						</form>
+						<!-- </form> -->
 					</div>
 				</div>
 			</div>
 		</div>
 
 		<div id="Container" class="container">
-		{{#each findAdvisors }}
-			{{name}}
-			<br>
-			{{school}}
-			<br>
-			{{dept}}
-			<br>
-			<img src={{image}}>
-			<br>
-			<br>
-		{{/each}}
+			{{#each findAdvisors }}
+				<div class="col-sm-3">
+					{{name}}
+					<br>
+					{{school}}
+					<br>
+					{{dept}}
+					<br>
+					<img src={{image}}>
+					<br>
+					<br>
+				</div>
+			{{/each}}
 		</div>    							
 	</body>
 </template>
