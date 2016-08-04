@@ -197,28 +197,10 @@ Template.findPi.helpers({
 let state_arr = [];
 
 Template.findPi.events({
-    'click'(event){
-      let clicked_list = event.target.options
-      console.log(clicked_list[clicked_list.selectedIndex].value);
-        if(clicked_list[clicked_list.selectedIndex].className == "school" || clicked_list[clicked_list.selectedIndex].className == "dept"){
-          console.log('clicked select');
-        }
-    },
-    'change .school'(event, instance) {
-      if(event.target.checked){
-        
-        instance.state.set('school', event.target.value);
-      } 
-      else {
-        instance.state.set('school', false);
-      }
-    },
-    'change .dept'(event, instance) {
-      if(event.target.checked){
-        instance.state.set('dept', event.target.value);
-      } 
-      else {
-        instance.state.set('dept', false);
-      }
-    }
+  'change #schoolSelect'(event, instance) {
+    instance.state.set('school', event.target.value);
+  },
+  'change #deptSelect'(event, instance) {
+    instance.state.set('dept', event.target.value);
+  }
 });
