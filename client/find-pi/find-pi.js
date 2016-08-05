@@ -29,13 +29,14 @@ Template.findPi.helpers({
     }
 });
 
-let state_arr = [];
-
 Template.findPi.events({
   'change #schoolSelect'(event, instance) {
     instance.state.set('school', event.target.value);
   },
   'change #deptSelect'(event, instance) {
     instance.state.set('dept', event.target.value);
+  },
+  'click .advisor'(event){
+    Router.go("/rate-pi/"+ this._id);
   }
 });
