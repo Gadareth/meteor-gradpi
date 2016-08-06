@@ -117,7 +117,6 @@ img {
     pointer-events: none; /* avoid mouse click events inside the dropdown */
 }
 
-
 .is-active .checkbox-dropdown-list {
     opacity: 1; /* display the dropdown */
     pointer-events: auto; /* make sure that the user still can select checkboxes */
