@@ -4,6 +4,11 @@ img {
 
 /* Container class and ID selectors */
 
+div.advisor {
+  width: 205px;
+  height: 400px;
+}
+
 .container .mix,
 .container .gap{
   width: 5px;

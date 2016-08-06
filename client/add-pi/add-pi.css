@@ -14,3 +14,7 @@ fieldset {
 #addPiDiv {
 	width: 700px;
 }
+
+label {
+	position: left;
+}
