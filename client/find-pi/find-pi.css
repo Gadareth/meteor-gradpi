@@ -133,7 +133,7 @@ img {
     transition: all 0.2s ease-out;
     background-color: #0090BE;
     margin-bottom: 0px;
-    z-index: 2; 
+    z-index: 2;
 }
 
 .checkbox-dropdown-list li label:hover {
@@ -225,9 +225,3 @@ img {
 #ten {
   z-index: 10;
 }
-
-
-
-
-
-

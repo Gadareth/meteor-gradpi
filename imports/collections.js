@@ -72,38 +72,53 @@ if (Meteor.isServer) {
 		console.log("add_advisor");
 		// console.log(name);
 		// console.log(school);
-		Advisors._ensureIndex('name', {unique: 1});
+		//Advisors._ensureIndex('name', {unique: 1});
 		return Advisors.insert({
 			createdAt: new Date(),
-			owner: Meteor.userId(),
-      		username: Meteor.user().username,
+			//owner: Meteor.userId(),
+      		//username: Meteor.user().username,
 			name: name,
 			school: school,
 			dept: dept,
 			image: image,
-			stature: 0,
-			mentorship: 0,
-			autonomy: 0,
-			resources: 0,
-			tact: 0,
-			free_response: null
+			stature: [],
+			mentorship: [],
+			autonomy: [],
+			resources: [],
+			tact: [],
+			free_response: []
 		});
 	},
 	'rate_advisor'(id,s,m,a,r,t,f)
 		{
+			let advisor = Advisors.find({
+				"_id": id
+			}).fetch();
+			let stature = advisor[0].stature;
+			let mentorship = advisor[0].mentorship;
+			let autonomy = advisor[0].autonomy;
+			let resources = advisor[0].resources;
+			let tact = advisor[0].tact; 
+			let free_response = advisor[0].free_response;
+
+			stature.push(s);
+			mentorship.push(m);
+			autonomy.push(a);
+			resources.push(r);
+			tact.push(t);
+			free_response.push(f);
+
 		Advisors.update(
 		 	{ "_id": id },
-			{$push:
-				{
-				"rating":
-					{
-					stature: s,
-					mentorship: m,
-					autonomy: a,
-					resources: r,
-					tact: t,
-					free_response: f
-					}
+		 	{$set:
+		 		{
+					stature: stature,
+					mentorship: mentorship,
+					autonomy: autonomy,
+					resources: resources,
+					tact: tact,
+					free_response: free_response
+					
 				}
 			});
 		},
