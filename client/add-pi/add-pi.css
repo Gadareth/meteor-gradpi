@@ -1,0 +1,16 @@
+
+.container div {
+  text-align: center;
+}
+
+fieldset {
+	width: 400px;
+}
+
+#name {
+    width: 200px;
+}
+
+#addPiDiv {
+	width: 700px;
+}
