@@ -1,5 +1,5 @@
 /*Cropping code*/
-.crop {
+/*.crop {
   height: 165px;
   width: 200px;
   overflow: hidden;
@@ -8,7 +8,7 @@
 }
 
 /* Set the image to fill its parent and make transparent */
-.crop img {
+/*.crop img {
   width: 200px;
   padding: 0;
-}
+}*/

@@ -1,12 +1,23 @@
 img {
-  width: 200px;
+  width: 250px;
+  text-align: center;
+}
+
+ /*Set the image to fill its parent and make transparent */
+.crop {
+  height: 250px;
+  text-align: center;
+  overflow: hidden;
+  padding: 0;
 }
 
 /* Container class and ID selectors */
-
 div.advisor {
-  width: 205px;
-  height: 400px;
+  width: 250px;
+  height: 360px;
+  margin: 0px 0px 0px 0px;
+  border: 0px 0px 0px 0px;
+  font-size: 12px;
 }
 
 .container .mix,
@@ -14,14 +25,6 @@ div.advisor {
   width: 5px;
   display: inline-flex;
   margin: 0 1%;
-}
-
-.container .mix{
-  width: 200px;
-  height: 60px;
-  margin: 5%;
-  background: white;
-  display: flex;
 }
 
 /*Fail message styles*/
@@ -55,13 +58,6 @@ div.advisor {
 .container.fail .fail-message{
   opacity: 1;
   pointer-events: auto;
-}
-
-.container img {
-  width: 200px;
-  height: auto;
-  text-align: center;
-  vertical-align: top;
 }
 
 .container h1 {
