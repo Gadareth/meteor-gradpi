@@ -1,5 +1,6 @@
 
 let imagesURL;
+let name;
 Template.addpi.events({
 	
 	'change .myFileInput': function(event, template) {
@@ -11,9 +12,6 @@ Template.addpi.events({
              // handle success depending what you need to do
             var userId = Meteor.userId();
            	imagesURL = "/cfs/files/images/" + fileObj._id;
-  
-            console.log(imagesURL);
-            // Meteor.users.update(userId, {$set: imagesURL});
           }
         });
      });
@@ -27,12 +25,10 @@ Template.addpi.events({
     var image = imagesURL;
       	
   	Meteor.call('add_advisor',name,school,dept,image, function(error,result){
-  		// console.info("Added PI");
-  		console.log(result);
   		if(error){
   			console.log(error);
   		} else {
-  			console.log(imagesURL);
+  			console.log(name);
   			Router.go('/rate-pi/'+result);
   		}
   	});
