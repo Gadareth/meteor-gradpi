@@ -46,7 +46,7 @@ Router.route('/advisor/:id', function () {
   this.render('advisor');
 });
 
-Router.route('/profile',{
+Router.route('/profile/:id',{
   waitOn: function () {
   return Meteor.subscribe('images')
   },
