@@ -1,63 +1,79 @@
 <template name = "addpi">
-	{{>navbar}}
-	<br>
-	<br>
-	<br>
-	{{#if currentUser}}
-	<form id="addpi">
-		<div id="addPiDiv" class="container">
-			<fieldset class>
-				<label for="name">Name</label>
-				<input type="text" id="name" class="col-sm-6 form-control" placeholder="Name">
-			</fieldset>
-			<fieldset class>
-				<label for="school">School</label>
-				<select id="school">
-					<option value="amc">Albertus Magnus College</option>	
-					<option value="columbia">Columbia</option>
-					<option value="quinnipiac">Quinnipiac</option>
-					<option value="scsu">Southern Connecticut State University</option>
-					<option value="unh">University of New Haven</option>
-					<option value="yale">Yale</option>
-				</select>
-			</fieldset>
-			<fieldset class>
-				<label for="dept">Department</label>
-				<select id="dept">
-					<option value="cbb">Bioinformatics</option>
-					<option value="bms">Biomedical Sciences</option>
-					<option value="seas">Engineering</option>
-					<option value="humanities">Humanities</option>
-					<option value="ph">Public Health</option>	
-				</select>
-			</fieldset>
-			<br>
-			<br>	
-			<input type="file" id="image" class="myFileInput">			
-  		</div>
-			<p>
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
-			</p>
-		<div class="row">
-			<div class="col-sm-3 col-sm-offset-5">
-				<br>
-				<br>
-				<br>
-				<!-- <input type="submit" id="submit" value="Submit"/> -->
-				<button type="submit" id="piSubmit" class="btn btn-primary">Submit</button>
+	<body>
+		{{>navbar}}
+		<div class="container">
+			<div class="row">
+				<!--First Column of About Section-->
+				<div class="col-sm-1">
+					<br>
+					<br>
+					<br>
+					<img src="images/GradPI-logo.png">
+				</div>
+				
+				<div class="col-sm-8 col-sm-offset-3">
+					{{#if currentUser}}
+					<form id="addpi">
+						<div id="addPiDiv" class="container">
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<fieldset>
+								<label for="name">Name</label>
+								<input type="text" id="name" class="col-sm-6 form-control" placeholder="Name">
+							</fieldset>
+							<fieldset>
+								<label for="school">School</label>
+								<select id="school">
+									<option value="Albertus Magnus College">Albertus Magnus College</option>	
+									<option value="Columbia">Columbia</option>
+									<option value="Quinnipiac">Quinnipiac</option>
+									<option value="Southern Connecticut State University">Southern Connecticut State University</option>
+									<option value="University of New Haven">University of New Haven</option>
+									<option value="Yale">Yale</option>
+								</select>
+							</fieldset>
+							<fieldset>
+								<label for="dept">Department</label>
+								<select id="dept">
+									<option value="Bioinformatics">Bioinformatics</option>
+									<option value="Biomedical Sciences">Biomedical Sciences</option>
+									<option value="Engineering">Engineering</option>
+									<option value="Humanities">Humanities</option>
+									<option value="Public Health">Public Health</option>	
+								</select>
+							</fieldset>
+							<br>
+							<br>	
+							<input type="file" id="image" class="myFileInput">			
+				  		<!-- </div> -->
+							<p>
+								<br>
+								<br>
+								<br>
+							</p>
+						<!-- <div class="row"> -->
+							<div class="col-sm-3 col-sm-offset-2">
+								<br>
+								<br>
+								<br>
+								<!-- <input type="submit" id="submit" value="Submit"/> -->
+								<button type="submit" id="piSubmit" class="btn btn-primary">Submit</button>
+							</div>
+						</div>
+					</form>
+					{{else}}
+					<div class="col-sm-5 col-sm-offset-3">
+						<h2>Please login or register to add a PI!</h2>
+						<br>
+						<br>
+						{{> loginButtons}}
+					</div>
+					{{/if}}
+				</div>
 			</div>
 		</div>
-	</form>
-	{{else}}
-	<div class="col-sm-5 col-sm-offset-3">
-		<h2>Please login or register to add a PI!</h2>
-		<br>
-		<br>
-		{{> loginButtons}}
-	</div>
-	{{/if}}
+	</body>
 </template>
