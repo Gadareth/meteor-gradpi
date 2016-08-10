@@ -37,6 +37,6 @@ Template.findPi.events({
     instance.state.set('dept', event.target.value);
   },
   'click .advisor'(event){
-    Router.go("/rate-pi/"+ this._id);
+    Router.go("/profile/"+ this._id);
   }
 });
