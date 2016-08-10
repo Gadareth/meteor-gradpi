@@ -22,7 +22,6 @@ Router.route('/student-bio', function () {
 // });
 
 Router.route('/find-pi', function () {
-  console.log("find PI");
   this.render('findPi');
 });
 
@@ -42,11 +41,11 @@ Router.route('/add-pi', function () {
   this.render('addpi');
 });
 
-Router.route('/advisor/:id', function () {
-  this.render('advisor');
-});
+// Router.route('/advisor/:id', function () {
+//   this.render('advisor');
+// });
 
-Router.route('/profile',{
+Router.route('/profile/:id',{
   waitOn: function () {
   return Meteor.subscribe('images')
   },
