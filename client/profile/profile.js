@@ -82,25 +82,8 @@ Template.profile.onCreated(function profileOnCreated() {
 		};
 
 		for(prop in overall_ratings){
-			switch(overall_ratings[prop]){
-				case 1:
-					document.getElementById(prop+"star-"+1).click();
-					break;
-				case 2:
-					document.getElementById(prop+"star-"+2).click();
-					break;
-				case 3:
-					document.getElementById(prop+"star-"+3).click();
-					break;
-				case 4:
-					document.getElementById(prop+"star-"+4).click();
-					break;
-				case 5:
-					document.getElementById(prop+"star-"+5).click();
-					break;
-			}
+			document.getElementById(prop+"star-"+overall_ratings[prop]).click();
 		}
-
 	});
 });
 
