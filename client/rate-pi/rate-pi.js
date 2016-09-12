@@ -102,7 +102,7 @@ Template.ratepi.events({
 		}
 		f = template.find("#comments").value;
 		Meteor.call('rate_advisor',Router.current().params.id,s,m,a,r,t,f);
-		Router.go('/');
+		Router.go("/profile/"+ Router.current().params.id);
 	}
 });
 
