@@ -72,10 +72,15 @@ Router.route('/profile/:id',{
   return Meteor.subscribe('images')
   },
   action: function () {
-  if (this.ready())
-  this.render('Profile');
-  else
-  this.render('Loading');
+    if(!Meteor.userId()){
+      Router.go('/');
+    }  
+    if (this.ready()) {
+      this.render('Profile');
+    }
+    else {
+      this.render('Loading');
+    }
   }
 });
 
