@@ -1,7 +1,6 @@
 // Router.configure({layoutTemplate: "layout"});
 
 Router.route('/', function () {
-  // console.log('about');
   this.render('about');
 });
 
@@ -14,11 +13,6 @@ Router.route('/schools', function () {
   }
 });
 
-/*Router.route('/login', function () {
-  this.render('login');
-});
-*/
-
 Router.route('/student-bio', function () {
   if(!Meteor.userId()){
     Router.go('/');
@@ -27,10 +21,6 @@ Router.route('/student-bio', function () {
     this.render('studentBio');
   }
 });
-
-// Router.route('/profile', function () {
-//   this.render('studentProfile');
-// });
 
 Router.route('/find-pi', function () {
   if(!Meteor.userId()){
@@ -77,10 +67,6 @@ Router.route('/add-pi', function () {
   }
 });
 
-// Router.route('/advisor/:id', function () {
-//   this.render('advisor');
-// });
-
 Router.route('/profile/:id',{
   waitOn: function () {
   return Meteor.subscribe('images')
@@ -107,6 +93,3 @@ Router.route('/profile/:id',{
 // Derek
 // Make a page to choose PIs
 // Create a page showing the scores/rankings of each PIs
-
-
-
