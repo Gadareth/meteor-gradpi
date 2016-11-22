@@ -1,5 +1,6 @@
 <template name = "advisor">
   {{>navbar}}
+  {{# if currentUser}}
     <!--Navigation Bar Code including links to IDs-->
   <div class="section" id="advisor">
     <div class="container">
@@ -26,6 +27,9 @@
       </a>
     </div>
   </div>
+  {{ else}}
+      {{> about}}
+  {{/if}}
 </template>
 <!-- {{#each school}}
 <li><a href="/school/{{this._id}}">{{this.name}}</a></li>

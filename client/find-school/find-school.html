@@ -2,6 +2,7 @@
 	<body>
 		<!--Navigation Bar Code including links to IDs-->
 		{{>navbar}}
+		{{#if currentUser}}
 			<div class="section" id="school">
 				<div class="container">
 					<div class="row">
@@ -40,6 +41,9 @@
 						</div>
 					</div>
 				</div>
-			</div>	
+			</div>
+			{{ else}}
+      			{{> about}}
+  			{{/if}} 	
 	</body>
 </template>

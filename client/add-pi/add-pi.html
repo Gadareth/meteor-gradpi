@@ -1,6 +1,7 @@
 <template name = "addpi">
 	<body>
 		{{>navbar}}
+		{{# if currentUser}}
 		<div class="container">
 			<div class="row">
 				<!--First Column of About Section-->
@@ -75,5 +76,8 @@
 				</div>
 			</div>
 		</div>
+		{{ else}}
+			{{> about}}
+		{{/if}}
 	</body>
 </template>

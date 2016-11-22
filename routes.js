@@ -6,15 +6,26 @@ Router.route('/', function () {
 });
 
 Router.route('/schools', function () {
-  this.render('schools');
+  if(!Meteor.userId()){
+    Router.go('/');
+  }
+  else {
+    this.render('schools');
+  }
 });
 
-Router.route('/login', function () {
+/*Router.route('/login', function () {
   this.render('login');
 });
+*/
 
 Router.route('/student-bio', function () {
-  this.render('studentBio');
+  if(!Meteor.userId()){
+    Router.go('/');
+  }
+  else {
+    this.render('studentBio');
+  }
 });
 
 // Router.route('/profile', function () {
@@ -22,23 +33,48 @@ Router.route('/student-bio', function () {
 // });
 
 Router.route('/find-pi', function () {
-  this.render('findPi');
+  if(!Meteor.userId()){
+    Router.go('/');
+  }
+  else {
+    this.render('findPi');
+  }
 });
 
 Router.route('/choose-pi', function () {
-  this.render('choose-pi');
+  if(!Meteor.userId()){
+    Router.go('/');
+  }
+  else {
+    this.render('choose-pi');
+  }
 });
 
 Router.route('/rate-pi/:id', function () {
-  this.render('ratepi');
+  if(!Meteor.userId()){
+    Router.go('/');
+  }
+  else {
+    this.render('ratepi');
+  }
 });
 
 Router.route('/contact', function () {
-  this.render('contact');
+  if(!Meteor.userId()){
+    Router.go('/');
+  }
+  else {
+    this.render('contact');
+  }
 });
 
 Router.route('/add-pi', function () {
-  this.render('addpi');
+  if(!Meteor.userId()){
+    Router.go('/');
+  }
+  else {
+    this.render('addpi');
+  }
 });
 
 // Router.route('/advisor/:id', function () {
@@ -56,8 +92,6 @@ Router.route('/profile/:id',{
   this.render('Loading');
   }
 });
-
-
 
 // Add route for schools. Google URL parameters for iron router.
 // Router.route('/school/:id', function (id) {

@@ -32,5 +32,10 @@ Template.addpi.events({
   			Router.go('/rate-pi/'+result);
   		}
   	});
+  },
+  
+  'click #login-buttons-password': function() {
+    console.log(document.getElementById('login-username-or-email').value);
   }
+
 });
