@@ -1,0 +1,20 @@
+{
+  "name": "meteor-gradpi",
+  "description": "Advisor rating app",
+  "main": "",
+  "license": "MIT",
+  "homepage": "https://github.com/Gadareth/meteor-gradpi",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "authors": [
+    "Gadareth Higgs",
+    "Batsirai Swiswa",
+    "David Schadlich"
+  ]
+}
