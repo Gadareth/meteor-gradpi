@@ -1,8 +1,7 @@
 import { Advisors } from '../../imports/collections.js';
 
 Template.ratepi.onCreated(function ratepiOnCreated() {
-	Meteor.subscribe('advisors');
-	console.log(Router.current().params);
+	this.subscribe('advisor', Router.current().params.id);
 
 	this.criterias = [
 		{
@@ -47,9 +46,9 @@ Template.ratepi.events({
 			rating[criteria.key] = value;
 		});	
 		
-		f = instance.find("#comments").value;
+		let f = instance.find("#comments").value;
 		const advisorId = Router.current().params.id;
-		console.log(rating, f);
+
 		Meteor.call('rate_advisor',advisorId,rating,f,(error,success)=>{
 			if(error){
 				alert(error.error);
@@ -63,7 +62,7 @@ Template.ratepi.events({
 
 Template.ratepi.helpers({
 	thisAdvisor: function (){
-		console.log(Advisors.find().count());
+		//console.log(Advisors.find().count());
 		let returnVar = Advisors.findOne({_id: Router.current().params.id});
 		console.log(Advisors.find().fetch());
 		return returnVar;

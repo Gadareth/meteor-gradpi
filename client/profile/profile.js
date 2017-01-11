@@ -3,7 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { Advisors } from '../../imports/collections.js';
 
 Template.profile.onCreated(function profileOnCreated() {
-	this.subscribe('advisors');
+	this.subscribe('advisor', Router.current().params.id);
 	this.criterias = [
 		{
 			key: 'stature',

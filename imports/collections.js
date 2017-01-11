@@ -57,7 +57,7 @@ if (Meteor.isServer) {
     });
 
     Meteor.publish('advisor', function(id) {
-        return Advisors.findOne({
+        return Advisors.find({
             _id: id
         });
     });
