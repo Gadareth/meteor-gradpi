@@ -42,7 +42,33 @@
 						<img src={{thisAdvisor.image}}>
 					</div>
 				</div>
-				{{/each}}
+				<!-- Stars section -->
+				{{#each criterias}}
+					<div class="row" id="rating-{{key}}">
+						<div class="col-sm-2 col-sm-offset-1">
+							<p>
+								<br>
+								{{name}}
+							</p>
+						</div>
+						<div class="col-sm-3">
+							<br>
+							<div class="tooltip-wrap">
+	  							<p>
+									?
+								</p>
+	  							<div class="tooltip-content">
+				    				<p>{{tooltip}}</p>
+				  				</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="pull-left">
+								{{> ratingStars}}
+							</div>
+						</div>
+					</div>
+ 				{{/each}}
 				<!-- Stars section END-->
 				<div class="row">
 					<div class="col-sm-1 col-sm-offset-1">
