@@ -1,480 +1,122 @@
 <!-- default styles -->
 <template name = "profile">
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
-<link href="path/to/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
-
-<!-- optionally if you need to use a theme, then include the theme CSS file as mentioned below -->
-<link href="path/to/themes/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
-
-<!-- important mandatory libraries -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
-<script src="path/to/js/star-rating.js" type="text/javascript"></script>
-
-<!-- optionally if you need to use a theme, then include the theme JS file as mentioned below -->
-<script src="path/to/themes/krajee-svg/theme.js"></script>
-
-<!-- optionally if you need translation for your language then include locale file as mentioned below -->
-<script src="path/to/js/locales/<lang>.js"></script>
-
-  {{>navbar}}
-  {{#if currentUser}}
-    <!--Navigation Bar Code including links to IDs-->
-  <div class="section" id="advisor">
-    <div class="container">
-      <div class="row">
-        <!--First Column of Advisor Section-->
-        <div class="col-sm-1">
-          <br>
-          <br>
-          <br>
-          <img src="/images/GradPI-logo.png">
-        </div>
-        <!--Second Column of Advisor Section-->
-        <div class="col-sm-5 col-sm-offset-3">
-          <br>
-          <br>
-          <br>
-          <br>
-          {{thisAdvisor.name}}
-          <br>
-          {{thisAdvisor.school}}
-          <br>
-          {{thisAdvisor.dept}}
-          <br>
-          <img src={{thisAdvisor.image}}>
-          <br>
-          <br>
-          <br>
-          <br>
-          <button type="submit" id={{thisAdvisor._id}} class="btn btn-primary">Rate PI</button>
-        </div>
-      </div>   
-      
-      <!--Beginning of New Code-->
-      
-      <div class="row">
-          <div class="col-sm-1 col-sm-offset-1">
-              <br>
-              <br>
-              <br>
-              <br>
-              <p>Stature</p>
-          </div>
-          <div class="col-sm-2">
-            <br>
-            <br>
-            <br>
-            <br>
-            <div class="tooltip-wrap">
-                <p>?</p>
-              <div class="tooltip-content">
-                <p>How well-known is this PI in the field? Does this PI do impactful research?</p>
-              </div>
+    {{>navbar}}
+    {{#if Template.subscriptionsReady}}
+        {{#if currentUser}}
+            <!--Navigation Bar Code including links to IDs-->
+            <div class="section" id="advisor">
+                <div class="container">
+                    <div class="row">
+                        {{#with thisAdvisor}}
+                            <!--First Column of Advisor Section-->
+                            <div class="col-sm-1">
+                                <br>
+                                <br>
+                                <br>
+                                <img src="/images/GradPI-logo.png">
+                            </div>
+                            <!--Second Column of Advisor Section-->
+                            <div class="col-sm-5 col-sm-offset-3">
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                {{name}}
+                                <br>
+                                {{school}}
+                                <br>
+                                {{dept}}
+                                <br>
+                                <img src={{image}}>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <a href="/rate-pi/{{_id}}" class="btn btn-primary">Rate PI</a>
+                            </div>
+                        {{/with}}
+                    </div>
+                    {{#each criterias}}
+                        <div class="row" id="rating-{{key}}">
+                            <div class="col-sm-2 col-sm-offset-1">
+                                <p>
+                                    <br>
+                                    {{name}}
+                                </p>
+                            </div>
+                            <div class="col-sm-3">
+                                <br>
+                                <div class="tooltip-wrap">
+                                    <p>
+                                        ?
+                                    </p>
+                                    <div class="tooltip-content">
+                                        <p>{{tooltip}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="pull-left">
+                                    {{> ratingStars value=(averageRating key) readonly=true}}
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                    <!--  old ratings --> 
+                    <!-- {{#each allRatings }}
+                        <div class="row">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                <br>
+                                <br>
+                                <span>
+                                    Stature: {{stature}}
+                                    Mentorship: {{mentorship}}
+                                    Autonomy: {{autonomy}}
+                                    Resources: {{resources}}
+                                    Tact: {{tact}}
+                                </span>
+                                <p>
+                                    Comments: {{free_response}}
+                                </p>
+                            </div>
+                        </div>
+                    {{/each}}  -->
+                    <br>
+                    <br>
+                    {{#if allRatings.length}}
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Stature</th>
+                                    <th>Mentorship</th>
+                                    <th>Autonomy</th>
+                                    <th>Resources</th>
+                                    <th>Tact</th>
+                                    <th>Comments</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each allRatings}}
+                                    <tr>
+                                        <td>{{stature}}</td>
+                                        <td>{{mentorship}}</td>
+                                        <td>{{autonomy}}</td>
+                                        <td>{{resources}}</td>
+                                        <td>{{tact}}</td>
+                                        <td>{{free_response}}</td>
+                                    </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    {{else}}
+                        <div>
+                            No ratings yet...
+                        </div>
+                    {{/if}}
+                </div>
             </div>
-          </div>
-          <div class="col-sm-4">
-            <br>
-            <br>
-            <br>
-            <fieldset class="rate profile stature">
-              <input type="radio" id="rating10" name="rating" value="10" /><label for="rating10" title="5 stars"></label>
-              <input type="radio" id="rating9" name="rating" value="9" /><label class="half" for="rating9" title="4 1/2 stars"></label>
-              <input type="radio" id="rating8" name="rating" value="8" /><label for="rating8" title="4 stars"></label>
-              <input type="radio" id="rating7" name="rating" value="7" /><label class="half" for="rating7" title="3 1/2 stars"></label>
-              <input type="radio" id="rating6" name="rating" value="6" /><label for="rating6" title="3 stars"></label>
-              <input type="radio" id="rating5" name="rating" value="5" /><label class="half" for="rating5" title="2 1/2 stars"></label>
-              <input type="radio" id="rating4" name="rating" value="4" /><label for="rating4" title="2 stars"></label>
-              <input type="radio" id="rating3" name="rating" value="3" /><label class="half" for="rating3" title="1 1/2 stars"></label>
-              <input type="radio" id="rating2" name="rating" value="2" /><label for="rating2" title="1 star"></label>
-              <input type="radio" id="rating1" name="rating" value="1" /><label class="half" for="rating1" title="1/2 star"></label>
-              <input type="radio" id="rating0" name="rating" value="0" /><label for="rating0" title="No star"></label>
-            </fieldset>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-1 col-sm-offset-1">
-              <br>
-              <br>
-              <br>
-              <br>
-              <p>Mentorship</p>
-          </div>
-          <div class="col-sm-2">
-            <br>
-            <br>
-            <br>
-            <br>
-            <div class="tooltip-wrap">
-                <p>?</p>
-              <div class="tooltip-content">
-                <p>How well does this PI mentor students in the lab?</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <br>
-            <br>
-            <br>
-            <fieldset class="rate profile mentorship">
-              <input type="radio" id="rating10" name="rating" value="10" /><label for="rating10" title="5 stars"></label>
-              <input type="radio" id="rating9" name="rating" value="9" /><label class="half" for="rating9" title="4 1/2 stars"></label>
-              <input type="radio" id="rating8" name="rating" value="8" /><label for="rating8" title="4 stars"></label>
-              <input type="radio" id="rating7" name="rating" value="7" /><label class="half" for="rating7" title="3 1/2 stars"></label>
-              <input type="radio" id="rating6" name="rating" value="6" /><label for="rating6" title="3 stars"></label>
-              <input type="radio" id="rating5" name="rating" value="5" /><label class="half" for="rating5" title="2 1/2 stars"></label>
-              <input type="radio" id="rating4" name="rating" value="4" /><label for="rating4" title="2 stars"></label>
-              <input type="radio" id="rating3" name="rating" value="3" /><label class="half" for="rating3" title="1 1/2 stars"></label>
-              <input type="radio" id="rating2" name="rating" value="2" /><label for="rating2" title="1 star"></label>
-              <input type="radio" id="rating1" name="rating" value="1" /><label class="half" for="rating1" title="1/2 star"></label>
-              <input type="radio" id="rating0" name="rating" value="0" /><label for="rating0" title="No star"></label>
-            </fieldset>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-1 col-sm-offset-1">
-              <br>
-              <br>
-              <br>
-              <br>
-              <p>Autonomy</p>
-          </div>
-          <div class="col-sm-2">
-            <br>
-            <br>
-            <br>
-            <br>
-            <div class="tooltip-wrap">
-                <p>?</p>
-              <div class="tooltip-content">
-                <p>Does this PI delegate tasks and trust students to get them done? Or does this PI micromanage everything?</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <br>
-            <br>
-            <br>
-            <fieldset class="rate profile autonomy">
-              <input type="radio" id="rating10" name="rating" value="10" /><label for="rating10" title="5 stars"></label>
-              <input type="radio" id="rating9" name="rating" value="9" /><label class="half" for="rating9" title="4 1/2 stars"></label>
-              <input type="radio" id="rating8" name="rating" value="8" /><label for="rating8" title="4 stars"></label>
-              <input type="radio" id="rating7" name="rating" value="7" /><label class="half" for="rating7" title="3 1/2 stars"></label>
-              <input type="radio" id="rating6" name="rating" value="6" /><label for="rating6" title="3 stars"></label>
-              <input type="radio" id="rating5" name="rating" value="5" /><label class="half" for="rating5" title="2 1/2 stars"></label>
-              <input type="radio" id="rating4" name="rating" value="4" /><label for="rating4" title="2 stars"></label>
-              <input type="radio" id="rating3" name="rating" value="3" /><label class="half" for="rating3" title="1 1/2 stars"></label>
-              <input type="radio" id="rating2" name="rating" value="2" /><label for="rating2" title="1 star"></label>
-              <input type="radio" id="rating1" name="rating" value="1" /><label class="half" for="rating1" title="1/2 star"></label>
-              <input type="radio" id="rating0" name="rating" value="0" /><label for="rating0" title="No star"></label>
-            </fieldset>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-1 col-sm-offset-1">
-              <br>
-              <br>
-              <br>
-              <br>
-              <p>Resources</p>
-          </div>
-          <div class="col-sm-2">
-            <br>
-            <br>
-            <br>
-            <br>
-            <div class="tooltip-wrap">
-                <p>?</p>
-              <div class="tooltip-content">
-                <p>How well is this PI funded?</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <br>
-            <br>
-            <br>
-            <fieldset class="rate profile resources">
-              <input type="radio" id="rating10" name="rating" value="10" /><label for="rating10" title="5 stars"></label>
-              <input type="radio" id="rating9" name="rating" value="9" /><label class="half" for="rating9" title="4 1/2 stars"></label>
-              <input type="radio" id="rating8" name="rating" value="8" /><label for="rating8" title="4 stars"></label>
-              <input type="radio" id="rating7" name="rating" value="7" /><label class="half" for="rating7" title="3 1/2 stars"></label>
-              <input type="radio" id="rating6" name="rating" value="6" /><label for="rating6" title="3 stars"></label>
-              <input type="radio" id="rating5" name="rating" value="5" /><label class="half" for="rating5" title="2 1/2 stars"></label>
-              <input type="radio" id="rating4" name="rating" value="4" /><label for="rating4" title="2 stars"></label>
-              <input type="radio" id="rating3" name="rating" value="3" /><label class="half" for="rating3" title="1 1/2 stars"></label>
-              <input type="radio" id="rating2" name="rating" value="2" /><label for="rating2" title="1 star"></label>
-              <input type="radio" id="rating1" name="rating" value="1" /><label class="half" for="rating1" title="1/2 star"></label>
-              <input type="radio" id="rating0" name="rating" value="0" /><label for="rating0" title="No star"></label>
-            </fieldset>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-1 col-sm-offset-1">
-              <br>
-              <br>
-              <br>
-              <br>
-              <p>Tact</p>
-          </div>
-          <div class="col-sm-2">
-            <br>
-            <br>
-            <br>
-            <br>
-            <div class="tooltip-wrap">
-                <p>?</p>
-              <div class="tooltip-content">
-                <p>How well does this PI convey feedback?</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <br>
-            <br>
-            <br>
-            <fieldset class="rate profile tact">
-              <input type="radio" id="rating10" name="rating" value="10" /><label for="rating10" title="5 stars"></label>
-              <input type="radio" id="rating9" name="rating" value="9" /><label class="half" for="rating9" title="4 1/2 stars"></label>
-              <input type="radio" id="rating8" name="rating" value="8" /><label for="rating8" title="4 stars"></label>
-              <input type="radio" id="rating7" name="rating" value="7" /><label class="half" for="rating7" title="3 1/2 stars"></label>
-              <input type="radio" id="rating6" name="rating" value="6" /><label for="rating6" title="3 stars"></label>
-              <input type="radio" id="rating5" name="rating" value="5" /><label class="half" for="rating5" title="2 1/2 stars"></label>
-              <input type="radio" id="rating4" name="rating" value="4" /><label for="rating4" title="2 stars"></label>
-              <input type="radio" id="rating3" name="rating" value="3" /><label class="half" for="rating3" title="1 1/2 stars"></label>
-              <input type="radio" id="rating2" name="rating" value="2" /><label for="rating2" title="1 star"></label>
-              <input type="radio" id="rating1" name="rating" value="1" /><label class="half" for="rating1" title="1/2 star"></label>
-              <input type="radio" id="rating0" name="rating" value="0" /><label for="rating0" title="No star"></label>
-            </fieldset>
-          </div>
-        </div>     
-      
-        <!-- End of New Code-->
-
-        <!-- Beginning of Very New Code -->
-
-        <label for="input-2" class="control-label">Rate This</label>
-
-        <input id="input-2" name="input-2" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1">
-
-        <!-- End of Very New Code -->
-
-      <!-- Beginning of Old code --> 
-      <!--
-      </div>
-      <div class="row">
-        <div class="col-sm-2 col-sm-offset-2">
-          <p>
-            <br>
-            Stature
-          </p>
-        </div>
-        <div class="col-sm-4">
-          <div class="stars stature">
-            <form action="">
-                <input class="star star-5" id="sstar-5" type="radio" name="star"/>
-                <label class="star star-5" for="sstar-5"></label>
-                <input class="star star-4" id="sstar-4" type="radio" name="star"/>
-                <label class="star star-4" for="sstar-4"></label>
-                <input class="star star-3" id="sstar-3" type="radio" name="star"/>
-                <label class="star star-3" for="sstar-3"></label>
-                <input class="star star-2" id="sstar-2" type="radio" name="star"/>
-                <label class="star star-2" for="sstar-2"></label>
-                <input class="star star-1" id="sstar-1" type="radio" name="star"/>
-                <label class="star star-1" for="sstar-1"></label>
-            </form>
-            
-          </div>
-        </div>
-        <div class="col-sm-3 col-sm-offset-1">
-          <br>
-          <div class="tooltip-wrap">
-              <p>
-              ?
-            </p>
-              <div class="tooltip-content">
-                <p>How well-known is this PI in the field? Does this PI do impactful research?</p>
-              </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-2 col-sm-offset-2">
-          <p>
-            <br>
-            Mentorship
-          </p>
-        </div>
-
-        <div class="col-sm-4">
-          <div class="stars">
-            <form action="">
-                <input class="star star-5" id="mstar-5" type="radio" name="star"/>
-                <label class="star star-5" for="mstar-5"></label>
-                <input class="star star-4" id="mstar-4" type="radio" name="star"/>
-                <label class="star star-4" for="mstar-4"></label>
-                <input class="star star-3" id="mstar-3" type="radio" name="star"/>
-                <label class="star star-3" for="mstar-3"></label>
-                <input class="star star-2" id="mstar-2" type="radio" name="star"/>
-                <label class="star star-2" for="mstar-2"></label>
-                <input class="star star-1" id="mstar-1" type="radio" name="star"/>
-                <label class="star star-1" for="mstar-1"></label>
-            </form>
-          </div>
-        </div>
-
-        <div class="col-sm-3 col-sm-offset-1">
-          <br>
-          <div class="tooltip-wrap">
-              <p>
-              ?
-            </p>
-              <div class="tooltip-content">
-                <p>How well does this PI mentor students in the lab?</p>
-              </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-2 col-sm-offset-2">
-          <p>
-            <br>
-            Autonomy
-          </p>
-        </div>
-        <div class="col-sm-4">
-          <div class="stars">
-            <form action="">
-                <input class="star star-5" id="astar-5" type="radio" name="star"/>
-                <label class="star star-5" for="astar-5"></label>
-                <input class="star star-4" id="astar-4" type="radio" name="star"/>
-                <label class="star star-4" for="astar-4"></label>
-                <input class="star star-3" id="astar-3" type="radio" name="star"/>
-                <label class="star star-3" for="astar-3"></label>
-                <input class="star star-2" id="astar-2" type="radio" name="star"/>
-                <label class="star star-2" for="astar-2"></label>
-                <input class="star star-1" id="astar-1" type="radio" name="star"/>
-                <label class="star star-1" for="astar-1"></label>
-            </form>
-          </div>
-        </div>
-
-        <div class="col-sm-3 col-sm-offset-1">
-          <br>
-          <div class="tooltip-wrap">
-              <p>
-              ?
-            </p>
-              <div class="tooltip-content">
-                <p>Does this PI delegate tasks and trust students to get them done? Or does this PI micromanage everything?</p>
-              </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-2 col-sm-offset-2">
-          <p>
-            <br>
-            Resources
-          </p>
-        </div>
-
-        <div class="col-sm-4">
-          <div class="stars">
-            <form action="">
-                <input class="star star-5" id="rstar-5" type="radio" name="star"/>
-                <label class="star star-5" for="rstar-5"></label>
-                <input class="star star-4" id="rstar-4" type="radio" name="star"/>
-                <label class="star star-4" for="rstar-4"></label>
-                <input class="star star-3" id="rstar-3" type="radio" name="star"/>
-                <label class="star star-3" for="rstar-3"></label>
-                <input class="star star-2" id="rstar-2" type="radio" name="star"/>
-                <label class="star star-2" for="rstar-2"></label>
-                <input class="star star-1" id="rstar-1" type="radio" name="star"/>
-                <label class="star star-1" for="rstar-1"></label>
-            </form>
-          </div>
-        </div>
-
-        <div class="col-sm-3 col-sm-offset-1">
-          <br>
-          <div class="tooltip-wrap">
-              <p>
-              ?
-            </p>
-              <div class="tooltip-content">
-                <p>How well is this PI funded?</p>
-              </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-2 col-sm-offset-2">
-          <p>
-            <br>
-            Tact
-          </p>
-        </div>
-
-        <div class="col-sm-4">
-          <div class="stars">
-            <form action="">
-                <input class="star star-5" id="tstar-5" type="radio" name="star"/>
-                <label class="star star-5" for="tstar-5"></label>
-                <input class="star star-4" id="tstar-4" type="radio" name="star"/>
-                <label class="star star-4" for="tstar-4"></label>
-                <input class="star star-3" id="tstar-3" type="radio" name="star"/>
-                <label class="star star-3" for="tstar-3"></label>
-                <input class="star star-2" id="tstar-2" type="radio" name="star"/>
-                <label class="star star-2" for="tstar-2"></label>
-                <input class="star star-1" id="tstar-1" type="radio" name="star"/>
-                <label class="star star-1" for="tstar-1"></label>
-            </form>
-          </div>
-        </div>
-
-        <div class="col-sm-3 col-sm-offset-1">
-          <br>
-          <div class="tooltip-wrap">
-              <p>
-              ?
-            </p>
-              <div class="tooltip-content">
-                <p>How well does this PI convey feedback?</p>
-              </div>
-          </div>
-        </div>
-        -->
- <!--End of Old Code -->
-
-      {{#each allRatings }}
-      <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
-          <br>
-          <br>    
-          <span>
-          Stature: {{stature}}
-          Mentorship: {{mentorship}} 
-          Autonomy: {{autonomy}}
-          Resources: {{resources}}
-          Tact: {{tact}}
-          </span>
-          <p> 
-            Comments: {{free_response}}
-          </p>
-        </div>
-      </div>
-      {{/each}} 
-    </div>
-  </div>
-  {{ else}}
-    {{> about}}
-  {{/if}} 
+        {{ else}}
+            {{> about}}
+        {{/if}}
+    {{/if}}
 </template>
-<!-- {{#each school}}
-<li><a href="/school/{{this._id}}">{{this.name}}</a></li>
-{{/each}} -->
