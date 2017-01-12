@@ -1,87 +1,81 @@
 // Router.configure({layoutTemplate: "layout"});
 
-Router.route('/', function () {
-  this.render('about');
+Router.route('/', function() {
+    this.render('about');
 });
 
-Router.route('/schools', function () {
-  if(!Meteor.userId()){
-    Router.go('/');
-  }
-  else {
-    this.render('schools');
-  }
-});
-
-Router.route('/student-bio', function () {
-  if(!Meteor.userId()){
-    Router.go('/');
-  }
-  else {
-    this.render('studentBio');
-  }
-});
-
-Router.route('/find-pi', function () {
-  if(!Meteor.userId()){
-    Router.go('/');
-  }
-  else {
-    this.render('findPi');
-  }
-});
-
-Router.route('/choose-pi', function () {
-  if(!Meteor.userId()){
-    Router.go('/');
-  }
-  else {
-    this.render('choose-pi');
-  }
-});
-
-Router.route('/rate-pi/:id', function () {
-  if(!Meteor.userId()){
-    Router.go('/');
-  }
-  else {
-    this.render('ratepi');
-  }
-});
-
-Router.route('/contact', function () {
-  if(!Meteor.userId()){
-    Router.go('/');
-  }
-  else {
-    this.render('contact');
-  }
-});
-
-Router.route('/add-pi', function () {
-  if(!Meteor.userId()){
-    Router.go('/');
-  }
-  else {
-    this.render('addpi');
-  }
-});
-
-Router.route('/profile/:id',{
-  waitOn: function () {
-  return Meteor.subscribe('images')
-  },
-  action: function () {
-    if(!Meteor.userId()){
-      Router.go('/');
-    }  
-    if (this.ready()) {
-      this.render('Profile');
+Router.route('/schools', function() {
+    if (!Meteor.userId()) {
+        Router.go('/');
+    } else {
+        this.render('schools');
     }
-    else {
-      this.render('Loading');
+});
+
+Router.route('/student-bio', function() {
+    if (!Meteor.userId()) {
+        Router.go('/');
+    } else {
+        this.render('studentBio');
     }
-  }
+});
+
+Router.route('/find-pi', function() {
+    if (!Meteor.userId()) {
+        Router.go('/');
+    } else {
+        this.render('findPi');
+    }
+});
+
+Router.route('/choose-pi', function() {
+    if (!Meteor.userId()) {
+        Router.go('/');
+    } else {
+        this.render('choose-pi');
+    }
+});
+
+Router.route('/rate-pi/:id', {
+    action: function() {
+        if (!Meteor.userId()) {
+            Router.go('/');
+        } else {
+            this.render('ratepi');
+        }
+    }
+});
+
+Router.route('/contact', function() {
+    if (!Meteor.userId()) {
+        Router.go('/');
+    } else {
+        this.render('contact');
+    }
+});
+
+Router.route('/add-pi', function() {
+    if (!Meteor.userId()) {
+        Router.go('/');
+    } else {
+        this.render('addpi');
+    }
+});
+
+Router.route('/profile/:id', {
+    waitOn: function() {
+        return Meteor.subscribe('images')
+    },
+    action: function() {
+        if (!Meteor.userId()) {
+            Router.go('/');
+        }
+        if (this.ready()) {
+            this.render('profile');
+        } else {
+            this.render('Loading');
+        }
+    }
 });
 
 // Add route for schools. Google URL parameters for iron router.

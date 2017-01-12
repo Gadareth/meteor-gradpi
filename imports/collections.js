@@ -8,6 +8,7 @@ import {
 export const Students = new Mongo.Collection('students');
 export const Advisors = new Mongo.Collection('advisors');
 export const Schools = new Mongo.Collection('schools');
+export const Ratings = new Mongo.Collection('ratings');
 
 var imageStore = new FS.Store.GridFS('images');
 
@@ -66,6 +67,10 @@ if (Meteor.isServer) {
         return Images.find({});
     });
 
+    Meteor.publish('ratings', function(advisorId){
+        return Ratings.find({advisorId});
+    });
+
     Meteor.methods({
         // 'add_student'(profile, id){
         // 	Students.update(
@@ -87,21 +92,26 @@ if (Meteor.isServer) {
                 school: school,
                 dept: dept,
                 image: image,
-                stature: [],
-                mentorship: [],
-                autonomy: [],
-                resources: [],
-                tact: [],
-                free_response: []
+                // stature: [],
+                // mentorship: [],
+                // autonomy: [],
+                // resources: [],
+                // tact: [],
+                // free_response: []
             });
         },
-        'rate_advisor' (id, rating, free_response) {
-            let advisor = Advisors.findOne({
-                "_id": id
+        'rate_advisor' (advisorId, rating, free_response) {
+            const advisor = Advisors.findOne({
+                "_id": advisorId
             });
 
             if (!advisor) {
                 throw new Meteor.Error(`Not found advisor with id: ${id}!`)
+            }
+
+            const userId = Meteor.userId();
+            if(!userId || Ratings.findOne({owner:userId, advisorId})){
+                throw new Meteor.Error(`You've already rated this advisor!`)
             }
 
             let {
@@ -112,17 +122,15 @@ if (Meteor.isServer) {
                 tact
             } = rating;
 
-            Advisors.update({
-                _id: id
-            }, {
-                $push: {
-                    stature,
-                    mentorship,
-                    autonomy,
-                    resources,
-                    tact,
-                    free_response
-                }
+            return Ratings.insert({
+                advisorId,
+                owner: userId,
+                stature,
+                mentorship,
+                autonomy,
+                resources,
+                tact,
+                free_response
             });
         },
 

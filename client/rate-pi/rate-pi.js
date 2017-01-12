@@ -51,9 +51,11 @@ Template.ratepi.events({
 
 		Meteor.call('rate_advisor',advisorId,rating,f,(error,success)=>{
 			if(error){
-				alert(error.error);
+				toastr.error(error.error);
 				console.log(error);
+				return;
 			} else {
+				toastr.success('Successfully rated!')
 				Router.go("/profile/"+ Router.current().params.id);
 			}
 		});
