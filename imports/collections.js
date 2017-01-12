@@ -84,14 +84,17 @@ if (Meteor.isServer) {
             // console.log(name);
             // console.log(school);
             //Advisors._ensureIndex('name', {unique: 1});
+            if(Advisors.findOne({name, school, dept})){
+                throw new Meteor.Error(`Advisor is already created!`);
+            }
             return Advisors.insert({
                 createdAt: new Date(),
                 //owner: Meteor.userId(),
                 //username: Meteor.user().username,
-                name: name,
-                school: school,
-                dept: dept,
-                image: image,
+                name,
+                school,
+                dept,
+                image,
                 // stature: [],
                 // mentorship: [],
                 // autonomy: [],
