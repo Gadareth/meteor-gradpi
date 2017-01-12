@@ -1,9 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
-import { Advisors } from '../../imports/collections.js';
+import { Ratings, Advisors } from '../../imports/collections.js';
 
 Template.profile.onCreated(function profileOnCreated() {
 	this.subscribe('advisor', Router.current().params.id);
+	this.subscribe('ratings', Router.current().params.id);
+
 	this.criterias = [
 		{
 			key: 'stature',
@@ -26,7 +28,7 @@ Template.profile.onCreated(function profileOnCreated() {
 			name: 'Tact',
 			tooltip: 'How well does this PI convey feedback?'
 		}
-	]
+	];
 });
 
 
@@ -36,38 +38,28 @@ Template.profile.helpers({
 		return returnVar;
 	},
 	allRatings: function(){
-		let returnVar = Advisors.findOne({_id: Router.current().params.id});
-		let all_ratings = [];
-		let total_responses = returnVar.stature.length;
-
-		for(let i = 0; i < total_responses; i++){
-			all_ratings[i] = {
-				stature: returnVar.stature[i],
-				mentorship: returnVar.mentorship[i],
-				autonomy: returnVar.autonomy[i],
-				resources: returnVar.resources[i],
-				tact: returnVar.tact[i],
-				free_response: returnVar.free_response[i]
-			}
-		}
-
-		console.log(all_ratings);
-		return all_ratings;
+		let ratings = Ratings.find({advisorId: Router.current().params.id}).fetch();
+		console.log('All ratings:', ratings);
+		return ratings;
 	},
 
 	averageRating: function(criteriaKey) {
-		let advisor = Advisors.findOne({_id: Router.current().params.id});
-		let overall_ratings = {};
-
 		//Compute average rating for passed criteria
-		let rating = advisor[criteriaKey];
-		return _.reduce(rating, function(memo, num) {
+		let ratings = Ratings.find({advisorId: Router.current().params.id}).fetch();
+		ratings = ratings.map((r) => {
+			return r[criteriaKey];
+		});
+		return _.reduce(ratings, function(memo, num) {
 	        return memo + num;
-	    }, 0) / (rating.length === 0 ? 1 : rating.length);
+	    }, 0) / (ratings.length === 0 ? 1 : ratings.length);
 	},
 
 	criterias: function() {
 		return Template.instance().criterias;
+	},
+
+	alreadyRated: function() {
+		return !!Ratings.findOne({advisorId: Router.current().params.id, owner: Meteor.userId()});
 	}
 });
 

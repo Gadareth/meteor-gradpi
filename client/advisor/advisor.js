@@ -17,11 +17,11 @@ import { Advisors } from '../../imports/collections.js';
 // 	// let s_average = s/size;
 // });
 
-Template.advisor.helpers({
-	name: function() {
-		return Session.get('name');
-	},
-	school: function() {
-		return Session.get('school');
-	}
-});
+// Template.advisor.helpers({
+// 	name: function() {
+// 		return Session.get('name');
+// 	},
+// 	school: function() {
+// 		return Session.get('school');
+// 	}
+// });
