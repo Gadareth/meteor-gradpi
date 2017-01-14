@@ -1,7 +1,8 @@
-import { Advisors } from '../../imports/collections.js';
+import { Advisors, Ratings } from '../../imports/collections.js';
 
 Template.ratepi.onCreated(function ratepiOnCreated() {
 	this.subscribe('advisor', Router.current().params.id);
+	this.subscribe('rating', Router.current().params.id);
 
 	this.criterias = [
 		{
@@ -72,6 +73,19 @@ Template.ratepi.helpers({
 
 	criterias: function() {
 		return Template.instance().criterias;
+	},
+
+	rating: function(criteriaKey) {
+		//Compute average rating for passed criteria
+		let rating = Ratings.findOne({advisorId: Router.current().params.id, owner: Meteor.userId()});
+		if(!rating) return null;
+		return rating[criteriaKey];
+	},
+
+	free_feedback: function() {
+		let rating = Ratings.findOne({advisorId: Router.current().params.id, owner: Meteor.userId()});
+		if(!rating) return null;
+		return rating['free_response'];
 	}
 });
 

@@ -47,7 +47,7 @@
 						</div>
 						<div class="col-sm-6">
 							<div class="pull-left">
-								{{> ratingStars}}
+								{{> ratingStars value=(rating key)}}
 							</div>
 						</div>
 					</div>
@@ -79,7 +79,7 @@
 						<div class="input">
 							<br>
 							<br>
-							<textarea id="comments" maxlength="450"></textarea>
+							<textarea id="comments" maxlength="450">{{free_feedback}}</textarea>
 						</div>
 					</div>
 				</div>
