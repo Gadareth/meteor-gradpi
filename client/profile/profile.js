@@ -5,6 +5,7 @@ import { Ratings, Advisors } from '../../imports/collections.js';
 Template.profile.onCreated(function profileOnCreated() {
 	this.subscribe('advisor', Router.current().params.id);
 	this.subscribe('ratings', Router.current().params.id);
+	this.subscribe('rating', Router.current().params.id);
 
 	this.criterias = [
 		{

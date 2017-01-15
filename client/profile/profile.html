@@ -32,9 +32,9 @@
                                 <br>
                                 <br>
                                 <br>
-                                {{#unless alreadyRated}}
-                                    <a href="/rate-pi/{{_id}}" class="btn btn-primary">Rate PI</a>
-                                {{/unless}}
+                                
+                                <a href="/rate-pi/{{_id}}" class="btn btn-primary">{{#unless alreadyRated}}Rate PI{{else}}Edit feedback{{/unless}}</a>
+                                
                             </div>
                         {{/with}}
                     </div>
