@@ -5,19 +5,21 @@
         		<div class="col-sm-4">
 	              	{{> logo}}
 				</div>
-				<div class="col-sm-6">
-					<br>
-					<br>
-					<br>
-					<br>
-					{{thisAdvisor.name}}
-					<br>
-					{{thisAdvisor.school}}
-					<br>
-					{{thisAdvisor.dept}}
-					<br>
-					<img src={{thisAdvisor.image}}>
-				</div>
+				{{#with thisAdvisor}}
+					<div class="col-sm-6">
+						<br>
+						<br>
+						<br>
+						<br>
+						<b>{{name}}</b>
+						<br>
+						{{school}}
+						<br>
+						{{dept}}
+						<br>
+						<img src="{{#if image}}{{image}}{{else}}/images/avatar.png{{/if}}" class="square">
+					</div>
+				{{/with}}
 			</div>
 			<!-- Stars section -->
 			{{#each criterias}}

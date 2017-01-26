@@ -13,22 +13,20 @@
                         <!--Second Column of Advisor Section-->
                         <div class="col-sm-6">
                             <br>
-                            <br>
-                            <br>
-                            <br>
-                            {{name}}
+                            <b>{{name}}</b>
                             <br>
                             {{school}}
                             <br>
                             {{dept}}
                             <br>
-                            <img src={{image}}>
+                            <div class="advisor-image">
+                                <img src="{{#if image}}{{image}}{{else}}/images/avatar.png{{/if}}">
+                            </div>
                             <br>
                             <br>
-                            <br>
-                            <br>
-                            
+                                                        
                             <a href="/rate-pi/{{_id}}" class="btn btn-primary">{{#unless alreadyRated}}Rate PI{{else}}Edit feedback{{/unless}}</a>
+                            <br>
                             
                         </div>
                     {{/with}}
