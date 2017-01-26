@@ -2,14 +2,11 @@
 	<div class="container">
 		<div class="row">
 			<!--First Column of About Section-->
-			<div class="col-sm-1">
-				<br>
-				<br>
-				<br>
-				<img src="images/GradPI-logo.png">
+			<div class="col-sm-4">
+				{{> logo}}
 			</div>
 			
-			<div class="col-sm-8 col-sm-offset-3">
+			<div class="col-sm-8">
 				<form id="addpi">
 					<div id="addPiDiv" class="container">
 						<br>
@@ -23,7 +20,7 @@
 						</fieldset>
 						<fieldset>
 							<label for="school">School</label>
-							<select id="school">
+							<select class="form-control" id="school">
 								<option value="Albertus Magnus College">Albertus Magnus College</option>	
 								<option value="Columbia">Columbia</option>
 								<option value="Quinnipiac">Quinnipiac</option>
@@ -34,7 +31,7 @@
 						</fieldset>
 						<fieldset>
 							<label for="dept">Department</label>
-							<select id="dept">
+							<select class="form-control" id="dept">
 								<option value="Bioinformatics">Bioinformatics</option>
 								<option value="Biomedical Sciences">Biomedical Sciences</option>
 								<option value="Engineering">Engineering</option>

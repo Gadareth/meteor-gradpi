@@ -10,6 +10,7 @@
 
 body {
     padding: 5%; 
+    padding-top: 70px;
     text-align: center;
     color: #333; 
 }
@@ -200,3 +201,6 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
 
 /*End of Code for New Stars*/
 
+img {
+  max-width: 100%;
+}

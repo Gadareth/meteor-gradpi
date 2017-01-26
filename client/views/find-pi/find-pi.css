@@ -1,23 +1,43 @@
-img {
-  width: 250px;
-  text-align: center;
-}
-
- /*Set the image to fill its parent and make transparent */
-.crop {
-  height: 250px;
-  text-align: center;
-  overflow: hidden;
-  padding: 0;
-}
-
 /* Container class and ID selectors */
-div.advisor {
-  width: 250px;
-  height: 360px;
+.advisor {
   margin: 0px 0px 0px 0px;
   border: 0px 0px 0px 0px;
   font-size: 12px;
+  cursor: pointer;
+}
+
+.advisor:hover {
+  border: 1px solid #ececec;
+}
+
+.advisor b {
+  font-size: 1.35em;
+  margin-bottom: 0.3em;
+  display: inline-block;
+}
+
+.advisor .image-container{
+  margin-top: 10px;
+}
+
+.square-container {
+    width: 100%;
+    padding-top: 100%; 
+    position: relative; 
+    overflow: hidden;
+}
+
+.square-container .square {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}
+
+.image-container img {
+  padding: 10px;
 }
 
 .container .mix,
