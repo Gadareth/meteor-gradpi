@@ -1,0 +1,25 @@
+<template name = "advisor">
+    <div class="section" id="advisor">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-1">
+                    <br>
+                    <br>
+                    <br>
+                    <img src="images/GradPI-logo.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="mix">
+            <a href={{linker}}>
+                <div class = "crop">
+                    <img src={{find_advisor_info}} alt=''>
+                </div>
+                <h4><b>{{ thisAdvisor.name }} {{ thisAdvisor.school }}</b></h4>
+                <p></p>
+            </a>
+        </div>
+    </div>
+</template>

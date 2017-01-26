@@ -1,0 +1,120 @@
+<!-- default styles -->
+<template name = "profile">
+    {{#if Template.subscriptionsReady}}
+        <!--Navigation Bar Code including links to IDs-->
+        <div class="section" id="advisor">
+            <div class="container">
+                <div class="row">
+                    {{#with thisAdvisor}}
+                        <!--First Column of Advisor Section-->
+                        <div class="col-sm-1">
+                            <br>
+                            <br>
+                            <br>
+                            <img src="/images/GradPI-logo.png">
+                        </div>
+                        <!--Second Column of Advisor Section-->
+                        <div class="col-sm-5 col-sm-offset-3">
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            {{name}}
+                            <br>
+                            {{school}}
+                            <br>
+                            {{dept}}
+                            <br>
+                            <img src={{image}}>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            
+                            <a href="/rate-pi/{{_id}}" class="btn btn-primary">{{#unless alreadyRated}}Rate PI{{else}}Edit feedback{{/unless}}</a>
+                            
+                        </div>
+                    {{/with}}
+                </div>
+                {{#each criterias}}
+                    <div class="row" id="rating-{{key}}">
+                        <div class="col-sm-2 col-sm-offset-1">
+                            <p>
+                                <br>
+                                {{name}}
+                            </p>
+                        </div>
+                        <div class="col-sm-3">
+                            <br>
+                            <div class="tooltip-wrap">
+                                <p>
+                                    ?
+                                </p>
+                                <div class="tooltip-content">
+                                    <p>{{tooltip}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="pull-left">
+                                {{> ratingStars value=(averageRating key) readonly=true}}
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+                <!--  old ratings --> 
+                <!-- {{#each allRatings }}
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <br>
+                            <br>
+                            <span>
+                                Stature: {{stature}}
+                                Mentorship: {{mentorship}}
+                                Autonomy: {{autonomy}}
+                                Resources: {{resources}}
+                                Tact: {{tact}}
+                            </span>
+                            <p>
+                                Comments: {{free_response}}
+                            </p>
+                        </div>
+                    </div>
+                {{/each}}  -->
+                <br>
+                <br>
+                {{#if allRatings.length}}
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Stature</th>
+                                <th>Mentorship</th>
+                                <th>Autonomy</th>
+                                <th>Resources</th>
+                                <th>Tact</th>
+                                <th>Comments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each allRatings}}
+                                <tr>
+                                    <td>{{stature}}</td>
+                                    <td>{{mentorship}}</td>
+                                    <td>{{autonomy}}</td>
+                                    <td>{{resources}}</td>
+                                    <td>{{tact}}</td>
+                                    <td>{{free_response}}</td>
+                                </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                {{else}}
+                    <div>
+                        No ratings yet...
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+
+    {{/if}}
+</template>
