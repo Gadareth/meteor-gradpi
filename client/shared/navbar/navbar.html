@@ -1,0 +1,18 @@
+<template name = "navbar">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">Grad PI</a>
+				<ul class="nav navbar-nav">
+					{{# if currentUser}}
+						<li><a href="/find-pi">Find a PI</a></li>
+						<li><a href="/add-pi">Add a PI</a></li>
+					{{/if}}
+				</ul>
+				<div id="login">
+					{{> loginButtons}}
+				</div>
+			</div>
+		</div>
+	</nav>
+</template>

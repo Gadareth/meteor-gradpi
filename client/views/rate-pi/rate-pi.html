@@ -1,0 +1,93 @@
+<template name = "ratepi">
+	<div class="section" id="rate">
+    	<div class="container">
+      		<div class="row">
+        		<div class="col-sm-4">
+	              	{{> logo}}
+				</div>
+				{{#with thisAdvisor}}
+					<div class="col-sm-6">
+						<br>
+						<br>
+						<br>
+						<br>
+						<b>{{name}}</b>
+						<br>
+						{{school}}
+						<br>
+						{{dept}}
+						<br>
+						<img src="{{#if image}}{{image}}{{else}}/images/avatar.png{{/if}}" class="square">
+					</div>
+				{{/with}}
+			</div>
+			<!-- Stars section -->
+			{{#each criterias}}
+				<div class="row" id="rating-{{key}}">
+					<div class="col-sm-2 col-sm-offset-1">
+						<p>
+							<br>
+							{{name}}
+						</p>
+					</div>
+					<div class="col-sm-3">
+						<br>
+						<div class="tooltip-wrap">
+  							<p>
+								?
+							</p>
+  							<div class="tooltip-content">
+			    				<p>{{tooltip}}</p>
+			  				</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="pull-left">
+							{{> ratingStars value=(rating key)}}
+						</div>
+					</div>
+				</div>
+				{{/each}}
+			<!-- Stars section END-->
+			<div class="row">
+				<div class="col-sm-1 col-sm-offset-1">
+					<p>
+						<br>
+						<br>
+						Additional Information
+					</p>
+				</div>
+
+				<div class="col-sm-2">
+					<br>
+					<br>
+					<div class="tooltip-wrap">
+		  				<p>
+							?
+						</p>
+		  				<div class="tooltip-content">
+		    				<p>Is there anything else you'd like to share about this PI?</p>
+		  				</div>
+					</div>
+				</div>
+
+				<div class="col-sm-4 col-sm-offset-1">
+					<div class="input">
+						<br>
+						<br>
+						<textarea id="comments" maxlength="450">{{free_feedback}}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3 col-sm-offset-5">
+					<br>
+					<br>
+					<br>
+					<button type="submit" id="ratingSubmit" class="btn btn-primary">Submit</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</template>

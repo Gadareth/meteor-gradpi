@@ -1,0 +1,55 @@
+<template name = "about">
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '856988154403595',
+          xfbml      : true,
+          version    : 'v2.8'
+        });
+        FB.AppEvents.logPageView();
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>  
+    <div class="section" id="about">
+        <div class="container">
+            <div class="row">
+                <!--First Column of About Section-->
+                <div class="col-sm-4">
+                    {{> logo}}
+                </div>
+                <!--Second Column of About Section-->
+                <div class="col-sm-6">
+                    <p>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <b>ABOUT US</b>
+                        <br>
+                        <br>
+                        The most important decision a student makes in graduate school is choosing an advisor or Principal Investigator (PI). This decision can make or break the student. However, there are few resources to reliably assess potential matches. It is essential that grad students know what they are getting into when they pick an advisor.
+                        <br>
+                        <br>
+                        GradPI will help to keep advisors accountable by allowing an open forum where grad students and postdocs can evaluate them based on our SMART (Stature, Mentorship, Autonomy, Resources, Tact) evaluation.
+                        <br>
+                        <br>
+                        <br>
+                        <div
+                            class="fb-like"
+                            data-share="true"
+                            data-width="450"
+                            data-show-faces="true">
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
