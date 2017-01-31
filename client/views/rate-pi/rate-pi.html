@@ -6,18 +6,14 @@
 	              	{{> logo}}
 				</div>
 				{{#with thisAdvisor}}
-					<div class="col-sm-6">
-						<br>
-						<br>
-						<br>
-						<br>
+					<div class="col-sm-8">
 						<b>{{name}}</b>
 						<br>
 						{{school}}
 						<br>
 						{{dept}}
 						<br>
-						<img src="{{#if image}}{{image}}{{else}}/images/avatar.png{{/if}}" class="square">
+						<img src="{{#if image}}{{image}}{{else}}/images/avatar.png{{/if}}" class="square" style="max-width: 250px;">
 					</div>
 				{{/with}}
 			</div>
