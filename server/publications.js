@@ -31,7 +31,6 @@ Meteor.publish('schools:search', function(searchString) {
 });
 
 Meteor.publish('departments:search', function(schoolId, searchString) {
-	console.log(schoolId, searchString)
 	return Departments.find({
 		schoolId, 
 		name:{
