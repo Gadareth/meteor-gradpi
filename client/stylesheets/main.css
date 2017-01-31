@@ -202,5 +202,38 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
 /*End of Code for New Stars*/
 
 img {
-  max-width: 100%;
+    max-width: 100%;
+}
+
+
+fieldset {
+    text-align: left;
+    position: relative;
+}
+
+.input-dropdown {
+  display: none;
+}
+
+input:focus + .input-dropdown {
+  display: block;
+}
+
+.input-dropdown {
+    position: absolute;
+    background: white;
+    width: 100%;
+    margin-top: 31px;
+    z-index: 10;
+    border: 1px solid #cccccc;
+}
+
+.input-dropdown .input-dropdown-option {
+    text-align: left;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.input-dropdown .input-dropdown-option:hover {
+    background-color: #cccccc;
 }

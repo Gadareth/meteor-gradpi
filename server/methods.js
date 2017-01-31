@@ -6,29 +6,33 @@ Meteor.methods({
     //      { upsert: true }
     //  );
     // },
-    'add_advisor' (name, school, dept, image) {
-        console.log("add_advisor");
-        // console.log(name);
-        // console.log(school);
-        //Advisors._ensureIndex('name', {unique: 1});
+    'add_advisor' (formData) {
+        console.log("add_advisor", formData);
+        let {name, school, dept} = formData; 
+        
         if(Advisors.findOne({name, school, dept})){
             throw new Meteor.Error(`Advisor is already created!`);
         }
-        return Advisors.insert({
-            createdAt: new Date(),
-            //owner: Meteor.userId(),
-            //username: Meteor.user().username,
-            name,
-            school,
-            dept,
-            image,
-            // stature: [],
-            // mentorship: [],
-            // autonomy: [],
-            // resources: [],
-            // tact: [],
-            // free_response: []
-        });
+
+        let schoolId;
+        let schoolDoc = Schools.findOne({name: school});
+
+        if(!schoolDoc){
+            console.log(school);
+            schoolId = Schools.insert({name: school});
+            Departments.insert({schoolId, name:dept});
+        } else {
+            schoolId = schoolDoc._id;
+        }
+
+        let departmentDoc = Departments.findOne({schoolId, name:dept});
+        if(!departmentDoc){
+            Departments.insert({schoolId, name:dept});
+        }
+
+        formData.createdAt = new Date();
+
+        return Advisors.insert(formData);
     },
     'rate_advisor' (advisorId, rating, free_response) {
         const advisor = Advisors.findOne({
