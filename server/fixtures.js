@@ -70,7 +70,7 @@ Meteor.startup(function(){
 			
 			if(departments){
 				departments.forEach(function(department){
-					department.schoolId = schoolId;
+					department.school = school.name;
 					Departments.insert(department);
 				});
 			}

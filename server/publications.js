@@ -1,10 +1,10 @@
-Meteor.publish('advisors', function() {
-    return Advisors.find();
+Meteor.publish('advisors', function(query={}) {
+    return Advisors.find(query);
 });
 
-Meteor.publish('advisor', function(id) {
+Meteor.publish('advisor', function(_id) {
     return Advisors.find({
-        _id: id
+        _id
     });
 });
 
@@ -30,14 +30,22 @@ Meteor.publish('schools:search', function(searchString) {
 	});
 });
 
-Meteor.publish('departments:search', function(schoolId, searchString) {
+Meteor.publish('departments:search', function(school, searchString) {
 	return Departments.find({
-		schoolId, 
+		school, 
 		name:{
 			$regex: searchString,
 			$options : 'i'
 		}
 	});
+});
+
+Meteor.publish('schools', function(query={}) {
+	return Schools.find(query);
+});
+
+Meteor.publish('departments', function(query={}) {
+	return Departments.find(query);
 });
 
 Meteor.publish('school', function(schoolId) {

@@ -1,41 +1,57 @@
 Template.findPi.onCreated(function bodyOnCreated() {
-    this.state = new ReactiveDict();
-    this.subscribe('advisors');
+    this.subscribe('schools');
+    this.school = new ReactiveVar('');
+    this.department = new ReactiveVar('');
+
+    this.autorun(()=>{
+        let school = this.school.get();
+        this.subscribe('departments', {school})
+        let department = this.department.get();
+
+        let query = {};
+        if(school){
+            query.school = school;
+        }
+        if(department) {
+            query.department = department
+        }
+        this.subscribe('advisors', query);    
+    }); 
+
 });
 
 Template.findPi.helpers({
-    findAdvisors: function() {
+    advisors() {
         const instance = Template.instance();
-        let clicked_school = instance.state.get('school');
-        let clicked_dept = instance.state.get('dept');
-        if (clicked_school || clicked_dept) {
-            if (clicked_school && clicked_dept) {
-                return Advisors.find({
-                    school: clicked_school,
-                    dept: clicked_dept
-                });
-            } else if (clicked_school && !(clicked_dept)) {
-                return Advisors.find({
-                    school: clicked_school
-                });
-            } else if (clicked_dept && !(clicked_school)) {
-                return Advisors.find({
-                    dept: clicked_dept
-                });
-            }
+        let school = instance.school.get();
+        let department = instance.department.get();
+
+        let query = {};
+        if(school){
+            query.school = school;
         }
-        return Advisors.find();
+        if(department) {
+            query.department = department
+        }
+        return Advisors.find(query);
+    }, 
+    schools() {
+        return Schools.find();
+    },
+    departments() {
+        let school = Template.instance().school.get();
+        return Departments.find({school});
     }
 });
 
 Template.findPi.events({
     'change #schoolSelect' (event, instance) {
-        instance.state.set('school', event.target.value);
+        instance.school.set(event.currentTarget.value);
     },
     'change #deptSelect' (event, instance) {
-        instance.state.set('dept', event.target.value);
+        instance.department.set(event.currentTarget.value);
     },
-    'click .advisor' (event) {
-        FlowRouter.go("/profile/" + this._id);
-    }
+    'click .advisor'(event,instance) {
+        FlowRouter.go(`/profile/${this._id}`);
+    } 
 });
