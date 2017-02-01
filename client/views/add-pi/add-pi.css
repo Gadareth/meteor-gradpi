@@ -1,20 +1,7 @@
-#addPiDiv {
-	width: 700px;
-}
-
-.container div {
-  text-align: center;
+#piSubmit {
+	margin-top: 50px;
 }
 
 fieldset {
-	width: 400px;
-}
-
-fieldset label {
-	float: left;
-}
-
-input#name {
-	margin-left: 70px;
-    width: 250px;
+	margin-bottom: 10px;
 }
