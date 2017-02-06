@@ -3,8 +3,8 @@ module.exports = {
     one: {
       host: '45.79.133.13',
       username: 'gadareth',
-      password: 'gradpi'
-      // pem:
+      //password: 'gradpi'
+      pem: './.config/gradpi'
       // or leave blank for authenticate from ssh-agent
     }
   },
