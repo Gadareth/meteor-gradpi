@@ -1,5 +1,5 @@
 Meteor.startup(function(){
-	if (Meteor.absoluteUrl().match('localhost')) {
+	if (process.env.NODE_ENV !== 'production') {
 	  
 		ServiceConfiguration.configurations.upsert(
 		  { service: "github" },
@@ -29,5 +29,5 @@ Meteor.startup(function(){
 	);
 	
 	
-		
+
 });
