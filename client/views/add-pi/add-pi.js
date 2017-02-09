@@ -1,11 +1,11 @@
 Template.addpi.onCreated(function(){
     this.schoolSearchString = new ReactiveVar('');
     this.departmentSearchString = new ReactiveVar('');
-    this.schoolId = new ReactiveVar('');
+    this.school = new ReactiveVar('');
 
     this.autorun(()=>{
         this.subscribe('schools:search', this.schoolSearchString.get());
-        this.subscribe('departments:search', this.schoolId.get(), this.departmentSearchString.get());
+        this.subscribe('departments:search', this.school.get(), this.departmentSearchString.get());
     });
 
 });
@@ -23,10 +23,10 @@ Template.addpi.helpers({
     },
     departments() {
         let searchString = Template.instance().departmentSearchString.get(),
-            schoolId = Template.instance().schoolId.get();
+            school = Template.instance().school.get();
 
         return Departments.find({
-            schoolId,
+            school,
             name: {
                 $regex: searchString,
                 $options : 'i'
@@ -43,7 +43,7 @@ Template.addpi.events({
         instance.departmentSearchString.set(event.currentTarget.value);
     },
     'mousedown [action=set-school]'(event, instance) {
-        instance.schoolId.set(this._id);
+        instance.school.set(this.name);
         instance.$('input#school').val(this.name);
     },
     'mousedown [action=set-department]'(event, instance) {

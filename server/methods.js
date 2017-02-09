@@ -14,20 +14,13 @@ Meteor.methods({
             throw new Meteor.Error(`Advisor is already created!`);
         }
 
-        let schoolId;
         let schoolDoc = Schools.findOne({name: school});
-
         if(!schoolDoc){
-            console.log(school);
-            schoolId = Schools.insert({name: school});
-            Departments.insert({schoolId, name:dept});
-        } else {
-            schoolId = schoolDoc._id;
-        }
-
-        let departmentDoc = Departments.findOne({schoolId, name:dept});
+            Schools.insert({name: school});
+        } 
+        let departmentDoc = Departments.findOne({school, name:dept});
         if(!departmentDoc){
-            Departments.insert({schoolId, name:dept});
+            Departments.insert({school, name:dept});
         }
 
         formData.createdAt = new Date();
