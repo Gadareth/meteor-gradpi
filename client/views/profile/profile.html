@@ -12,24 +12,7 @@
                         </div>
                         <!--Second Column of Advisor Section-->
                         <div class="col-sm-8">
-                            <br>
-                            <b>{{name}}</b>
-                            <br>
-                            {{school}}
-                            <br>
-                            {{dept}}
-                            <br>
-                            <div class="advisor-image">
-                                <img src="{{#if image}}{{image}}{{else}}/images/avatar.png{{/if}}" class="square" style="max-width: 250px;">
-                                {{#if wasCreatedByUser}}
-                                    <div class="text-center">
-                                        <label for="image"><div class="btn btn-primary">Update image</div></label>
-                                        <input type="file" id="image" class="myFileInput" style="width:1px; height:1px; position:absolute; left: -999999px;">
-                                    </div>      
-                                {{/if}}
-                            </div>
-                            <br>
-                            <br>
+                            {{> advisorProfileCard advisor=thisAdvisor}}
                                                         
                             <a href="/rate-pi/{{_id}}" class="btn btn-primary">{{#unless alreadyRated}}Rate PI{{else}}Edit feedback{{/unless}}</a>
                             <br>

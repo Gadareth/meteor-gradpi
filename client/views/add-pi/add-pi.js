@@ -52,6 +52,10 @@ Template.addpi.events({
 
     'change .myFileInput'(event, template) {
         FS.Utility.eachFile(event, function(file) {
+            if(file.size/1024/1024 > 1) {
+                toastr.error('File size should be less than 1 mb');
+                return
+            }
             Images.insert(file, function(err, fileObj) {
                 if (err) {
                     // handle error
@@ -59,8 +63,7 @@ Template.addpi.events({
                     toastr.err(err.err);
                 } else {
                     // handle success depending what you need to do
-                    var userId = Meteor.userId();
-                    template.imageURL = "/cfs/files/images/" + fileObj._id;
+                    template.imageId = fileObj._id;
                 }
             });
         });
@@ -75,7 +78,8 @@ Template.addpi.events({
             name : form.name.value,
             school: form.school.value,
             dept: form.department.value,
-            image: instance.imageURL
+            imageId: instance.imageId,
+            imageUrl: "/cfs/files/images/" + instance.imageId
         }
 
         Meteor.call('add_advisor', formData, function(error, result) {

@@ -68,39 +68,8 @@ Template.profile.helpers({
         });
     },
 
-    wasCreatedByUser () {
-        return true;
-        return this.createBy === Meteor.userId();
-
-    }
 });  
 
 Template.profile.events({
-    'change .myFileInput'(event, template) {
-        FS.Utility.eachFile(event, function(file) {
-            Images.insert(file, function(err, fileObj) {
-                if (err) {
-                    // handle error
-                    console.log(err);
-                    toastr.err(err.err);
-                } else {
-                    // handle success depending what you need to do
-                    let image = "/cfs/files/images/" + fileObj._id;
-                    let advisorId = FlowRouter.getParam('id');
-                    let formData = {
-                        image
-                    }
-
-                    Meteor.call('advisors.update', advisorId, formData, (error)=>{
-                        if(error){
-                            console.log(error);
-                            toastr.error(error.reason);
-                        } else {
-                            toastr.success('Profile was successfully updated');
-                        }
-                    });
-                }
-            });
-        });
-    },
+    
 })
