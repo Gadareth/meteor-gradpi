@@ -21,6 +21,12 @@
                             <br>
                             <div class="advisor-image">
                                 <img src="{{#if image}}{{image}}{{else}}/images/avatar.png{{/if}}" class="square" style="max-width: 250px;">
+                                {{#if wasCreatedByUser}}
+                                    <div class="text-center">
+                                        <label for="image"><div class="btn btn-primary">Update image</div></label>
+                                        <input type="file" id="image" class="myFileInput" style="width:1px; height:1px; position:absolute; left: -999999px;">
+                                    </div>      
+                                {{/if}}
                             </div>
                             <br>
                             <br>
