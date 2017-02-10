@@ -24,6 +24,7 @@ Meteor.methods({
         }
 
         formData.createdAt = new Date();
+        formData.createdBy = Meteor.userId();
 
         return Advisors.insert(formData);
     },
@@ -81,9 +82,9 @@ Meteor.methods({
         if(!advisor){
             throw new Meteor.Error(404, 'Advisor not found');
         }
-        // if(advisor.createdBy !== Meteor.userId() ){
-        //     throw new Meteor.Error(404, "You don't have permissions for this operation");
-        // }
+        if(advisor.createdBy !== Meteor.userId() ){
+            throw new Meteor.Error(404, "You don't have permissions for this operation");
+        }
 
         Advisors.update(advisorId, {$set: formData});
     }

@@ -5,17 +5,9 @@
         		<div class="col-sm-4">
 	              	{{> logo}}
 				</div>
-				{{#with thisAdvisor}}
-					<div class="col-sm-8">
-						<b>{{name}}</b>
-						<br>
-						{{school}}
-						<br>
-						{{dept}}
-						<br>
-						<img src="{{#if image}}{{image}}{{else}}/images/avatar.png{{/if}}" class="square" style="max-width: 250px;">
-					</div>
-				{{/with}}
+				<div class="col-sm-8">
+					{{> advisorProfileCard advisor=thisAdvisor}}
+				</div>
 			</div>
 			<!-- Stars section -->
 			{{#each criterias}}
