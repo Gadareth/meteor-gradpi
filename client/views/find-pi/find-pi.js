@@ -13,7 +13,7 @@ Template.findPi.onCreated(function bodyOnCreated() {
             query.school = school;
         }
         if(department) {
-            query.department = department
+            query.dept = department
         }
         this.subscribe('advisors', query);    
     }); 
@@ -31,7 +31,7 @@ Template.findPi.helpers({
             query.school = school;
         }
         if(department) {
-            query.department = department
+            query.dept = department
         }
         return Advisors.find(query);
     }, 
