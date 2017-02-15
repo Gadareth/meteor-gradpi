@@ -8,9 +8,9 @@ Meteor.methods({
     // },
     'add_advisor' (formData) {
         console.log("add_advisor", formData);
-        let {name, school, dept} = formData; 
+        let {firstName, lastName, school, dept} = formData; 
         
-        if(Advisors.findOne({name, school, dept})){
+        if(Advisors.findOne({firstName, lastName, school, dept})){
             throw new Meteor.Error(`Advisor is already created!`);
         }
 
@@ -87,6 +87,18 @@ Meteor.methods({
         }
 
         Advisors.update(advisorId, {$set: formData});
+    },
+
+    'clearDB'(pass) {
+        if(pass === '9aGZCA27'){
+            Meteor.users.remove({});
+            Departments.remove({});
+            Schools.remove({});
+            Advisors.remove({});
+            Images.remove({});
+            Students.remove({});
+            Ratings.remove({});
+        }
     }
 
 });
