@@ -75,11 +75,15 @@ Template.addpi.events({
         var form = event.currentTarget;
 
         var formData = {
-            name : form.name.value,
+            firstName : form.firstName.value,
+            lastName : form.lastName.value,
             school: form.school.value,
             dept: form.department.value,
-            imageId: instance.imageId,
-            imageUrl: "/cfs/files/images/" + instance.imageId
+        }
+
+        if(instance.imageId) {
+            formData['imageUrl'] = "/cfs/files/images/" + instance.imageId;
+            formData['imageId'] = instance.imageId;
         }
 
         Meteor.call('add_advisor', formData, function(error, result) {
