@@ -33,7 +33,15 @@ Template.findPi.helpers({
         if(department) {
             query.dept = department
         }
-        return Advisors.find(query);
+        let advisors = Advisors.find(query, {
+            sort:{
+                firstName: 1
+            }
+        }).fetch();
+
+        return _.sortBy(advisors, (a) => {
+            return a.lastName.toLowerCase();
+        });
     }, 
     schools() {
         return Schools.find();
