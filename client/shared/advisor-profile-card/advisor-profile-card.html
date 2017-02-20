@@ -1,32 +1,39 @@
 <template name="advisorProfileCard">
+    <div class="advisor-profile-card">
+        <div class="advisor-image text-center">
+            {{#if advisor.imageId}}
+                {{#with image advisor.imageId}}
+                    {{#if isUploaded}}
+                        <img src="{{url}}" class="square">
+                    {{else}}
+                        Image is processing...
+                    {{/if}}
+                {{/with}}
+            {{else}}
+                <img src="/images/avatar.png" class="square">
+            {{/if}}
 
-    <br>
-    <b>{{advisor.firstName}} {{advisor.lastName}}</b>
-    <br>
-    {{advisor.school}}
-    <br>
-    {{advisor.dept}}
-    <br>
-    <div class="advisor-image">
-        {{#if advisor.imageId}}
-            {{#with image advisor.imageId}}
-                {{#if isUploaded}}
-                    <img src="{{url}}" class="square" style="max-width: 250px;">
-                {{else}}
-                    Image is processing...
-                {{/if}}
-            {{/with}}
-        {{else}}
-            <img src="/images/avatar.png" class="square" style="max-width: 250px;">
-        {{/if}}
+            {{#if wasCreatedByUser}}
+                <div class="image-overlay">
+                    <label for="image">
+                        <span>
+                            Update image
+                            <br>
+                            <i class="fa fa-picture-o" style="font-size:2em;"></i>
+                        </span>
+                    </label>
+                    <input type="file" id="image" class="myFileInput" style="width:1px; height:1px; position:absolute; left: -999999px;">
+                </div>      
+            {{/if}}
 
-        {{#if wasCreatedByUser}}
-            <div class="text-center">
-                <label for="image"><div class="btn btn-primary">Update image</div></label>
-                <input type="file" id="image" class="myFileInput" style="width:1px; height:1px; position:absolute; left: -999999px;">
-            </div>      
-        {{/if}}
+        </div>
+        <div class="text-center">
+            <br>
+            <b>{{advisor.firstName}} {{advisor.lastName}}</b>
+            <br>
+            {{advisor.school}}
+            <br>
+            {{advisor.dept}}
+        </div>
     </div>
-    <br>
-    <br>
 </template>

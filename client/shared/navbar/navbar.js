@@ -2,7 +2,7 @@ Template.navbar.onCreated(function(){
 	this.closeLoginPopup = function(event) {
 		const container = $('#login');
 
-		if($(event.target).hasClass('additional-link')) return;
+		if($(event.target).hasClass('additional-link') || $(event.target).hasClass('login-close-text')) return;
 	    if (!container.is(event.target) && container.has(event.target).length === 0){
 	        $('.login-close-text').trigger('click');
 		}

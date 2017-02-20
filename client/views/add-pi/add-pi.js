@@ -50,7 +50,7 @@ Template.addpi.events({
         instance.$('input#department').val(this.name);
     },
 
-    'change .myFileInput'(event, template) {
+    'change input[type="file"]#image'(event, template) {
         FS.Utility.eachFile(event, function(file) {
             if(file.size/1024/1024 > 1) {
                 toastr.error('File size should be less than 1 mb');
