@@ -1,17 +1,13 @@
 <!-- default styles -->
 <template name = "profile">
     {{#if Template.subscriptionsReady}}
-        <!--Navigation Bar Code including links to IDs-->
         <div class="section" id="advisor">
             <div class="container">
                 <div class="row">
                     {{#with thisAdvisor}}
-                        <!--First Column of Advisor Section-->
-                        <div class="col-sm-4">
-                            {{> logo}}
-                        </div>
-                        <!--Second Column of Advisor Section-->
-                        <div class="col-sm-8">
+
+                        <div class="col-sm-4 col-sm-offset-4 text-center">
+
                             {{> advisorProfileCard advisor=thisAdvisor}}
                                                         
                             <a href="/rate-pi/{{_id}}" class="btn btn-primary">{{#unless alreadyRated}}Rate PI{{else}}Edit feedback{{/unless}}</a>
@@ -46,26 +42,6 @@
                         </div>
                     </div>
                 {{/each}}
-                <!--  old ratings --> 
-                <!-- {{#each allRatings }}
-                    <div class="row">
-                        <div class="col-sm-8 col-sm-offset-2">
-                            <br>
-                            <br>
-                            <span>
-                                Stature: {{stature}}
-                                Mentorship: {{mentorship}}
-                                Autonomy: {{autonomy}}
-                                Resources: {{resources}}
-                                Tact: {{tact}}
-                            </span>
-                            <p>
-                                Comments: {{free_response}}
-                            </p>
-                        </div>
-                    </div>
-                {{/each}}  -->
-                <br>
                 <br>
                 {{#if allRatings.length}}
                     <table class="table table-bordered">
@@ -93,7 +69,7 @@
                         </tbody>
                     </table>
                 {{else}}
-                    <div>
+                    <div class="col-sm-offset-1">
                         No ratings yet...
                     </div>
                 {{/if}}

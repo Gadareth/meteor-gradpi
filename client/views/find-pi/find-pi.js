@@ -38,6 +38,7 @@ Template.findPi.helpers({
                 firstName: 1
             }
         }).fetch();
+        console.log(query)
 
         return _.sortBy(advisors, (a) => {
             return a.lastName.toLowerCase();

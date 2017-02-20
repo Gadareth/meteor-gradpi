@@ -2,11 +2,9 @@
 	<div class="container">
 		<div class="row">
 			<!--First Column of About Section-->
-			<div class="col-sm-4">
-				{{> logo}}
-			</div>
-			
-			<div class="col-sm-8">
+			<div class="col-sm-8 col-sm-offset-2">
+				<h1>Add PI</h1>
+				<br>
 				<form id="addpi">
 					<div>
 						<fieldset>
@@ -40,11 +38,10 @@
 							</div>
 						</fieldset>
 						<br>	
-						<input type="file" id="image" class="myFileInput">			
-			  		
-						<div class="col-sm-3 col-sm-offset-2">
-							<button type="submit" id="piSubmit" class="btn btn-primary">Submit</button>
-						</div>
+						<input type="file" id="image">			
+						<button type="submit" id="piSubmit" class="btn btn-primary">Submit</button>
+						<!-- <div class="col-sm-3 col-sm-offset-2"> -->
+						<!-- </div> -->
 					</div>
 				</form>
 			</div>

@@ -1,0 +1,99 @@
+/* CSS declarations go here */
+
+/*
+    Note: It is best to use a less version of this file ( see http://css2less.cc
+    For the media queries use @screen-sm-min instead of 768px.
+    For .omb_spanOr use @body-bg instead of white.
+*/
+
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+body {
+    padding-top: 70px;
+    color: #333; 
+    font-family: Roboto, Helvetica, sans-serif;
+}
+
+// h1 {
+//     font-size: 2em; 
+//     margin-bottom: .5rem;
+// }
+
+// p {
+//     font-size: 16px;
+// }
+
+.tooltip-wrap {
+  position: relative;
+}
+
+.tooltip-wrap .tooltip-content {
+  display: none;
+  position: absolute;
+  top: 5%;
+  left: 10%;
+  background-color: #fff;
+}
+
+.tooltip-wrap:hover .tooltip-content {
+  display: inline;
+}
+
+textarea {
+  min-height: 200px;
+  min-width: 280px;
+}
+
+
+img {
+    max-width: 100%;
+}
+
+
+
+
+
+fieldset {
+    text-align: left;
+    position: relative;
+}
+
+
+input:focus + .input-dropdown {
+    display: block;
+}
+
+.input-dropdown {
+    display: none;
+    position: absolute;
+    background: white;
+    width: 100%;
+    margin-top: 31px;
+    z-index: 10;
+    border: 1px solid #cccccc;
+
+    .input-dropdown-option {
+        text-align: left;
+        padding: 5px;
+        cursor: pointer;
+    }
+
+    .input-dropdown-option:hover {
+        background-color: #cccccc;
+    }
+}
+
+.square-container {
+    width: 100%;
+    padding-top: 100%; 
+    position: relative; 
+    overflow: hidden;
+    .square {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+    }
+}
