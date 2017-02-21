@@ -18,8 +18,8 @@
 			</div>
 			<ul class="nav navbar-nav navbar-collapse collapse" id="navbar">
 				{{# if currentUser}}
-					<li><a href="/find-pi">Find a PI</a></li>
-					<li><a href="/add-pi">Add a PI</a></li>
+					<li><a href="{{pathFor 'advisors.list'}}">Find a PI</a></li>
+					<li><a href="{{pathFor 'advisors.new'}}">Add a PI</a></li>
 				{{/if}}
 			</ul>
 			<div class="pull-right hidden-xs" style="margin:15px; ">

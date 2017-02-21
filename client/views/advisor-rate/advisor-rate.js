@@ -1,4 +1,4 @@
-Template.ratepi.onCreated(function ratepiOnCreated() {
+Template.advisorRate.onCreated(function advisorRateOnCreated() {
 	let id = FlowRouter.getParam('id');
 	this.subscribe('advisor', id);
 	this.subscribe('rating', id);
@@ -29,7 +29,7 @@ Template.ratepi.onCreated(function ratepiOnCreated() {
 	]
 });
 
-Template.ratepi.events({
+Template.advisorRate.events({
 	'click #ratingSubmit': function(event,instance) {
 		console.log ("rate submit clicked");
 		event.preventDefault();
@@ -49,21 +49,21 @@ Template.ratepi.events({
 		let f = instance.find("#comments").value;
 		const advisorId = FlowRouter.getParam('id');
 
-		Meteor.call('rate_advisor',advisorId,rating,f,(error,success)=>{
+		Meteor.call('advisors.rate',advisorId,rating,f,(error,success)=>{
 			if(error){
 				toastr.error(error.error);
 				console.log(error);
 				return;
 			} else {
 				toastr.success('Successfully rated!')
-				FlowRouter.go("/profile/"+ FlowRouter.getParam('id'));
+				FlowRouter.go('advisors.details' , {id:FlowRouter.getParam('id')});
 			}
 		});
 	}
 });
 
-Template.ratepi.helpers({
-	thisAdvisor: function (){
+Template.advisorRate.helpers({
+	advisor: function (){
 		//console.log(Advisors.find().count());
 		let returnVar = Advisors.findOne({_id: FlowRouter.getParam('id')});
 		console.log(Advisors.find().fetch());

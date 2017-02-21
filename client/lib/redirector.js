@@ -1,5 +1,5 @@
 Tracker.autorun(function(){
-	if(!Meteor.userId()){
+	if(!Meteor.userId() && !Meteor.loggingIn()){
 		FlowRouter.redirect('/');
 	}
 });

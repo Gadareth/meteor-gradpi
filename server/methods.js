@@ -6,8 +6,8 @@ Meteor.methods({
     //      { upsert: true }
     //  );
     // },
-    'add_advisor' (formData) {
-        console.log("add_advisor", formData);
+    'advisors.insert' (formData) {
+        console.log("advisors.insert", formData);
         let {firstName, lastName, school, dept} = formData; 
         
         if(Advisors.findOne({firstName, lastName, school, dept})){
@@ -28,7 +28,7 @@ Meteor.methods({
 
         return Advisors.insert(formData);
     },
-    'rate_advisor' (advisorId, rating, free_response) {
+    'advisors.rate' (advisorId, rating, free_response) {
         const advisor = Advisors.findOne({
             "_id": advisorId
         });
@@ -89,16 +89,16 @@ Meteor.methods({
         Advisors.update(advisorId, {$set: formData});
     },
 
-    'clearDB'(pass) {
-        if(pass === '9aGZCA27'){
-            Meteor.users.remove({});
-            Departments.remove({});
-            Schools.remove({});
-            Advisors.remove({});
-            Images.remove({});
-            Students.remove({});
-            Ratings.remove({});
-        }
-    }
+    // 'clearDB'(pass) {
+    //     if(pass === '9aGZCA27'){
+    //         Meteor.users.remove({});
+    //         Departments.remove({});
+    //         Schools.remove({});
+    //         Advisors.remove({});
+    //         Images.remove({});
+    //         Students.remove({});
+    //         Ratings.remove({});
+    //     }
+    // }
 
 });
