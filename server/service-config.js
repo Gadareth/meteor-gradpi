@@ -1,6 +1,6 @@
 Meteor.startup(function(){
 	if (process.env.NODE_ENV !== 'production') {
-	  
+
 		ServiceConfiguration.configurations.upsert(
 		  { service: "github" },
 		  { $set: { clientId: "d3b6f9e0d079cbb44ea1", secret: "f79d0e30ff582684b4cb1da84033f3eabe20b423" } }
@@ -27,7 +27,4 @@ Meteor.startup(function(){
 	  { service: "google" },
 	  { $set: { clientId: "1051789464456-macqaaehbotl0s0iirgu7dkk89304ach.apps.googleusercontent.com", secret: "wjiqeqR51iWDL2dc2JwDyd8H" } }
 	);
-	
-	
-
 });

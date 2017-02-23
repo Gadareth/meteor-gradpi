@@ -8,8 +8,8 @@ Meteor.methods({
     // },
     'add_advisor' (formData) {
         console.log("add_advisor", formData);
-        let {firstName, lastName, school, dept} = formData; 
-        
+        let {firstName, lastName, school, dept} = formData;
+
         if(Advisors.findOne({firstName, lastName, school, dept})){
             throw new Meteor.Error(`Advisor is already created!`);
         }
@@ -17,7 +17,7 @@ Meteor.methods({
         let schoolDoc = Schools.findOne({name: school});
         if(!schoolDoc){
             Schools.insert({name: school});
-        } 
+        }
         let departmentDoc = Departments.findOne({school, name:dept});
         if(!departmentDoc){
             Departments.insert({school, name:dept});
@@ -40,7 +40,7 @@ Meteor.methods({
         if (!Meteor.userId()) {
             throw new Meteor.Error(`Access denied. Must be logged in!`)
         }
-        
+
         let {
             stature,
             mentorship,
@@ -63,7 +63,7 @@ Meteor.methods({
                     free_response
                 }
             });
-        } 
+        }
 
         return Ratings.insert({
             advisorId,
@@ -78,7 +78,7 @@ Meteor.methods({
     },
 
     'advisors.update'(advisorId, formData) {
-        const advisor = Advisors.findOne(advisorId); 
+        const advisor = Advisors.findOne(advisorId);
         if(!advisor){
             throw new Meteor.Error(404, 'Advisor not found');
         }
@@ -99,6 +99,29 @@ Meteor.methods({
             Students.remove({});
             Ratings.remove({});
         }
+    },
+
+    'add_feedback'(formData, captchaData) {
+      const verifyCaptchaResponse = reCAPTCHA.verifyCaptcha(this.connection.clientAddress, captchaData);
+
+        if (!verifyCaptchaResponse.success) {
+            console.log('reCAPTCHA check failed!', verifyCaptchaResponse);
+            throw new Meteor.Error(422, 'reCAPTCHA Failed: ' + verifyCaptchaResponse.error);
+        } else{
+          console.log('reCAPTCHA verification passed!');
+        }
+        Feedbacks.insert(formData);
+        return true;
+    },
+
+    sendEmail: function (to, from, subject, text) {
+      this.unblock();
+      Email.send({
+        to: to,
+        from: from,
+        subject: subject,
+        text: text
+      });
     }
 
 });

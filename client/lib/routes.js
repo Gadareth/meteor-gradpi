@@ -6,6 +6,13 @@ FlowRouter.route('/', {
     }
 });
 
+FlowRouter.route('/feedback-form', {
+  action: function(){
+    BlazeLayout.render('mainLayout', {content:'feedbackForm'});
+  }
+});
+
+
 var loggedInRoutes = FlowRouter.group({
     name: 'loggedIn',
     triggersEnter: [function() {
@@ -82,7 +89,7 @@ loggedInRoutes.route('/logout', {
 // Steps
 // 1. Create collection for schools, fill with data
 // 2. Make iron FlowRouter routes for schools and advisors
-// 3. Make template for school (needs helper to load lists of advisors) 
+// 3. Make template for school (needs helper to load lists of advisors)
 // 4. Make template for advisor
 // Derek
 // Make a page to choose PIs
