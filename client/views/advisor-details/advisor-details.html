@@ -1,16 +1,16 @@
 <!-- default styles -->
-<template name = "profile">
+<template name = "advisorDetails">
     {{#if Template.subscriptionsReady}}
         <div class="section" id="advisor">
             <div class="container">
                 <div class="row">
-                    {{#with thisAdvisor}}
+                    {{#with advisor}}
 
                         <div class="col-sm-4 col-sm-offset-4 text-center">
 
-                            {{> advisorProfileCard advisor=thisAdvisor}}
+                            {{> advisorProfileCard advisor=advisor}}
                                                         
-                            <a href="/rate-pi/{{_id}}" class="btn btn-primary">{{#unless alreadyRated}}Rate PI{{else}}Edit feedback{{/unless}}</a>
+                            <a href="{{pathFor 'advisor.rate' id=_id}}" class="btn btn-primary">{{#unless alreadyRated}}Rate PI{{else}}Edit feedback{{/unless}}</a>
                             <br>
                             
                         </div>
@@ -43,7 +43,7 @@
                     </div>
                 {{/each}}
                 <br>
-                {{#if allRatings.length}}
+                {{#if ratings.length}}
                     <table class="table table-bordered">
                         <thead>
                             <tr>

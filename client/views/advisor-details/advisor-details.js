@@ -1,4 +1,4 @@
-Template.profile.onCreated(function profileOnCreated() {
+Template.advisorDetails.onCreated(function advisorDetailsOnCreated() {
     var id = FlowRouter.getParam('id');
 
     this.subscribe('advisor', id);
@@ -29,14 +29,14 @@ Template.profile.onCreated(function profileOnCreated() {
 });
 
 
-Template.profile.helpers({
-    thisAdvisor () {
+Template.advisorDetails.helpers({
+    advisor () {
         let returnVar = Advisors.findOne({
             _id: FlowRouter.getParam('id')
         });
         return returnVar;
     },
-    allRatings () {
+    ratings () {
         let ratings = Ratings.find({
             advisorId: FlowRouter.getParam('id')
         }).fetch();
@@ -70,6 +70,6 @@ Template.profile.helpers({
 
 });  
 
-Template.profile.events({
+Template.advisorDetails.events({
     
 })

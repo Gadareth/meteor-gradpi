@@ -1,6 +1,7 @@
 // FlowRouter.configure({layoutTemplate: "layout"});
 
 FlowRouter.route('/', {
+    name: 'home',
     action: function(){
         BlazeLayout.render('mainLayout', {content:'about'});
     }
@@ -15,54 +16,62 @@ var loggedInRoutes = FlowRouter.group({
     }]
 });
 
-loggedInRoutes.route('/schools', {
+// loggedInRoutes.route('/schools', {
+//      name: '',    
+//      action: function(){
+//         BlazeLayout.render('mainLayout', {content:'schools'});
+//     }
+// });
+
+// loggedInRoutes.route('/student-bio', {
+//      name: '',    
+//      action: function(){
+//         BlazeLayout.render('mainLayout', {content:'studentBio'});
+//     }
+// });
+
+loggedInRoutes.route('/advisors', {
+    name: 'advisors.list',
     action: function(){
-        BlazeLayout.render('mainLayout', {content:'schools'});
+        BlazeLayout.render('mainLayout', {content:'advisorsList'});
     }
 });
 
-loggedInRoutes.route('/student-bio', {
+loggedInRoutes.route('/advisors/new', {
+    name: 'advisors.new',
     action: function(){
-        BlazeLayout.render('mainLayout', {content:'studentBio'});
+        BlazeLayout.render('mainLayout', {content:'advisorsForm'});
     }
 });
 
-loggedInRoutes.route('/find-pi', {
-    action: function(){
-        BlazeLayout.render('mainLayout', {content:'findPi'});
-    }
-});
-
-loggedInRoutes.route('/choose-pi', {
-    action: function(){
-        BlazeLayout.render('mainLayout', {content:'choose-pi'});
-    }
-});
-
-loggedInRoutes.route('/rate-pi/:id', {
+loggedInRoutes.route('/advisors/:id', {
+    // waitOn: function() {
+    //     return Meteor.subscribe('images')
+    // },
+    name: 'advisors.details',
     action: function() {
-        BlazeLayout.render('mainLayout', {content:'ratepi'});
+        BlazeLayout.render('mainLayout', {content:'advisorDetails'});
+    }
+});
+
+// loggedInRoutes.route('/choose-pi', {
+//      name: '',    
+//      action: function(){
+//         BlazeLayout.render('mainLayout', {content:'choose-pi'});
+//     }
+// });
+
+loggedInRoutes.route('/rate-advisor/:id', {
+    name: 'advisors.rate',
+    action: function() {
+        BlazeLayout.render('mainLayout', {content:'advisorRate'});
     }
 });
 
 loggedInRoutes.route('/contact', {
+    name: 'contact',
     action: function(){
         BlazeLayout.render('mainLayout', {content:'contact'});
-    }
-});
-
-loggedInRoutes.route('/add-pi', {
-    action: function(){
-        BlazeLayout.render('mainLayout', {content:'addpi'});
-    }
-});
-
-loggedInRoutes.route('/profile/:id', {
-    // waitOn: function() {
-    //     return Meteor.subscribe('images')
-    // },
-    action: function() {
-        BlazeLayout.render('mainLayout', {content:'profile'});
     }
 });
 

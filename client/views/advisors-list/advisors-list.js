@@ -1,4 +1,4 @@
-Template.findPi.onCreated(function bodyOnCreated() {
+Template.advisorsList.onCreated(function bodyOnCreated() {
     this.subscribe('schools');
     this.school = new ReactiveVar('');
     this.department = new ReactiveVar('');
@@ -20,7 +20,7 @@ Template.findPi.onCreated(function bodyOnCreated() {
 
 });
 
-Template.findPi.helpers({
+Template.advisorsList.helpers({
     advisors() {
         const instance = Template.instance();
         let school = instance.school.get();
@@ -53,7 +53,7 @@ Template.findPi.helpers({
     }
 });
 
-Template.findPi.events({
+Template.advisorsList.events({
     'change #schoolSelect' (event, instance) {
         instance.school.set(event.currentTarget.value);
     },
@@ -61,6 +61,6 @@ Template.findPi.events({
         instance.department.set(event.currentTarget.value);
     },
     'click .advisor'(event,instance) {
-        FlowRouter.go(`/profile/${this._id}`);
+        FlowRouter.go('advisors.rate' , {id : this._id});
     } 
 });

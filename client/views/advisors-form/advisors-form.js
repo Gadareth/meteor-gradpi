@@ -1,4 +1,4 @@
-Template.addpi.onCreated(function(){
+Template.advisorsForm.onCreated(function(){
     this.schoolSearchString = new ReactiveVar('');
     this.departmentSearchString = new ReactiveVar('');
     this.school = new ReactiveVar('');
@@ -10,7 +10,7 @@ Template.addpi.onCreated(function(){
 
 });
 
-Template.addpi.helpers({
+Template.advisorsForm.helpers({
     schools() {
         let searchString = Template.instance().schoolSearchString.get();
 
@@ -35,7 +35,7 @@ Template.addpi.helpers({
     }
 });
 
-Template.addpi.events({
+Template.advisorsForm.events({
     'input [action=search-school]'(event, instance){
         instance.schoolSearchString.set(event.currentTarget.value);
     },
@@ -69,7 +69,7 @@ Template.addpi.events({
         });
     },
 
-    'submit #addpi'(event, instance) {
+    'submit #advisorsForm'(event, instance) {
         event.preventDefault();
 
         var form = event.currentTarget;
@@ -86,13 +86,13 @@ Template.addpi.events({
             formData['imageId'] = instance.imageId;
         }
 
-        Meteor.call('add_advisor', formData, function(error, result) {
+        Meteor.call('advisors.insert', formData, function(error, result) {
             if (error) {
                 console.log(error);
                 toastr.error(error.error);
             } else {
                 console.log(name);
-                FlowRouter.go('/rate-pi/' + result);
+                FlowRouter.go('advisors.rate', { id:result });
             }
         });
     }
