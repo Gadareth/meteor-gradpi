@@ -10,12 +10,6 @@ Template.feedbackForm.events({
             message: form.message.value,
         }
 
-        if (Meteor.user()) {
-            let userId = this.userId();
-            formData.userId = userId;
-            formData.message = formData.message + " userId:" + userId;
-        }
-
         //get the captcha data
         let captchaData = grecaptcha.getResponse();
 
@@ -25,17 +19,11 @@ Template.feedbackForm.events({
 
             if (error) {
                 console.log(error);
-            } else {
-                let {
-                    from,
-                    title,
-                    message
-                } = formData;
-                Meteor.call('sendEmail', 'gradpi.app@gmail.com', from, title, message);
-                console.log('feedback is added');
-                console.log(formData);
-                FlowRouter.go('/');
+                toastr.error(error.reason);
+                return
             }
+            toastr.success('Your feedback was successfully sent to us');
+            FlowRouter.go('/');
         });
 
     }

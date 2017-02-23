@@ -9,19 +9,39 @@ Meteor.methods({
 
     'advisors.insert' (formData) {
         console.log("advisors.insert", formData);
-        let {firstName, lastName, school, dept} = formData; 
-        
-        if(Advisors.findOne({firstName, lastName, school, dept})){
+        let {
+            firstName,
+            lastName,
+            school,
+            dept
+        } = formData;
+
+        if (Advisors.findOne({
+                firstName,
+                lastName,
+                school,
+                dept
+            })) {
             throw new Meteor.Error(`Advisor is already created!`);
         }
 
-        let schoolDoc = Schools.findOne({name: school});
-        if(!schoolDoc){
-            Schools.insert({name: school});
+        let schoolDoc = Schools.findOne({
+            name: school
+        });
+        if (!schoolDoc) {
+            Schools.insert({
+                name: school
+            });
         }
-        let departmentDoc = Departments.findOne({school, name:dept});
-        if(!departmentDoc){
-            Departments.insert({school, name:dept});
+        let departmentDoc = Departments.findOne({
+            school,
+            name: dept
+        });
+        if (!departmentDoc) {
+            Departments.insert({
+                school,
+                name: dept
+            });
         }
 
         formData.createdAt = new Date();
@@ -51,11 +71,14 @@ Meteor.methods({
         } = rating;
 
         const owner = Meteor.userId();
-        const oldRating = Ratings.findOne({owner, advisorId});
+        const oldRating = Ratings.findOne({
+            owner,
+            advisorId
+        });
 
-        if(oldRating){
+        if (oldRating) {
             return Ratings.update(oldRating._id, {
-                $set:{
+                $set: {
                     stature,
                     mentorship,
                     autonomy,
@@ -78,40 +101,56 @@ Meteor.methods({
         });
     },
 
-    'advisors.update'(advisorId, formData) {
+    'advisors.update' (advisorId, formData) {
         const advisor = Advisors.findOne(advisorId);
-        if(!advisor){
+        if (!advisor) {
             throw new Meteor.Error(404, 'Advisor not found');
         }
-        if(advisor.createdBy !== Meteor.userId() ){
+        if (advisor.createdBy !== Meteor.userId()) {
             throw new Meteor.Error(404, "You don't have permissions for this operation");
         }
 
-        Advisors.update(advisorId, {$set: formData});
+        Advisors.update(advisorId, {
+            $set: formData
+        });
     },
 
-    'feedbacks.insert'(formData, captchaData) {
-      const verifyCaptchaResponse = reCAPTCHA.verifyCaptcha(this.connection.clientAddress, captchaData);
+    'feedbacks.insert' (formData, captchaData) {
+        const verifyCaptchaResponse = reCAPTCHA.verifyCaptcha(this.connection.clientAddress, captchaData);
 
         if (!verifyCaptchaResponse.success) {
             console.log('reCAPTCHA check failed!', verifyCaptchaResponse);
             throw new Meteor.Error(422, 'reCAPTCHA Failed: ' + verifyCaptchaResponse.error);
-        } else{
-          console.log('reCAPTCHA verification passed!');
+        } else {
+            console.log('reCAPTCHA verification passed!');
         }
-        Feedbacks.insert(formData);
-        return true;
+        if(Meteor.userId()) {
+            formData.userId = Meteor.userId();
+        }
+
+        const id = Feedbacks.insert(formData);
+        
+        let {
+            from,
+            title,
+            message
+        } = formData;
+
+        let to = 'gradpi.app@gmail.com';
+
+        message = `From: ${from} \n${message}`;
+        message = formData.userId ? `From user with id: ${formData.userId} \n${message}` : message;
+
+        Email.send({
+            to: to,
+            from: from,
+            subject: title,
+            text: message
+        });
+
+        return id;
     },
 
-    sendEmail: function (to, from, subject, text) {
-      this.unblock();
-      Email.send({
-        to: to,
-        from: from,
-        subject: subject,
-        text: text
-      });
-    }
     // 'clearDB'(pass) {
     //     if(pass === '9aGZCA27'){
     //         Meteor.users.remove({});
