@@ -15,8 +15,8 @@ Template.advisorsList.onCreated(function bodyOnCreated() {
         if(department) {
             query.dept = department
         }
-        this.subscribe('advisors', query);    
-    }); 
+        this.subscribe('advisors', query);
+    });
 
 });
 
@@ -35,15 +35,18 @@ Template.advisorsList.helpers({
         }
         let advisors = Advisors.find(query, {
             sort:{
-                firstName: 1
+                firstName: 1,
+                lastName: 1
             }
         }).fetch();
         console.log(query)
 
-        return _.sortBy(advisors, (a) => {
+        return _.sortBy((_.sortBy(advisors, (a) => {
+            return a.firstName.toLowerCase();
+        })), (a) => {
             return a.lastName.toLowerCase();
         });
-    }, 
+    },
     schools() {
         return Schools.find();
     },
@@ -62,5 +65,5 @@ Template.advisorsList.events({
     },
     'click .advisor'(event,instance) {
         FlowRouter.go('advisors.rate' , {id : this._id});
-    } 
+    }
 });
