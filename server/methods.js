@@ -6,10 +6,11 @@ Meteor.methods({
     //      { upsert: true }
     //  );
     // },
-    'add_advisor' (formData) {
-        console.log("add_advisor", formData);
-        let {firstName, lastName, school, dept} = formData;
 
+    'advisors.insert' (formData) {
+        console.log("advisors.insert", formData);
+        let {firstName, lastName, school, dept} = formData; 
+        
         if(Advisors.findOne({firstName, lastName, school, dept})){
             throw new Meteor.Error(`Advisor is already created!`);
         }
@@ -28,7 +29,7 @@ Meteor.methods({
 
         return Advisors.insert(formData);
     },
-    'rate_advisor' (advisorId, rating, free_response) {
+    'advisors.rate' (advisorId, rating, free_response) {
         const advisor = Advisors.findOne({
             "_id": advisorId
         });
@@ -89,19 +90,7 @@ Meteor.methods({
         Advisors.update(advisorId, {$set: formData});
     },
 
-    'clearDB'(pass) {
-        if(pass === '9aGZCA27'){
-            Meteor.users.remove({});
-            Departments.remove({});
-            Schools.remove({});
-            Advisors.remove({});
-            Images.remove({});
-            Students.remove({});
-            Ratings.remove({});
-        }
-    },
-
-    'add_feedback'(formData, captchaData) {
+    'feedbacks.insert'(formData, captchaData) {
       const verifyCaptchaResponse = reCAPTCHA.verifyCaptcha(this.connection.clientAddress, captchaData);
 
         if (!verifyCaptchaResponse.success) {
@@ -123,5 +112,16 @@ Meteor.methods({
         text: text
       });
     }
+    // 'clearDB'(pass) {
+    //     if(pass === '9aGZCA27'){
+    //         Meteor.users.remove({});
+    //         Departments.remove({});
+    //         Schools.remove({});
+    //         Advisors.remove({});
+    //         Images.remove({});
+    //         Students.remove({});
+    //         Ratings.remove({});
+    //     }
+    // }
 
 });
