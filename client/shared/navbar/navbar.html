@@ -6,15 +6,19 @@
 					<img src="/images/GradPI-logo-cropped.png" class="img-responsive">
 					<span class="navbar-brand-title">Grad PI</span>
 				</a>
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar">
-		            <span class="sr-only">Toggle navigation</span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-		            <span class="icon-bar"></span>
-	            </button>
-				<div class="hidden-sm hidden-md hidden-lg pull-right" style="margin:15px; ">
-					{{> loginButtons align="right"}}
-				</div>
+				{{#if currentUser}}
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar">
+			            <span class="sr-only">Toggle navigation</span>
+			            <span class="icon-bar"></span>
+			            <span class="icon-bar"></span>
+			            <span class="icon-bar"></span>
+		            </button>
+		        {{/if}}
+	            {{#if isMobile}}
+					<div class="hidden-sm hidden-md hidden-lg pull-right" style="margin:15px; ">
+						{{> loginButtons align="right"}}
+					</div>
+				{{/if}}
 			</div>
 			<ul class="nav navbar-nav navbar-collapse collapse" id="navbar">
 				{{# if currentUser}}
@@ -22,9 +26,11 @@
 					<li><a href="{{pathFor 'advisors.new'}}">Add a PI</a></li>
 				{{/if}}
 			</ul>
-			<div class="pull-right hidden-xs" style="margin:15px; ">
-				{{> loginButtons align="right"}}
-			</div>
+			{{#unless isMobile}}
+				<div class="pull-right hidden-xs" style="margin:15px; ">
+					{{> loginButtons align="right"}}
+				</div>
+			{{/unless}}
 		</div>
 	</nav>
 </template>
