@@ -37,3 +37,6 @@ kadira:blaze-layout
 arillo:flow-router-helpers
 service-configuration
 less
+altapp:recaptcha
+ejson
+check

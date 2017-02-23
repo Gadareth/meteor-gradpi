@@ -1,0 +1,30 @@
+<template name="feedbackForm">
+    <div class="container">
+        <div class="row">
+            <!--First Column of About Section-->
+            <div class="col-sm-8 col-sm-offset-2">
+                <h1>Contact</h1>
+                <br>
+                <form id="feedback-form">
+                    <div>
+                        <fieldset>
+                            <label for="from">From</label>
+                            <input type="text" id="from" name="from" class="col-sm-6 form-control" placeholder="Your name or email">
+                        </fieldset>
+                        <fieldset>
+                            <label for="title">Title</label>
+                            <input type="text" id="title" name="title" class="col-sm-6 form-control" placeholder="Subject" required>
+                        </fieldset>
+                        <fieldset>
+                            <label for="message">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="3" placeholder="Message" required></textarea>
+                        </fieldset>
+                        {{> reCAPTCHA}}
+                        <br>
+                        <button type="submit" id="feedbackSubmit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
