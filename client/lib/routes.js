@@ -13,6 +13,11 @@ FlowRouter.route('/feedback-form', {
   }
 });
 
+FlowRouter.route('/faq', {
+  action: function(){
+    BlazeLayout.render('mainLayout', {content:'faq'});
+  }
+});
 
 var loggedInRoutes = FlowRouter.group({
     name: 'loggedIn',
