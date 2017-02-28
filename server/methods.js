@@ -129,7 +129,7 @@ Meteor.methods({
         }
 
         const id = Feedbacks.insert(formData);
-        
+
         let {
             from,
             title,
@@ -150,6 +150,47 @@ Meteor.methods({
 
         return id;
     },
+    'sendBulkInvitations'(formData) {
+        // Let other method calls from the same client start running
+        // without waiting for the email sending to complete.
+        let subject = 'Grad PI invitation';
+        if(!formData.receivers || !formData.receivers.length){
+            throw new Meteor.Error(500, 'There is no invitation receivers');
+        }
+
+        let senderName = formData.senderName;
+        if(!senderName){
+            if(Meteor.user() && Meteor.user().profile && Meteor.user().profile.name) senderName = Meteor.user().profile.name;
+            else {
+                senderName = 'Anonymous';
+            }
+        }
+
+        formData.receivers.forEach((r)=>{
+            let recieverName = r.name;
+            let recieverEmail = r.email;
+            let regexp = /@\S+\.edu/i;
+
+            if (recieverEmail.search(regexp) == -1) {
+                throw new Meteor.Error(`${recieverEmail}: Email domain must include .edu`);
+            }
+            
+            let message = `Hi ${recieverName}!
+            I just rated a PI at www.gradpi.com! Check out the site to learn more about PIs or rate a few!
+            Cheers!
+            ${senderName}`;
+
+            Email.send({
+                to: recieverEmail,
+                from: senderName,
+                subject,
+                text: message
+            });
+
+        });
+
+        
+  },
 
     // 'clearDB'(pass) {
     //     if(pass === '9aGZCA27'){
