@@ -17,6 +17,7 @@ FlowRouter.route('/share-page', {
     action: function(){
         BlazeLayout.render('mainLayout', {content:'sharePage'});
     }
+});
 
 FlowRouter.route('/faq', {
     action: function(){
