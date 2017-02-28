@@ -79,6 +79,7 @@ Template.advisorsForm.events({
             lastName : form.lastName.value,
             school: form.school.value,
             dept: form.department.value,
+            website: form.website.value,
         }
 
         if(instance.imageId) {
