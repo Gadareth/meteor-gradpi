@@ -64,6 +64,6 @@ Template.advisorsList.events({
         instance.department.set(event.currentTarget.value);
     },
     'click .advisor'(event,instance) {
-        FlowRouter.go('advisors.rate' , {id : this._id});
+        FlowRouter.go('advisors.details' , {id : this._id});
     }
 });

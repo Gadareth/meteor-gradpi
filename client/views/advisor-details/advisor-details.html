@@ -10,7 +10,7 @@
 
                             {{> advisorProfileCard advisor=advisor}}
                                                         
-                            <a href="{{pathFor 'advisor.rate' id=_id}}" class="btn btn-primary">{{#unless alreadyRated}}Rate PI{{else}}Edit feedback{{/unless}}</a>
+                            <a href="{{pathFor 'advisors.rate' id=_id}}" class="btn btn-primary">{{#unless alreadyRated}}Rate PI{{else}}Edit feedback{{/unless}}</a>
                             <br>
                             
                         </div>
@@ -56,7 +56,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each allRatings}}
+                            {{#each ratings}}
                                 <tr>
                                     <td>{{stature}}</td>
                                     <td>{{mentorship}}</td>

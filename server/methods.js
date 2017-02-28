@@ -131,21 +131,25 @@ Meteor.methods({
         const id = Feedbacks.insert(formData);
 
         let {
-            from,
+            fromName,
+            fromEmail,
             title,
             message
         } = formData;
 
-        let to = 'gradpi.app@gmail.com';
+        let to = 'gradpi.app@gmail.com',
+            from = `${fromName}<${fromEmail}>`; 
 
-        message = `From: ${from} \n${message}`;
+        message = `From: ${fromName} <${fromEmail}> \n\n\n${message}`;
         message = formData.userId ? `From user with id: ${formData.userId} \n${message}` : message;
+
 
         Email.send({
             to: to,
             from: from,
             subject: title,
-            text: message
+            text: message,
+            replyTo: fromEmail
         });
 
         return id;

@@ -5,7 +5,8 @@ Template.feedbackForm.events({
         var form = event.currentTarget;
 
         let formData = {
-            from: form.from.value,
+            fromName: form.fromName.value,
+            fromEmail: form.fromEmail.value,
             title: form.title.value,
             message: form.message.value,
         }
