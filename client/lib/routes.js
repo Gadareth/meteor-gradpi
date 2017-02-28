@@ -13,10 +13,16 @@ FlowRouter.route('/feedback-form', {
   }
 });
 
+FlowRouter.route('/share-page', {
+    action: function(){
+        BlazeLayout.render('mainLayout', {content:'sharePage'});
+    }
+});
+
 FlowRouter.route('/faq', {
-  action: function(){
-    BlazeLayout.render('mainLayout', {content:'faq'});
-  }
+    action: function(){
+        BlazeLayout.render('mainLayout', {content:'faq'});
+    }
 });
 
 var loggedInRoutes = FlowRouter.group({
@@ -29,14 +35,14 @@ var loggedInRoutes = FlowRouter.group({
 });
 
 // loggedInRoutes.route('/schools', {
-//      name: '',    
+//      name: '',
 //      action: function(){
 //         BlazeLayout.render('mainLayout', {content:'schools'});
 //     }
 // });
 
 // loggedInRoutes.route('/student-bio', {
-//      name: '',    
+//      name: '',
 //      action: function(){
 //         BlazeLayout.render('mainLayout', {content:'studentBio'});
 //     }
@@ -67,7 +73,7 @@ loggedInRoutes.route('/advisors/:id', {
 });
 
 // loggedInRoutes.route('/choose-pi', {
-//      name: '',    
+//      name: '',
 //      action: function(){
 //         BlazeLayout.render('mainLayout', {content:'choose-pi'});
 //     }
