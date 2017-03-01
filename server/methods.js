@@ -49,7 +49,7 @@ Meteor.methods({
 
         return Advisors.insert(formData);
     },
-    'advisors.rate' (advisorId, rating, free_response) {
+    'advisors.rate' (advisorId, rating, free_response, additionalFields = {}) {
         const advisor = Advisors.findOne({
             "_id": advisorId
         });
@@ -77,7 +77,7 @@ Meteor.methods({
         });
 
         if (oldRating) {
-            return Ratings.update(oldRating._id, {
+            Ratings.update(oldRating._id, {
                 $set: {
                     stature,
                     mentorship,
@@ -87,9 +87,14 @@ Meteor.methods({
                     free_response
                 }
             });
+            Ratings.update(oldRating._id, { 
+                $set: additionalFields
+            });
+
+            return oldRating._id;   
         }
 
-        return Ratings.insert({
+        let ratingId =  Ratings.insert({
             advisorId,
             owner,
             stature,
@@ -99,6 +104,12 @@ Meteor.methods({
             tact,
             free_response
         });
+
+        Ratings.update(ratingId, { 
+            $set: additionalFields
+        });
+
+        return ratingId;
     },
 
     'advisors.update' (advisorId, formData) {

@@ -3,6 +3,14 @@ Template.advisorRate.onCreated(function advisorRateOnCreated() {
 	this.subscribe('advisor', id);
 	this.subscribe('rating', id);
 
+	this.gradSelected = new ReactiveVar(false);
+	this.autorun(()=>{
+		let rating = Ratings.findOne({advisorId:FlowRouter.getParam('id'), owner: Meteor.userId()});
+		if(rating){
+			this.gradSelected.set(rating.role === 'grad');
+		}
+	});
+
 	this.criterias = [
 		{
 			key: 'stature',
@@ -30,7 +38,7 @@ Template.advisorRate.onCreated(function advisorRateOnCreated() {
 });
 
 Template.advisorRate.events({
-	'click #ratingSubmit': function(event,instance) {
+	'submit #rating-form': function(event,instance) {
 		console.log ("rate submit clicked");
 		event.preventDefault();
 
@@ -46,57 +54,77 @@ Template.advisorRate.events({
 			rating[criteria.key] = value;
 		});
 
-		let f = instance.find("#comments").value;
+		let comments = instance.find("#comments").value;
 		const advisorId = FlowRouter.getParam('id');
 
-		Meteor.call('advisors.rate',advisorId,rating,f,(error,success)=>{
+		let additionalFields = {
+			role : event.currentTarget.role.value,
+			PIrole: null
+		}
+		if(event.currentTarget.PIrole && event.currentTarget.PIrole.value) {
+			additionalFields['PIrole'] = event.currentTarget.PIrole.value;
+		}
+		Meteor.call('advisors.rate',advisorId,rating,comments, additionalFields, (error,success)=>{
 			if(error){
 				toastr.error(error.error);
 				console.log(error);
 				return;
 			} else {
-				toastr.success('Successfully rated!')
-				FlowRouter.go('advisors.details' , {id:FlowRouter.getParam('id')});
+				toastr.success('Successfully rated!');
+				Modal.show('rateAnotherPIModal', {advisorId: FlowRouter.getParam('id')});
+				// FlowRouter.go('advisors.details' , {id:FlowRouter.getParam('id')});
 			}
 		});
 	},
 
-	'click #do-not-rate': function(){
-		FlowRouter.go();
-	},
+	'change [name="role"]'(event,instance) {
+		event.preventDefault();
+		if(event.currentTarget.value === 'grad') {
+			instance.gradSelected.set(true);
+		} else {
+			instance.gradSelected.set(false);
+		}
+	} ,
 
-	'click #rate-listed-pi': function(){
-		FlowRouter.go('/advisors');
-	},
-
-	'click #do-not-rate-listed-pi': function(){
-		FlowRouter.go('/advisors/new');
-	},
 });
 
 Template.advisorRate.helpers({
-	advisor: function (){
+	advisor(){
 		//console.log(Advisors.find().count());
 		let returnVar = Advisors.findOne({_id: FlowRouter.getParam('id')});
 		console.log(Advisors.find().fetch());
 		return returnVar;
 	},
 
-	criterias: function() {
+	criterias() {
 		return Template.instance().criterias;
 	},
 
-	rating: function(criteriaKey) {
+	rating(criteriaKey) {
 		//Compute average rating for passed criteria
 		let rating = Ratings.findOne({advisorId:FlowRouter.getParam('id'), owner: Meteor.userId()});
 		if(!rating) return null;
 		return rating[criteriaKey];
 	},
 
-	free_feedback: function() {
+	free_feedback() {
 		let rating = Ratings.findOne({advisorId: FlowRouter.getParam('id'), owner: Meteor.userId()});
 		if(!rating) return null;
 		return rating['free_response'];
+	},
+
+	ratingsObj() {
+		let rating = Ratings.findOne({advisorId: FlowRouter.getParam('id'), owner: Meteor.userId()});
+		if(!rating) return null;
+		return rating;
+	},
+
+	gradSelected() {
+		return Template.instance().gradSelected.get();
+	},
+
+	isEqual(val1 , val2) {
+		return val1 === val2;
 	}
 });
 
