@@ -66,7 +66,7 @@ Template.advisorRate.events({
 	},
 
 	'click #rate-listed-pi': function(){
-		FlowRouter.go();
+		FlowRouter.go('/advisors');
 	},
 
 	'click #do-not-rate-listed-pi': function(){
