@@ -44,8 +44,8 @@ Template.advisorRate.events({
 				throw errorMsg;
 			}
 			rating[criteria.key] = value;
-		});	
-		
+		});
+
 		let f = instance.find("#comments").value;
 		const advisorId = FlowRouter.getParam('id');
 
@@ -59,7 +59,19 @@ Template.advisorRate.events({
 				FlowRouter.go('advisors.details' , {id:FlowRouter.getParam('id')});
 			}
 		});
-	}
+	},
+
+	'click #do-not-rate': function(){
+		FlowRouter.go();
+	},
+
+	'click #rate-listed-pi': function(){
+		FlowRouter.go();
+	},
+
+	'click #do-not-rate-listed-pi': function(){
+		FlowRouter.go('/advisors/new');
+	},
 });
 
 Template.advisorRate.helpers({
