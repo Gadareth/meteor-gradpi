@@ -44,7 +44,9 @@ Template.rateAnotherPIModal.helpers({
         }, {
             limit : 10
         }).fetch();
-    }
+    },
+
+
 });
 
 Template.rateAnotherPIModal.events({
@@ -62,6 +64,11 @@ Template.rateAnotherPIModal.events({
 
     'click #do-not-rate-listed-pi' () {
         FlowRouter.go('advisors.new');
+    },
+
+    'click [action="rate-another-pi"]' (event, instance) {
+        let advisorId = this._id;
+        FlowRouter.go('advisors.rate', {id:advisorId});
     },
 
     'input [action="search-advisors"]' (event, instance) {

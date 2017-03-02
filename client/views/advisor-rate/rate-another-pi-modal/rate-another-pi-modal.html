@@ -26,7 +26,7 @@
 						</div>
 						{{#each advisors}}
 							<div>
-								<a href="{{pathFor 'advisors.rate' id=_id}}">{{firstName}} {{lastName}} ({{school}})</a>
+								<a data-dismiss="modal" action="rate-another-pi" href="{{pathFor 'advisors.rate' id=_id}}">{{firstName}} {{lastName}} ({{school}})</a>
 							</div>
 						{{/each}}
 					</div>

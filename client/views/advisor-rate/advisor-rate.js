@@ -1,7 +1,10 @@
 Template.advisorRate.onCreated(function advisorRateOnCreated() {
-	let id = FlowRouter.getParam('id');
-	this.subscribe('advisor', id);
-	this.subscribe('rating', id);
+
+	this.autorun(()=>{
+		let id = FlowRouter.getParam('id');
+		this.subscribe('advisor', id);
+		this.subscribe('rating', id);
+	});
 
 	this.gradSelected = new ReactiveVar(false);
 	this.autorun(()=>{
@@ -37,6 +40,25 @@ Template.advisorRate.onCreated(function advisorRateOnCreated() {
 	]
 });
 
+Template.advisorRate.onRendered(function(){
+
+	this.$datePicker = $('#date-picker').datepicker({
+	    autoclose: true,
+	    minViewMode: 1,
+	    format: 'MM yyyy'
+	});
+
+    this.autorun(()=>{
+    	let rating = Ratings.findOne({advisorId:FlowRouter.getParam('id'), owner: Meteor.userId()}) || {};
+    	let date = rating.lastInteraction || new Date();
+    	Tracker.afterFlush(()=>{
+	    	console.log('updating datepicker')
+	    	this.$datePicker.datepicker('update', date);
+    	});
+    });
+
+});
+
 Template.advisorRate.events({
 	'submit #rating-form': function(event,instance) {
 		console.log ("rate submit clicked");
@@ -59,7 +81,7 @@ Template.advisorRate.events({
 
 		let additionalFields = {
 			role : event.currentTarget.role.value,
-			year : event.currentTarget.year.value - 0,
+			lastInteraction : $('#date-picker').datepicker('getDate'),
 			PIrole: null
 		}
 		if(event.currentTarget.PIrole && event.currentTarget.PIrole.value) {
