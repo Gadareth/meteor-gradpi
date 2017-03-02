@@ -45,14 +45,14 @@ Template.advisorRate.onRendered(function(){
 	this.$datePicker = $('#date-picker').datepicker({
 	    autoclose: true,
 	    minViewMode: 1,
-	    format: 'MM yyyy'
+	    format: 'MM yyyy',
+	    endDate:'today'
 	});
 
     this.autorun(()=>{
     	let rating = Ratings.findOne({advisorId:FlowRouter.getParam('id'), owner: Meteor.userId()}) || {};
     	let date = rating.lastInteraction || new Date();
     	Tracker.afterFlush(()=>{
-	    	console.log('updating datepicker')
 	    	this.$datePicker.datepicker('update', date);
     	});
     });
