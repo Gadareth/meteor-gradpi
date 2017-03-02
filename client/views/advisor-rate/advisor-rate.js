@@ -93,7 +93,6 @@ Template.advisorRate.helpers({
 	advisor(){
 		//console.log(Advisors.find().count());
 		let returnVar = Advisors.findOne({_id: FlowRouter.getParam('id')});
-		console.log(Advisors.find().fetch());
 		return returnVar;
 	},
 

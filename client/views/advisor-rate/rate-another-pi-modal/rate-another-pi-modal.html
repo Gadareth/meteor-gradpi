@@ -17,9 +17,21 @@
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						<h4 class="modal-title">Is the PI listed already?</h4>
+
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label>Or type PI name</label>
+							<input type="text" action="search-advisors">
+						</div>
+						{{#each advisors}}
+							<div>
+								<a href="{{pathFor 'advisors.rate' id=_id}}">{{firstName}} {{lastName}} ({{school}})</a>
+							</div>
+						{{/each}}
 					</div>
 					<div class="modal-footer">
-						<button type="button" id="rate-listed-pi" class="btn btn-primary" data-dismiss="modal">Yes</button>
+						<button type="button" id="rate-listed-pi" class="btn btn-primary" data-dismiss="modal">Find PI</button>
 						<button type="button" id="do-not-rate-listed-pi" class="btn btn-primary" data-dismiss="modal">No</button>
 					</div>
 				{{/if}}

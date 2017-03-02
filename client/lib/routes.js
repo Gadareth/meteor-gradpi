@@ -8,18 +8,21 @@ FlowRouter.route('/', {
 });
 
 FlowRouter.route('/feedback-form', {
-  action: function(){
-    BlazeLayout.render('mainLayout', {content:'feedbackForm'});
-  }
+    name: 'contact',
+    action: function(){
+        BlazeLayout.render('mainLayout', {content:'feedbackForm'});
+    }
 });
 
 FlowRouter.route('/share-page', {
+    name: 'share',
     action: function(){
         BlazeLayout.render('mainLayout', {content:'sharePage'});
     }
 });
 
 FlowRouter.route('/faq', {
+    name: 'faq',
     action: function(){
         BlazeLayout.render('mainLayout', {content:'faq'});
     }
