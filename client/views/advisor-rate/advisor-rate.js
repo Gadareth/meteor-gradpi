@@ -66,7 +66,7 @@ Template.advisorRate.events({
 		}
 		Meteor.call('advisors.rate',advisorId,rating,comments, additionalFields, (error,success)=>{
 			if(error){
-				toastr.error(error.error);
+				toastr.error(error.reason);
 				console.log(error);
 				return;
 			} else {

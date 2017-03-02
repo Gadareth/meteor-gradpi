@@ -2,7 +2,14 @@ Template.advisorsForm.onCreated(function(){
     this.schoolSearchString = new ReactiveVar('');
     this.departmentSearchString = new ReactiveVar('');
     this.school = new ReactiveVar('');
-
+    this.autorun(()=>{
+        let advisor = Template.currentData().advisor;
+        if(advisor) {
+            this.school.set(advisor.school);
+            this.schoolSearchString.set(advisor.school);
+            this.departmentSearchString.set(advisor.dept);
+        }
+    });
     this.autorun(()=>{
         this.subscribe('schools:search', this.schoolSearchString.get());
         this.subscribe('departments:search', this.school.get(), this.departmentSearchString.get());
@@ -71,7 +78,6 @@ Template.advisorsForm.events({
 
     'submit #advisorsForm'(event, instance) {
         event.preventDefault();
-
         var form = event.currentTarget;
 
         var formData = {
@@ -87,15 +93,9 @@ Template.advisorsForm.events({
             formData['imageId'] = instance.imageId;
         }
 
-        Meteor.call('advisors.insert', formData, function(error, result) {
-            if (error) {
-                console.log(error);
-                toastr.error(error.error);
-            } else {
-                console.log(name);
-                FlowRouter.go('advisors.rate', { id:result });
-            }
-        });
+        if(typeof instance.data.onSubmit === 'function'){
+            instance.data.onSubmit(formData)
+        }
     }
 
 });

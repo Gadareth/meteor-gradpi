@@ -13,7 +13,7 @@
                 <img src="/images/avatar.png" class="square">
             {{/if}}
 
-            {{#if wasCreatedByUser}}
+            {{#if canEditImage}}
                 <div class="image-overlay">
                     <label for="image">
                         <span>
@@ -27,15 +27,26 @@
             {{/if}}
 
         </div>
-        <div class="text-center">
-            <br>
-            <b>{{advisor.firstName}} {{advisor.lastName}}</b>
-            <br>
-            {{advisor.school}}
-            <br>
-            {{advisor.dept}}
-            <br>
-            {{advisor.website}}
-        </div>
+        {{#unless state 'edit'}}
+            <div class="text-center">
+                <br>
+                <b>{{advisor.firstName}} {{advisor.lastName}}</b>
+                <br>
+                {{advisor.school}}
+                <br>
+                {{advisor.dept}}
+                <br>
+                {{advisor.website}}
+                {{#if isAdmin}}
+                    <div>
+                        <a action="set-state" data-state="edit" class="btn btn-default">Edit</a>
+                    </div>
+                {{/if}}
+            </div>
+        {{else}}
+            <div class="clearfix">
+                {{> advisorsForm advisor=advisor onSubmit=updateAdvisor}}
+            </div>
+        {{/unless}}
     </div>
 </template>

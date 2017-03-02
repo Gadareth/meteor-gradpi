@@ -112,13 +112,23 @@ Meteor.methods({
         return ratingId;
     },
 
+
+    'ratings.remove' (ratingId) {
+        if(!Roles.isAdmin()) {
+            throw new Meteor.Error(500, "You don't have permissions for this operation");
+        }
+
+        Ratings.remove(ratingId);
+    },
+
     'advisors.update' (advisorId, formData) {
         const advisor = Advisors.findOne(advisorId);
         if (!advisor) {
             throw new Meteor.Error(404, 'Advisor not found');
         }
-        if (advisor.createdBy !== Meteor.userId()) {
-            throw new Meteor.Error(404, "You don't have permissions for this operation");
+
+        if (!Roles.isAdmin() && advisor.createdBy !== Meteor.userId()) {
+            throw new Meteor.Error(500, "You don't have permissions for this operation");
         }
 
         Advisors.update(advisorId, {

@@ -58,7 +58,7 @@ loggedInRoutes.route('/advisors', {
 loggedInRoutes.route('/advisors/new', {
     name: 'advisors.new',
     action: function(){
-        BlazeLayout.render('mainLayout', {content:'advisorsForm'});
+        BlazeLayout.render('mainLayout', {content:'advisorsNew'});
     }
 });
 

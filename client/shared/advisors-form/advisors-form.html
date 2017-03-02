@@ -1,0 +1,47 @@
+<template name="advisorsForm">
+	<form id="advisorsForm">
+		<div class="col-sm-12 ">
+			<fieldset>
+				<label for="firstName">First Name</label>
+				<input type="text" id="firstName" value={{advisor.firstName}} name="firstName" class="form-control" placeholder="First Name" required>
+			</fieldset>
+			<fieldset>
+				<label for="lastName">Last Name</label>
+				<input type="text" id="lastName" value={{advisor.lastName}} name="lastName" class="form-control" placeholder="Last Name" required>
+			</fieldset>
+			<fieldset>
+				<label for="school">School</label>
+				<input type="text" id="school" value={{advisor.school}} name="school" class="form-control input-dropdown-toggler" placeholder="School" action="search-school" required autocomplete="off">
+				<div class="input-dropdown">
+					{{#each schools}}
+						<div class="input-dropdown-option" action="set-school">
+							{{name}}
+						</div>
+					{{/each}}
+				</div>
+			</fieldset>
+			<fieldset>
+				<label for="department">Department</label>
+				<input type="text" id="department" value={{advisor.dept}} name="department" class="form-control input-dropdown-toggler" placeholder="Department" action="search-department" required autocomplete="off">
+				<div class="input-dropdown">
+					{{#each departments}}
+						<div class="input-dropdown-option" action="set-department">
+							{{name}}
+						</div>
+					{{/each}}
+				</div>
+			</fieldset>
+			<fieldset>
+				<label for="website">Website</label>
+				<input type="text" id="website" value={{advisor.website}} name="website" class="form-control" placeholder="Website">
+			</fieldset>
+			<br>
+
+			<input type="file" id="image" title="PI Image">
+
+			<button type="submit" id="piSubmit" class="btn btn-primary">Submit</button>
+			<!-- <div class="col-sm-3 col-sm-offset-2"> -->
+			<!-- </div> -->
+		</div>
+	</form>
+</template>
