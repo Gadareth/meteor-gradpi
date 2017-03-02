@@ -59,6 +59,7 @@ Template.advisorRate.events({
 
 		let additionalFields = {
 			role : event.currentTarget.role.value,
+			year : event.currentTarget.year.value - 0,
 			PIrole: null
 		}
 		if(event.currentTarget.PIrole && event.currentTarget.PIrole.value) {
