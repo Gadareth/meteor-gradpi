@@ -86,7 +86,7 @@ Template.advisorDetails.events({
                         toastr.error(error.reason);
                     }
                     else {
-                        toastr.success('Successfully removed');
+                        toastr.success('Successfully removed!');
                     }
                 });
             }
