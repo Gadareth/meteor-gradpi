@@ -12,24 +12,17 @@
 				<!-- Stars section -->
 				{{#each criterias}}
 					<div class="row" id="rating-{{key}}">
-						<div class="col-sm-2 col-sm-offset-1">
+						<div class="col-sm-3 col-sm-offset-1 tooltip-wrap">
 							<p>
 								<br>
 								<b>{{name}}</b>
-							</p>
-						</div>
-						<div class="col-sm-3">
-							<br>
-							<div class="tooltip-wrap">
-	  							<p>
-									<small><i>Desc</i></small>
-								</p>
-	  							<div class="tooltip-content">
+								<div class="tooltip-content">
 				    				<p>{{tooltip}}</p>
 				  				</div>
-							</div>
+							</p>
 						</div>
-						<div class="col-sm-6">
+
+						<div class="col-sm-6 col-sm-offset-2">
 							<div class="pull-left">
 								{{> ratingStars value=(rating key)}}
 							</div>
@@ -38,43 +31,32 @@
 				{{/each}}
 				<!-- Stars section END-->
 				<div class="row">
-					<div class="col-sm-2 col-sm-offset-1">
+					<div class="col-sm-3 col-sm-offset-1 tooltip-wrap">
 						<p>
 							<br>
 							<br>
 							<b>Additional Information</b>
+							<div class="tooltip-content">
+			    				<p>(Is there anything else you'd like to share about this PI?)</p>
+			  				</div>
 						</p>
 					</div>
 
-					<div class="col-sm-3">
-						<br>
-						<br>
-						<div class="tooltip-wrap">
-			  				<p>
-								<small><i>Desc</i></small>
-							</p>
-			  				<div class="tooltip-content">
-			    				<p>Is there anything else you'd like to share about this PI?</p>
-			  				</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6">
+					<div class="col-sm-6 col-sm-offset-2">
 						<div class="input">
 							<br>
 							<br>
 							<textarea id="comments" maxlength="450">{{free_feedback}}</textarea>
 						</div>
 					</div>
-
 				</div>
 
 				<div class="row">
-					<div class="col-sm-8 col-sm-offset-2">
+					<div class="col-sm-8 col-sm-offset-1">
 						<p>
 							<br>
 							<br>
-							<b>The following information will not be displayed with your rating, but is collected for analytics.</b>
+							<b>The following information will not be displayed with your rating, but is only collected for analytics.</b>
 							<br>
 							<br>
 						</p>
@@ -82,29 +64,19 @@
 				</div>
 
 				<div class="row">
-					<div class="col-sm-2 col-sm-offset-1">
+					<div class="col-sm-3 col-sm-offset-1 tooltip-wrap">
 						<p>
 							<br>
 							<br>
-							<b>You are/were a(n)</b>
-						</p>
-					</div>
-
-					<div class="col-sm-3">
-						<br>
-						<br>
-						<div class="tooltip-wrap">
-			  				<p>
-								<small><i>Desc</i></small>
-							</p>
-			  				<div class="tooltip-content">
-			    				<p>Under what role did you interact with this PI?
+							<b>You are/were a(n):</b>
+							<div class="tooltip-content">
+			    				<p>(Under what role did you interact with this PI?)
 			    				</p>
 			  				</div>
-						</div>
+						</p>
 					</div>
 
-					<div class="col-sm-6">
+					<div class="col-sm-6 col-sm-offset-2">
 						<div class="radio">
 							<label><input type="radio" value="undergrad" name="role" checked={{isEqual ratingsObj.role "undergrad"}}>Undergrad</label>
 						</div>
@@ -126,28 +98,18 @@
 
 				{{#if gradSelected}}
 				<div class="row">
-					<div class="col-sm-2 col-sm-offset-1">
+					<div class="col-sm-3 col-sm-offset-1 tooltip-wrap">
 						<p>
 							<br>
 							<br>
-							<b>PI is/was a</b>
+							<b>PI is/was a:</b>
+							<div class="tooltip-content">
+			    				<p>(In what position did this PI work with you?)</p>
+			  				</div>
 						</p>
 					</div>
 
-					<div class="col-sm-3">
-						<br>
-						<br>
-						<div class="tooltip-wrap">
-			  				<p>
-								<small><i>Desc</i></small>
-							</p>
-			  				<div class="tooltip-content">
-			    				<p>In what position did this PI work with you?</p>
-			  				</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6">
+					<div class="col-sm-6 col-sm-offset-2">
 						<div class="radio">
 							<label><input type="radio" value="rotation" name="PIrole" checked={{isEqual ratingsObj.PIrole "rotation"}}>Rotation PI</label>
 						</div>
@@ -163,28 +125,18 @@
 				{{/if}}
 
 				<div class="row">
-					<div class="col-sm-2 col-sm-offset-1">
+					<div class="col-sm-3 col-sm-offset-1 tooltip-wrap">
 						<p>
 							<br>
 							<br>
-							<b>Last research interaction</b>
+							<b>Last research interaction:</b>
+							<div class="tooltip-content">
+			    				<p>(What month and year did you last work with this PI?)</p>
+			  				</div>
 						</p>
 					</div>
 
-					<div class="col-sm-3">
-						<br>
-						<br>
-						<div class="tooltip-wrap">
-			  				<p>
-								<small><i>Desc</i></small>
-							</p>
-			  				<div class="tooltip-content">
-			    				<p>What month and year did you last work with this PI?</p>
-			  				</div>
-						</div>
-					</div>
-
-					<div class="col-sm-3">
+					<div class="col-sm-6 col-sm-offset-2">
 						<br>
 						<br>
 						<div class="form-group">
@@ -205,5 +157,4 @@
 			</form>
 		</div>
 	</div>
-
 </template>
