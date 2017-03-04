@@ -71,5 +71,26 @@ Template.advisorDetails.helpers({
 });  
 
 Template.advisorDetails.events({
-    
+    'click [action="remove-rating"]'(event, instance) {
+        let ratingId = this._id;
+        BootstrapModalPrompt.prompt({
+            btnDismissText: 'Cancel',
+            btnOkText: 'Yes',
+            title: 'Confirm removing rating',
+            content: 'Are you sure you want to remove this rating?'
+        }, function(result) {
+            if (result) {
+                Meteor.call('ratings.remove', ratingId, function(error){
+                    if(error) {
+                        console.log(error);
+                        toastr.error(error.reason);
+                    }
+                    else {
+                        toastr.success('Successfully removed');
+                    }
+                });
+            }
+        });
+
+    }
 })

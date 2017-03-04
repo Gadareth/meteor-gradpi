@@ -49,7 +49,7 @@ Meteor.methods({
 
         return Advisors.insert(formData);
     },
-    'advisors.rate' (advisorId, rating, free_response) {
+    'advisors.rate' (advisorId, rating, free_response, additionalFields = {}) {
         const advisor = Advisors.findOne({
             "_id": advisorId
         });
@@ -77,7 +77,7 @@ Meteor.methods({
         });
 
         if (oldRating) {
-            return Ratings.update(oldRating._id, {
+            Ratings.update(oldRating._id, {
                 $set: {
                     stature,
                     mentorship,
@@ -87,9 +87,14 @@ Meteor.methods({
                     free_response
                 }
             });
+            Ratings.update(oldRating._id, { 
+                $set: additionalFields
+            });
+
+            return oldRating._id;   
         }
 
-        return Ratings.insert({
+        let ratingId =  Ratings.insert({
             advisorId,
             owner,
             stature,
@@ -99,6 +104,21 @@ Meteor.methods({
             tact,
             free_response
         });
+
+        Ratings.update(ratingId, { 
+            $set: additionalFields
+        });
+
+        return ratingId;
+    },
+
+
+    'ratings.remove' (ratingId) {
+        if(!Roles.isAdmin()) {
+            throw new Meteor.Error(500, "You don't have permissions for this operation");
+        }
+
+        Ratings.remove(ratingId);
     },
 
     'advisors.update' (advisorId, formData) {
@@ -106,8 +126,9 @@ Meteor.methods({
         if (!advisor) {
             throw new Meteor.Error(404, 'Advisor not found');
         }
-        if (advisor.createdBy !== Meteor.userId()) {
-            throw new Meteor.Error(404, "You don't have permissions for this operation");
+
+        if (!Roles.isAdmin() && advisor.createdBy !== Meteor.userId()) {
+            throw new Meteor.Error(500, "You don't have permissions for this operation");
         }
 
         Advisors.update(advisorId, {
@@ -129,7 +150,7 @@ Meteor.methods({
         }
 
         const id = Feedbacks.insert(formData);
-        
+
         let {
             fromName,
             fromEmail,
@@ -154,6 +175,47 @@ Meteor.methods({
 
         return id;
     },
+    'sendBulkInvitations'(formData) {
+        // Let other method calls from the same client start running
+        // without waiting for the email sending to complete.
+        let subject = 'Grad PI invitation';
+        if(!formData.receivers || !formData.receivers.length){
+            throw new Meteor.Error(500, 'There is no invitation receivers');
+        }
+
+        let senderName = formData.senderName;
+        if(!senderName){
+            if(Meteor.user() && Meteor.user().profile && Meteor.user().profile.name) senderName = Meteor.user().profile.name;
+            else {
+                senderName = 'Anonymous';
+            }
+        }
+
+        formData.receivers.forEach((r)=>{
+            let recieverName = r.name;
+            let recieverEmail = r.email;
+            let regexp = /@\S+\.edu/i;
+
+            if (recieverEmail.search(regexp) == -1) {
+                throw new Meteor.Error(`${recieverEmail}: Email domain must include .edu`);
+            }
+            
+            let message = `Hi ${recieverName}!
+            I just rated a PI at www.gradpi.com! Check out the site to learn more about PIs or rate a few!
+            Cheers!
+            ${senderName}`;
+
+            Email.send({
+                to: recieverEmail,
+                from: senderName,
+                subject,
+                text: message
+            });
+
+        });
+
+        
+  },
 
     // 'clearDB'(pass) {
     //     if(pass === '9aGZCA27'){

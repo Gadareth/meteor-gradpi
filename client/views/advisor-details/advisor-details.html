@@ -28,7 +28,7 @@
                             <br>
                             <div class="tooltip-wrap">
                                 <p>
-                                    ?
+                                    <small><i>Desc</i></small>
                                 </p>
                                 <div class="tooltip-content">
                                     <p>{{tooltip}}</p>
@@ -53,6 +53,9 @@
                                 <th>Resources</th>
                                 <th>Tact</th>
                                 <th>Comments</th>
+                                {{#if isAdmin}}
+                                    <th>Remove</th>
+                                {{/if}}
                             </tr>
                         </thead>
                         <tbody>
@@ -64,6 +67,11 @@
                                     <td>{{resources}}</td>
                                     <td>{{tact}}</td>
                                     <td>{{free_response}}</td>
+                                    {{#if isAdmin}}
+                                        <td><a class="btn btn-default" action="remove-rating">
+                                            <i class="fa fa-trash"></i>
+                                        </a></td>
+                                    {{/if}}
                                 </tr>
                             {{/each}}
                         </tbody>

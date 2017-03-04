@@ -1,5 +1,5 @@
-Meteor.publish('advisors', function(query={}) {
-    return Advisors.find(query);
+Meteor.publish('advisors', function(query={}, options={}) {
+    return Advisors.find(query, options);
 });
 
 Meteor.publish('advisor', function(_id) {
