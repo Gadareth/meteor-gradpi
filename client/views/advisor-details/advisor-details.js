@@ -68,7 +68,7 @@ Template.advisorDetails.helpers({
         });
     },
 
-});  
+});
 
 Template.advisorDetails.events({
     'click [action="remove-rating"]'(event, instance) {
@@ -92,5 +92,8 @@ Template.advisorDetails.events({
             }
         });
 
+    },
+    'click #reportShow'(event, instance){
+        Modal.show('reportModal');
     }
 })

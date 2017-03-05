@@ -1,5 +1,8 @@
 <!-- default styles -->
 <template name = "advisorDetails">
+    <button type="button" class="btn btn-default" id="reportShow" style="position:fixed; margin-left:30px;">
+        <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+    </button>
     {{#if Template.subscriptionsReady}}
         <div class="section" id="advisor">
             <div class="container">
@@ -9,10 +12,10 @@
                         <div class="col-sm-4 col-sm-offset-4 text-center">
 
                             {{> advisorProfileCard advisor=advisor}}
-                                                        
+
                             <a href="{{pathFor 'advisors.rate' id=_id}}" class="btn btn-primary">{{#unless alreadyRated}}Rate PI{{else}}Edit feedback{{/unless}}</a>
                             <br>
-                            
+
                         </div>
                     {{/with}}
                 </div>

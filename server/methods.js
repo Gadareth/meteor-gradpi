@@ -87,11 +87,11 @@ Meteor.methods({
                     free_response
                 }
             });
-            Ratings.update(oldRating._id, { 
+            Ratings.update(oldRating._id, {
                 $set: additionalFields
             });
 
-            return oldRating._id;   
+            return oldRating._id;
         }
 
         let ratingId =  Ratings.insert({
@@ -105,7 +105,7 @@ Meteor.methods({
             free_response
         });
 
-        Ratings.update(ratingId, { 
+        Ratings.update(ratingId, {
             $set: additionalFields
         });
 
@@ -159,7 +159,7 @@ Meteor.methods({
         } = formData;
 
         let to = 'gradpi.app@gmail.com',
-            from = `${fromName}<${fromEmail}>`; 
+            from = `${fromName}<${fromEmail}>`;
 
         message = `From: ${fromName} <${fromEmail}> \n\n\n${message}`;
         message = formData.userId ? `From user with id: ${formData.userId} \n${message}` : message;
@@ -199,7 +199,7 @@ Meteor.methods({
             if (recieverEmail.search(regexp) == -1) {
                 throw new Meteor.Error(`${recieverEmail}: Email domain must include .edu`);
             }
-            
+
             let message = `Hi ${recieverName}!
             I just rated a PI at www.gradpi.com! Check out the site to learn more about PIs or rate a few!
             Cheers!
@@ -214,8 +214,21 @@ Meteor.methods({
 
         });
 
+
+},
+    'sendReport'(message){
+        let subject = 'Inappropriate content notification';
+        let to = 'gradpi.app@gmail.com';
+        let from = 'Anonymously';
         
-  },
+        Email.send({
+            to: to,
+            from: from,
+            subject,
+            text: message
+        });
+    },
+
 
     // 'clearDB'(pass) {
     //     if(pass === '9aGZCA27'){
