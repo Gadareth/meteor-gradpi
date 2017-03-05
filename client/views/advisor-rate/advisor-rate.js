@@ -14,30 +14,27 @@ Template.advisorRate.onCreated(function advisorRateOnCreated() {
 		}
 	});
 
-	this.criterias = [
-		{
-			key: 'stature',
-			name: 'Stature',
-			tooltip: 'How well-known is this PI in the field? Does this PI do impactful research?'
-		},{
-			key: 'mentorship',
-			name: 'Mentorship',
-			tooltip: 'How well does this PI mentor students in the lab?'
-		},{
-			key: 'autonomy',
-			name: 'Autonomy',
-			tooltip: 'Does this PI delegate tasks and trust students to get them done? Or does this PI micromanage everything?'
-		},{
-			key: 'resources',
-			name: 'Resources',
-			tooltip: 'How well is this PI funded?'
-		},{
-			key: 'tact',
-			name: 'Tact',
-			tooltip: 'How well does this PI convey feedback?'
-		}
-
-	]
+	this.criterias = [{
+        key: 'stature',
+        name: 'Stature',
+        tooltip: '(How well-known is this PI in the field? Does this PI do impactful research?)'
+    }, {
+        key: 'mentorship',
+        name: 'Mentorship',
+        tooltip: '(How well does this PI mentor students in the lab?)'
+    }, {
+        key: 'autonomy',
+        name: 'Autonomy',
+        tooltip: '(How well does this PI delegate tasks and trust students to get them done?)'
+    }, {
+        key: 'resources',
+        name: 'Resources',
+        tooltip: '(How well is this PI funded?)'
+    }, {
+        key: 'tact',
+        name: 'Tact',
+        tooltip: '(How well does this PI convey feedback?)'
+    }]
 });
 
 Template.advisorRate.onRendered(function(){
