@@ -21,7 +21,7 @@ Template.advisorRate.onCreated(function advisorRateOnCreated() {
     }, {
         key: 'mentorship',
         name: 'Mentorship',
-        tooltip: '(How well does this PI mentor students in the lab?)'
+        tooltip: '(How well does this PI mentor students in the lab and prepare them for life after lab?)'
     }, {
         key: 'autonomy',
         name: 'Autonomy',
