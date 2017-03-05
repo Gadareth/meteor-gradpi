@@ -18,17 +18,19 @@
                 </div>
                 {{#each criterias}}
                     <div class="row" id="rating-{{key}}">
-                        <div class="col-sm-3 col-sm-offset-1 tooltip-wrap">
+                        <div class="col-sm-4 col-sm-offset-2 tooltip-wrap">
                             <p>
                                 <br>
+                                <b><h4>
                                 {{name}}
+                                </h4></b>
                                 <div class="tooltip-content">
                                     <p>{{tooltip}}</p>
                                 </div>
                             </p>
                         </div>
                         
-                        <div class="col-sm-6 col-sm-offset-2">
+                        <div class="col-sm-6">
                             <div class="pull-left">
                                 {{> ratingStars value=(averageRating key) readonly=true}}
                             </div>
