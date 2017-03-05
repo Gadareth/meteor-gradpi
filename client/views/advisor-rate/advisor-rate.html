@@ -12,17 +12,19 @@
 				<!-- Stars section -->
 				{{#each criterias}}
 					<div class="row" id="rating-{{key}}">
-						<div class="col-sm-3 col-sm-offset-1 tooltip-wrap">
+						<div class="col-sm-4 col-sm-offset-2 tooltip-wrap">
 							<p>
 								<br>
-								<b>{{name}}</b>
+								<h4><b>
+								{{name}}
+								</b></h4>
 								<div class="tooltip-content">
 				    				<p>{{tooltip}}</p>
 				  				</div>
 							</p>
 						</div>
 
-						<div class="col-sm-6 col-sm-offset-2">
+						<div class="col-sm-6">
 							<div class="pull-left">
 								{{> ratingStars value=(rating key)}}
 							</div>
@@ -31,7 +33,7 @@
 				{{/each}}
 				<!-- Stars section END-->
 				<div class="row">
-					<div class="col-sm-3 col-sm-offset-1 tooltip-wrap">
+					<div class="col-sm-3 col-sm-offset-2 tooltip-wrap">
 						<p>
 							<br>
 							<br>
@@ -42,7 +44,7 @@
 						</p>
 					</div>
 
-					<div class="col-sm-6 col-sm-offset-2">
+					<div class="col-sm-6 col-sm-offset-1">
 						<div class="input">
 							<br>
 							<br>
@@ -52,11 +54,11 @@
 				</div>
 
 				<div class="row">
-					<div class="col-sm-8 col-sm-offset-1">
+					<div class="col-sm-8 col-sm-offset-2">
 						<p>
 							<br>
 							<br>
-							<b>The following information will not be displayed with your rating, but is only collected for analytics.</b>
+							<h4><em>The following information will not be displayed with your rating, but is only collected for analytics.</em></h4>
 							<br>
 							<br>
 						</p>
@@ -64,7 +66,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-sm-3 col-sm-offset-1 tooltip-wrap">
+					<div class="col-sm-3 col-sm-offset-2 tooltip-wrap">
 						<p>
 							<br>
 							<br>
@@ -76,7 +78,7 @@
 						</p>
 					</div>
 
-					<div class="col-sm-6 col-sm-offset-2">
+					<div class="col-sm-6 col-sm-offset-1">
 						<div class="radio">
 							<label><input type="radio" value="undergrad" name="role" checked={{isEqual ratingsObj.role "undergrad"}}>Undergrad</label>
 						</div>
@@ -97,7 +99,7 @@
 
 				{{#if gradSelected}}
 				<div class="row">
-					<div class="col-sm-3 col-sm-offset-1 tooltip-wrap">
+					<div class="col-sm-3 col-sm-offset-2 tooltip-wrap">
 						<p>
 							<br>
 							<br>
@@ -108,7 +110,7 @@
 						</p>
 					</div>
 
-					<div class="col-sm-6 col-sm-offset-2">
+					<div class="col-sm-6 col-sm-offset-1">
 						<div class="radio">
 							<label><input type="radio" value="rotation" name="PIrole" checked={{isEqual ratingsObj.PIrole "rotation"}}>Rotation PI</label>
 						</div>
@@ -124,7 +126,7 @@
 				{{/if}}
 
 				<div class="row">
-					<div class="col-sm-3 col-sm-offset-1 tooltip-wrap">
+					<div class="col-sm-3 col-sm-offset-2 tooltip-wrap">
 						<p>
 							<br>
 							<br>
@@ -135,7 +137,7 @@
 						</p>
 					</div>
 
-					<div class="col-sm-2 col-sm-offset-2">
+					<div class="col-sm-2 col-sm-offset-1">
 						<br>
 						<br>
 						<div class="form-group">
