@@ -73,7 +73,7 @@ Template.advisorRate.events({
 			rating[criteria.key] = value;
 		});
 
-		let comments = instance.find("#comments").value;
+		let comments = instance.find("#comments").value.trim();
 		const advisorId = FlowRouter.getParam('id');
 
 		let additionalFields = {
@@ -146,8 +146,3 @@ Template.advisorRate.helpers({
 		return val1 === val2;
 	}
 });
-
-function removeTextAreaWhiteSpace() {
-	var myTxtArea = document.getElementById('#comments');
-	myTxtArea.value = myTxtArea.value.replace(/^\s*|\s*$/g,'');
-}

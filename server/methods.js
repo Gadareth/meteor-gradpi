@@ -121,6 +121,16 @@ Meteor.methods({
         Ratings.remove(ratingId);
     },
 
+    'ratings.update' (ratingId, formData) {
+        if(!Roles.isAdmin()) {
+            throw new Meteor.Error(500, "You don't have permissions for this operation");
+        }
+
+        Ratings.update(ratingId, {
+            $set: formData
+        });
+    },
+
     'advisors.update' (advisorId, formData) {
         const advisor = Advisors.findOne(advisorId);
         if (!advisor) {

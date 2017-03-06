@@ -49,25 +49,14 @@
                                 <th>Tact</th>
                                 <th>Comments</th>
                                 {{#if isAdmin}}
+                                    <th>Edit</th>
                                     <th>Remove</th>
                                 {{/if}}
                             </tr>
                         </thead>
                         <tbody>
                             {{#each ratings}}
-                                <tr>
-                                    <td>{{stature}}</td>
-                                    <td>{{mentorship}}</td>
-                                    <td>{{autonomy}}</td>
-                                    <td>{{resources}}</td>
-                                    <td>{{tact}}</td>
-                                    <td>{{free_response}}</td>
-                                    {{#if isAdmin}}
-                                        <td><a class="btn btn-default" action="remove-rating">
-                                            <i class="fa fa-trash"></i>
-                                        </a></td>
-                                    {{/if}}
-                                </tr>
+                                {{> advisorDetailsTableRow}}
                             {{/each}}
                         </tbody>
                     </table>
