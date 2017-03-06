@@ -65,11 +65,11 @@ Template.advisorRate.events({
 		let rating = {};
 		criterias.forEach((criteria) => {
 			const value = instance.$(`#rating-${criteria.key} input.rating`).val() - 0 // -0 means number from string
-			if(!value){
-				const errorMsg = `You didn't enter a rating for ${criteria.key}!`;
-				alert(errorMsg);
-				throw errorMsg;
-			}
+			// if(!value){
+			// 	const errorMsg = `You didn't enter a rating for ${criteria.key}!`;
+			// 	alert(errorMsg);
+			// 	throw errorMsg;
+			// }
 			rating[criteria.key] = value;
 		});
 
