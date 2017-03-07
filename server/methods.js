@@ -94,7 +94,7 @@ Meteor.methods({
             return oldRating._id;
         }
 
-        let ratingId =  Ratings.insert({
+        let ratingId = Ratings.insert({
             advisorId,
             owner,
             stature,
@@ -114,7 +114,7 @@ Meteor.methods({
 
 
     'ratings.remove' (ratingId) {
-        if(!Roles.isAdmin()) {
+        if (!Roles.isAdmin()) {
             throw new Meteor.Error(500, "You don't have permissions for this operation");
         }
 
@@ -122,7 +122,7 @@ Meteor.methods({
     },
 
     'ratings.update' (ratingId, formData) {
-        if(!Roles.isAdmin()) {
+        if (!Roles.isAdmin()) {
             throw new Meteor.Error(500, "You don't have permissions for this operation");
         }
 
@@ -155,7 +155,7 @@ Meteor.methods({
         } else {
             console.log('reCAPTCHA verification passed!');
         }
-        if(Meteor.userId()) {
+        if (Meteor.userId()) {
             formData.userId = Meteor.userId();
         }
 
@@ -185,23 +185,23 @@ Meteor.methods({
 
         return id;
     },
-    'sendBulkInvitations'(formData) {
+    'sendBulkInvitations' (formData) {
         // Let other method calls from the same client start running
         // without waiting for the email sending to complete.
         let subject = 'Grad PI invitation';
-        if(!formData.receivers || !formData.receivers.length){
+        if (!formData.receivers || !formData.receivers.length) {
             throw new Meteor.Error(500, 'There is no invitation receivers');
         }
 
         let senderName = formData.senderName;
-        if(!senderName){
-            if(Meteor.user() && Meteor.user().profile && Meteor.user().profile.name) senderName = Meteor.user().profile.name;
+        if (!senderName) {
+            if (Meteor.user() && Meteor.user().profile && Meteor.user().profile.name) senderName = Meteor.user().profile.name;
             else {
                 senderName = 'Anonymous';
             }
         }
 
-        formData.receivers.forEach((r)=>{
+        formData.receivers.forEach((r) => {
             let recieverName = r.name;
             let recieverEmail = r.email;
             let regexp = /@\S+\.edu/i;
@@ -225,15 +225,18 @@ Meteor.methods({
         });
 
 
-},
-    'sendReport'(message){
+    },
+    'inapropriateContentMessage' (advisorId,message) {
         let subject = 'Inappropriate content notification';
         let to = 'gradpi.app@gmail.com';
-        let from = 'Anonymously';
-        
+        let from = Meteor.userId();
+        message = `From user with id: ${from};\nAdvisor Id: ${advisorId};\nMessage:\n${message}`;
+
+        console.log(`Sending email: ${subject} \n ${message}`);
+
         Email.send({
-            to: to,
-            from: from,
+            to,
+            from,
             subject,
             text: message
         });
