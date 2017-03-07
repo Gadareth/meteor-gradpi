@@ -1,0 +1,54 @@
+<template name="advisorDetailsTableRow">
+	{{#unless state "edit"}}
+		<tr>
+		    <td>{{stature}}</td>
+		    <td>{{mentorship}}</td>
+		    <td>{{autonomy}}</td>
+		    <td>{{resources}}</td>
+		    <td>{{tact}}</td>
+		    <td>{{free_response}}</td>
+		    {{#if isAdmin}}
+		        <td><a class="btn btn-default" action="set-state" data-state="edit">
+		            <i class="fa fa-pencil"></i>
+		        </a></td>
+		        <td><a class="btn btn-default" action="remove-rating">
+		            <i class="fa fa-trash"></i>
+		        </a></td>
+		    {{/if}}
+		</tr>
+	{{else}}
+		<tr>
+			<td>
+				<input type="text" value="{{stature}}" name="stature" class="form-control" required >
+			</td>
+			<td>
+				<input type="text" value="{{mentorship}}" name="mentorship" class="form-control" required >
+			</td>
+			<td>
+				<input type="text" value="{{autonomy}}" name="autonomy" class="form-control" required >
+			</td>
+			<td>
+				<input type="text" value="{{resources}}" name="resources" class="form-control" required >
+			</td>
+			<td>
+				<input type="text" value="{{tact}}" name="tact" class="form-control" required >
+			</td>
+			<td>
+				<textarea name="free_response" class="form-control" required style="min-width: auto; min-height:200px;">{{free_response}}</textarea>
+			</td>
+		    <td>
+			    <a class="btn btn-default" action="save-rating">
+			        <i class="fa fa-check"></i>
+			    </a>
+			    <a class="btn btn-default" action="set-state" data-state="view">
+			        <i class="fa fa-close"></i>
+			    </a>
+		    </td>
+		    <td>
+			    <a class="btn btn-default" action="remove-rating">
+			        <i class="fa fa-trash"></i>
+			    </a>
+		    </td>
+		</tr>
+	{{/unless}}
+</template>

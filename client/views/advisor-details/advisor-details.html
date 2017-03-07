@@ -21,23 +21,18 @@
                 </div>
                 {{#each criterias}}
                     <div class="row" id="rating-{{key}}">
-                        <div class="col-sm-2 col-sm-offset-1">
+                        <div class="col-sm-4 col-sm-offset-2 tooltip-wrap">
                             <p>
                                 <br>
+                                <b><h4>
                                 {{name}}
-                            </p>
-                        </div>
-                        <div class="col-sm-3">
-                            <br>
-                            <div class="tooltip-wrap">
-                                <p>
-                                    <small><i>Desc</i></small>
-                                </p>
+                                </h4></b>
                                 <div class="tooltip-content">
                                     <p>{{tooltip}}</p>
                                 </div>
-                            </div>
+                            </p>
                         </div>
+                        
                         <div class="col-sm-6">
                             <div class="pull-left">
                                 {{> ratingStars value=(averageRating key) readonly=true}}
@@ -57,25 +52,14 @@
                                 <th>Tact</th>
                                 <th>Comments</th>
                                 {{#if isAdmin}}
+                                    <th>Edit</th>
                                     <th>Remove</th>
                                 {{/if}}
                             </tr>
                         </thead>
                         <tbody>
                             {{#each ratings}}
-                                <tr>
-                                    <td>{{stature}}</td>
-                                    <td>{{mentorship}}</td>
-                                    <td>{{autonomy}}</td>
-                                    <td>{{resources}}</td>
-                                    <td>{{tact}}</td>
-                                    <td>{{free_response}}</td>
-                                    {{#if isAdmin}}
-                                        <td><a class="btn btn-default" action="remove-rating">
-                                            <i class="fa fa-trash"></i>
-                                        </a></td>
-                                    {{/if}}
-                                </tr>
+                                {{> advisorDetailsTableRow}}
                             {{/each}}
                         </tbody>
                     </table>

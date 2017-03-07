@@ -14,30 +14,27 @@ Template.advisorRate.onCreated(function advisorRateOnCreated() {
 		}
 	});
 
-	this.criterias = [
-		{
-			key: 'stature',
-			name: 'Stature',
-			tooltip: 'How well-known is this PI in the field? Does this PI do impactful research?'
-		},{
-			key: 'mentorship',
-			name: 'Mentorship',
-			tooltip: 'How well does this PI mentor students in the lab?'
-		},{
-			key: 'autonomy',
-			name: 'Autonomy',
-			tooltip: 'Does this PI delegate tasks and trust students to get them done? Or does this PI micromanage everything?'
-		},{
-			key: 'resources',
-			name: 'Resources',
-			tooltip: 'How well is this PI funded?'
-		},{
-			key: 'tact',
-			name: 'Tact',
-			tooltip: 'How well does this PI convey feedback?'
-		}
-
-	]
+	this.criterias = [{
+        key: 'stature',
+        name: 'Stature',
+        tooltip: '(How well-known is this PI in the field? Does this PI do impactful research?)'
+    }, {
+        key: 'mentorship',
+        name: 'Mentorship',
+        tooltip: '(How well does this PI mentor students in the lab and prepare them for life after lab?)'
+    }, {
+        key: 'autonomy',
+        name: 'Autonomy',
+        tooltip: '(How well does this PI delegate tasks and trust students to get them done?)'
+    }, {
+        key: 'resources',
+        name: 'Resources',
+        tooltip: '(How well is this PI funded?)'
+    }, {
+        key: 'tact',
+        name: 'Tact',
+        tooltip: '(How well does this PI convey feedback?)'
+    }]
 });
 
 Template.advisorRate.onRendered(function(){
@@ -68,15 +65,15 @@ Template.advisorRate.events({
 		let rating = {};
 		criterias.forEach((criteria) => {
 			const value = instance.$(`#rating-${criteria.key} input.rating`).val() - 0 // -0 means number from string
-			if(!value){
-				const errorMsg = `You didn't enter a rating for ${criteria.key}!`;
-				alert(errorMsg);
-				throw errorMsg;
-			}
+			// if(!value){
+			// 	const errorMsg = `You didn't enter a rating for ${criteria.key}!`;
+			// 	alert(errorMsg);
+			// 	throw errorMsg;
+			// }
 			rating[criteria.key] = value;
 		});
 
-		let comments = instance.find("#comments").value;
+		let comments = instance.find("#comments").value.trim();
 		const advisorId = FlowRouter.getParam('id');
 
 		let additionalFields = {
@@ -149,8 +146,3 @@ Template.advisorRate.helpers({
 		return val1 === val2;
 	}
 });
-
-function removeTextAreaWhiteSpace() {
-	var myTxtArea = document.getElementById('#comments');
-	myTxtArea.value = myTxtArea.value.replace(/^\s*|\s*$/g,'');
-}

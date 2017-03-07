@@ -12,23 +12,18 @@
 				<!-- Stars section -->
 				{{#each criterias}}
 					<div class="row" id="rating-{{key}}">
-						<div class="col-sm-2 col-sm-offset-1">
+						<div class="col-sm-4 col-sm-offset-2 tooltip-wrap">
 							<p>
 								<br>
-								<b>{{name}}</b>
-							</p>
-						</div>
-						<div class="col-sm-3">
-							<br>
-							<div class="tooltip-wrap">
-	  							<p>
-									<small><i>Desc</i></small>
-								</p>
-	  							<div class="tooltip-content">
+								<h4><b>
+								{{name}}
+								</b></h4>
+								<div class="tooltip-content">
 				    				<p>{{tooltip}}</p>
 				  				</div>
-							</div>
+							</p>
 						</div>
+
 						<div class="col-sm-6">
 							<div class="pull-left">
 								{{> ratingStars value=(rating key)}}
@@ -38,103 +33,84 @@
 				{{/each}}
 				<!-- Stars section END-->
 				<div class="row">
-					<div class="col-sm-2 col-sm-offset-1">
+					<div class="col-sm-3 col-sm-offset-2 tooltip-wrap">
 						<p>
 							<br>
 							<br>
 							<b>Additional Information</b>
+							<div class="tooltip-content">
+			    				<p>(Is there anything else you'd like to share about this PI? For example: How is the lab working environment?)</p>
+			  				</div>
 						</p>
 					</div>
 
-					<div class="col-sm-3">
-						<br>
-						<br>
-						<div class="tooltip-wrap">
-			  				<p>
-								<small><i>Desc</i></small>
-							</p>
-			  				<div class="tooltip-content">
-			    				<p>Is there anything else you'd like to share about this PI?</p>
-			  				</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6">
+					<div class="col-sm-6 col-sm-offset-1">
 						<div class="input">
 							<br>
 							<br>
 							<textarea id="comments" maxlength="450">{{free_feedback}}</textarea>
 						</div>
 					</div>
-
 				</div>
 
 				<div class="row">
-					<div class="col-sm-2 col-sm-offset-1">
+					<div class="col-sm-8 col-sm-offset-2">
 						<p>
 							<br>
 							<br>
-							<b>You are</b>
+							<h4><em>The following information will not be displayed with your rating, but is only collected for analytics.</em></h4>
+							<br>
+							<br>
+						</p>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-3 col-sm-offset-2 tooltip-wrap">
+						<p>
+							<br>
+							<br>
+							<b>You are/were a(n):</b>
+							<div class="tooltip-content">
+			    				<p>(Under what role did you interact with this PI?)
+			    				</p>
+			  				</div>
 						</p>
 					</div>
 
-					<div class="col-sm-3">
-						<br>
-						<br>
-						<div class="tooltip-wrap">
-			  				<p>
-								<small><i>Desc</i></small>
-							</p>
-			  				<div class="tooltip-content">
-			    				<p></p>
-			  				</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6">
+					<div class="col-sm-6 col-sm-offset-1">
 						<div class="radio">
 							<label><input type="radio" value="undergrad" name="role" checked={{isEqual ratingsObj.role "undergrad"}}>Undergrad</label>
 						</div>
 						<div class="radio">
-							<label><input type="radio" value="postbac"  name="role" checked={{isEqual ratingsObj.role "postbac"}}>Postbac</label>
+							<label><input type="radio" value="postbac"  name="role" checked={{isEqual ratingsObj.role "postbac"}}>Postbac/Postgrad Assoc.</label>
 						</div>
 						<div class="radio">
-							<label><input type="radio" value="grad" name="role" checked={{isEqual ratingsObj.role "grad"}}>Grad</label>
-						</div>
-						<div class="radio">
-							<label><input type="radio" value="research" name="role" checked={{isEqual ratingsObj.role "research"}}>Research Scientist</label>
+							<label><input type="radio" value="grad" name="role" checked={{isEqual ratingsObj.role "grad"}}>Grad Student</label>
 						</div>
 						<div class="radio">
 							<label><input type="radio" value="postdoc" name="role" checked={{isEqual ratingsObj.role "postdoc"}}>Postdoc</label>
 						</div>
+						<div class="radio">
+							<label><input type="radio" value="research" name="role" checked={{isEqual ratingsObj.role "research"}}>Research Scientist</label>
+						</div>
 					</div>
-					
 				</div>
 
 				{{#if gradSelected}}
 				<div class="row">
-					<div class="col-sm-2 col-sm-offset-1">
+					<div class="col-sm-3 col-sm-offset-2 tooltip-wrap">
 						<p>
 							<br>
 							<br>
-							<b>PI was</b>
+							<b>PI is/was a:</b>
+							<div class="tooltip-content">
+			    				<p>(In what position did this PI work with you?)</p>
+			  				</div>
 						</p>
 					</div>
 
-					<div class="col-sm-3">
-						<br>
-						<br>
-						<div class="tooltip-wrap">
-			  				<p>
-								<small><i>Desc</i></small>
-							</p>
-			  				<div class="tooltip-content">
-			    				<p></p>
-			  				</div>
-						</div>
-					</div>
-
-					<div class="col-sm-6">
+					<div class="col-sm-6 col-sm-offset-1">
 						<div class="radio">
 							<label><input type="radio" value="rotation" name="PIrole" checked={{isEqual ratingsObj.PIrole "rotation"}}>Rotation PI</label>
 						</div>
@@ -150,28 +126,18 @@
 				{{/if}}
 
 				<div class="row">
-					<div class="col-sm-2 col-sm-offset-1">
+					<div class="col-sm-3 col-sm-offset-2 tooltip-wrap">
 						<p>
 							<br>
 							<br>
-							<b>Last research interaction</b>
+							<b>Last research interaction:</b>
+							<div class="tooltip-content">
+			    				<p>(What month and year did you last work with this PI?)</p>
+			  				</div>
 						</p>
 					</div>
 
-					<div class="col-sm-3">
-						<br>
-						<br>
-						<div class="tooltip-wrap">
-			  				<p>
-								<small><i>Desc</i></small>
-							</p>
-			  				<div class="tooltip-content">
-			    				<p></p>
-			  				</div>
-						</div>
-					</div>
-
-					<div class="col-sm-3">
+					<div class="col-sm-2 col-sm-offset-1">
 						<br>
 						<br>
 						<div class="form-group">
@@ -192,7 +158,4 @@
 			</form>
 		</div>
 	</div>
-
-
-	
 </template>

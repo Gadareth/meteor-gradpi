@@ -3,6 +3,7 @@ Template.ratingStars.onRendered(function(){
     //init stars plugin
     $input.removeClass('rating-loading').addClass('rating-loading').rating({
     	readonly: !!Template.currentData().readonly,
+        clearCaption: 0,
     	starCaptions(val) {
     	    return val;
     	}
