@@ -1,5 +1,8 @@
 <!-- default styles -->
 <template name = "advisorDetails">
+    <button type="button" class="btn btn-danger" id="reportShow" style="position:fixed; right:30px;">
+        <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+    </button>
     {{#if Template.subscriptionsReady}}
         <div class="section" id="advisor">
             <div class="container">
@@ -9,32 +12,27 @@
                         <div class="col-sm-4 col-sm-offset-4 text-center">
 
                             {{> advisorProfileCard advisor=advisor}}
-                                                        
+
                             <a href="{{pathFor 'advisors.rate' id=_id}}" class="btn btn-primary">{{#unless alreadyRated}}Rate PI{{else}}Edit feedback{{/unless}}</a>
                             <br>
-                            
+
                         </div>
                     {{/with}}
                 </div>
                 {{#each criterias}}
                     <div class="row" id="rating-{{key}}">
-                        <div class="col-sm-2 col-sm-offset-1">
+                        <div class="col-sm-4 col-sm-offset-2 tooltip-wrap">
                             <p>
                                 <br>
+                                <b><h4>
                                 {{name}}
-                            </p>
-                        </div>
-                        <div class="col-sm-3">
-                            <br>
-                            <div class="tooltip-wrap">
-                                <p>
-                                    ?
-                                </p>
+                                </h4></b>
                                 <div class="tooltip-content">
                                     <p>{{tooltip}}</p>
                                 </div>
-                            </div>
+                            </p>
                         </div>
+                        
                         <div class="col-sm-6">
                             <div class="pull-left">
                                 {{> ratingStars value=(averageRating key) readonly=true}}
@@ -53,18 +51,15 @@
                                 <th>Resources</th>
                                 <th>Tact</th>
                                 <th>Comments</th>
+                                {{#if isAdmin}}
+                                    <th>Edit</th>
+                                    <th>Remove</th>
+                                {{/if}}
                             </tr>
                         </thead>
                         <tbody>
                             {{#each ratings}}
-                                <tr>
-                                    <td>{{stature}}</td>
-                                    <td>{{mentorship}}</td>
-                                    <td>{{autonomy}}</td>
-                                    <td>{{resources}}</td>
-                                    <td>{{tact}}</td>
-                                    <td>{{free_response}}</td>
-                                </tr>
+                                {{> advisorDetailsTableRow}}
                             {{/each}}
                         </tbody>
                     </table>

@@ -8,23 +8,23 @@ Template.advisorDetails.onCreated(function advisorDetailsOnCreated() {
     this.criterias = [{
         key: 'stature',
         name: 'Stature',
-        tooltip: 'How well-known is this PI in the field? Does this PI do impactful research?'
+        tooltip: '(How well-known is this PI in the field? Does this PI do impactful research?)'
     }, {
         key: 'mentorship',
         name: 'Mentorship',
-        tooltip: 'How well does this PI mentor students in the lab?'
+        tooltip: '(How well does this PI mentor students in the lab and prepare them for life after lab?)'
     }, {
         key: 'autonomy',
         name: 'Autonomy',
-        tooltip: 'Does this PI delegate tasks and trust students to get them done? Or does this PI micromanage everything?'
+        tooltip: '(How well does this PI delegate tasks and trust students to get them done?)'
     }, {
         key: 'resources',
         name: 'Resources',
-        tooltip: 'How well is this PI funded?'
+        tooltip: '(How well is this PI funded?)'
     }, {
         key: 'tact',
         name: 'Tact',
-        tooltip: 'How well does this PI convey feedback?'
+        tooltip: '(How well does this PI convey feedback?)'
     }];
 });
 
@@ -68,8 +68,32 @@ Template.advisorDetails.helpers({
         });
     },
 
-});  
+});
 
 Template.advisorDetails.events({
-    
+    'click [action="remove-rating"]'(event, instance) {
+        let ratingId = this._id;
+        BootstrapModalPrompt.prompt({
+            btnDismissText: 'Cancel',
+            btnOkText: 'Yes',
+            title: 'Confirm removing rating',
+            content: 'Are you sure you want to remove this rating?'
+        }, function(result) {
+            if (result) {
+                Meteor.call('ratings.remove', ratingId, function(error){
+                    if(error) {
+                        console.log(error);
+                        toastr.error(error.reason);
+                    }
+                    else {
+                        toastr.success('Successfully removed!');
+                    }
+                });
+            }
+        });
+
+    },
+    'click #reportShow'(event, instance){
+        Modal.show('reportModal');
+    }
 })

@@ -49,7 +49,7 @@ Meteor.methods({
 
         return Advisors.insert(formData);
     },
-    'advisors.rate' (advisorId, rating, free_response) {
+    'advisors.rate' (advisorId, rating, free_response, additionalFields = {}) {
         const advisor = Advisors.findOne({
             "_id": advisorId
         });
@@ -77,7 +77,7 @@ Meteor.methods({
         });
 
         if (oldRating) {
-            return Ratings.update(oldRating._id, {
+            Ratings.update(oldRating._id, {
                 $set: {
                     stature,
                     mentorship,
@@ -87,9 +87,14 @@ Meteor.methods({
                     free_response
                 }
             });
+            Ratings.update(oldRating._id, {
+                $set: additionalFields
+            });
+
+            return oldRating._id;
         }
 
-        return Ratings.insert({
+        let ratingId = Ratings.insert({
             advisorId,
             owner,
             stature,
@@ -99,6 +104,31 @@ Meteor.methods({
             tact,
             free_response
         });
+
+        Ratings.update(ratingId, {
+            $set: additionalFields
+        });
+
+        return ratingId;
+    },
+
+
+    'ratings.remove' (ratingId) {
+        if (!Roles.isAdmin()) {
+            throw new Meteor.Error(500, "You don't have permissions for this operation");
+        }
+
+        Ratings.remove(ratingId);
+    },
+
+    'ratings.update' (ratingId, formData) {
+        if (!Roles.isAdmin()) {
+            throw new Meteor.Error(500, "You don't have permissions for this operation");
+        }
+
+        Ratings.update(ratingId, {
+            $set: formData
+        });
     },
 
     'advisors.update' (advisorId, formData) {
@@ -106,8 +136,9 @@ Meteor.methods({
         if (!advisor) {
             throw new Meteor.Error(404, 'Advisor not found');
         }
-        if (advisor.createdBy !== Meteor.userId()) {
-            throw new Meteor.Error(404, "You don't have permissions for this operation");
+
+        if (!Roles.isAdmin() && advisor.createdBy !== Meteor.userId()) {
+            throw new Meteor.Error(500, "You don't have permissions for this operation");
         }
 
         Advisors.update(advisorId, {
@@ -124,32 +155,93 @@ Meteor.methods({
         } else {
             console.log('reCAPTCHA verification passed!');
         }
-        if(Meteor.userId()) {
+        if (Meteor.userId()) {
             formData.userId = Meteor.userId();
         }
 
         const id = Feedbacks.insert(formData);
-        
+
         let {
-            from,
+            fromName,
+            fromEmail,
             title,
             message
         } = formData;
 
-        let to = 'gradpi.app@gmail.com';
+        let to = 'gradpi.app@gmail.com',
+            from = `${fromName}<${fromEmail}>`;
 
-        message = `From: ${from} \n${message}`;
+        message = `From: ${fromName} <${fromEmail}> \n\n\n${message}`;
         message = formData.userId ? `From user with id: ${formData.userId} \n${message}` : message;
+
 
         Email.send({
             to: to,
             from: from,
             subject: title,
-            text: message
+            text: message,
+            replyTo: fromEmail
         });
 
         return id;
     },
+    'sendBulkInvitations' (formData) {
+        // Let other method calls from the same client start running
+        // without waiting for the email sending to complete.
+        let subject = 'Grad PI invitation';
+        if (!formData.receivers || !formData.receivers.length) {
+            throw new Meteor.Error(500, 'There is no invitation receivers');
+        }
+
+        let senderName = formData.senderName;
+        if (!senderName) {
+            if (Meteor.user() && Meteor.user().profile && Meteor.user().profile.name) senderName = Meteor.user().profile.name;
+            else {
+                senderName = 'Anonymous';
+            }
+        }
+
+        formData.receivers.forEach((r) => {
+            let recieverName = r.name;
+            let recieverEmail = r.email;
+            let regexp = /@\S+\.edu/i;
+
+            if (recieverEmail.search(regexp) == -1) {
+                throw new Meteor.Error(`${recieverEmail}: Email domain must include .edu`);
+            }
+
+            let message = `Hi ${recieverName}!
+            I just rated a PI at www.gradpi.com! Check out the site to learn more about PIs or rate a few!
+            Cheers!
+            ${senderName}`;
+
+            Email.send({
+                to: recieverEmail,
+                from: senderName,
+                subject,
+                text: message
+            });
+
+        });
+
+
+    },
+    'inapropriateContentMessage' (advisorId,message) {
+        let subject = 'Inappropriate content notification';
+        let to = 'gradpi.app@gmail.com';
+        let from = Meteor.userId();
+        message = `From user with id: ${from};\nAdvisor Id: ${advisorId};\nMessage:\n${message}`;
+
+        console.log(`Sending email: ${subject} \n ${message}`);
+
+        Email.send({
+            to,
+            from,
+            subject,
+            text: message
+        });
+    },
+
 
     // 'clearDB'(pass) {
     //     if(pass === '9aGZCA27'){

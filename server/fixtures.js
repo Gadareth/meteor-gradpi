@@ -1,5 +1,5 @@
 Meteor.startup(function(){
-	if(Schools.find().count() === 0){
+	// if(Schools.find().count() === 0){
 		// var schools = [
 		// 	{
 		// 		name: 'Albertus Magnus College',
@@ -75,5 +75,6 @@ Meteor.startup(function(){
 		// 		});
 		// 	}
 		// });
-	}
+	// }
+
 });

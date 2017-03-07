@@ -17,7 +17,6 @@ Template.advisorsList.onCreated(function bodyOnCreated() {
         }
         this.subscribe('advisors', query);
     });
-
 });
 
 Template.advisorsList.helpers({

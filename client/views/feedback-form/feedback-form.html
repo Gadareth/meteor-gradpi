@@ -2,14 +2,18 @@
     <div class="container">
         <div class="row">
             <!--First Column of About Section-->
-            <div class="col-sm-8 col-sm-offset-2">
+            <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                 <h1>Contact</h1>
                 <br>
                 <form id="feedback-form">
                     <div>
                         <fieldset>
-                            <label for="from">From</label>
-                            <input type="text" id="from" name="from" class="col-sm-6 form-control" placeholder="Your name or email">
+                            <label for="fromName">Your name</label>
+                            <input type="text" id="fromName" name="fromName" class="col-sm-6 form-control" placeholder="Full name" required>
+                        </fieldset>
+                        <fieldset>
+                            <label for="fromEmail">Your email</label>
+                            <input type="text" id="fromEmail" name="fromEmail" class="col-sm-6 form-control" placeholder="Email" required>
                         </fieldset>
                         <fieldset>
                             <label for="title">Title</label>

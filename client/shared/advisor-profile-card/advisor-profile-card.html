@@ -1,4 +1,5 @@
 <template name="advisorProfileCard">
+
     <div class="advisor-profile-card">
         <div class="advisor-image text-center">
             {{#if advisor.imageId}}
@@ -13,7 +14,7 @@
                 <img src="/images/avatar.png" class="square">
             {{/if}}
 
-            {{#if wasCreatedByUser}}
+            {{#if canEditImage}}
                 <div class="image-overlay">
                     <label for="image">
                         <span>
@@ -23,17 +24,31 @@
                         </span>
                     </label>
                     <input type="file" id="image" class="myFileInput" style="width:1px; height:1px; position:absolute; left: -999999px;">
-                </div>      
+                </div>
             {{/if}}
 
         </div>
-        <div class="text-center">
-            <br>
-            <b>{{advisor.firstName}} {{advisor.lastName}}</b>
-            <br>
-            {{advisor.school}}
-            <br>
-            {{advisor.dept}}
-        </div>
+        {{#unless state 'edit'}}
+            <div class="text-center">
+                <br>
+                <b>{{advisor.firstName}} {{advisor.lastName}}</b>
+                <br>
+                {{advisor.school}}
+                <br>
+                {{advisor.dept}}
+                <br>
+                {{advisor.website}}
+                {{#if isAdmin}}
+                    <div>
+                        <a action="set-state" data-state="edit" class="btn btn-default">Edit</a>
+                    </div>
+                {{/if}}
+            </div>
+        {{else}}
+            <div class="clearfix">
+                {{> advisorsForm advisor=advisor onSubmit=updateAdvisor}}
+            </div>
+        {{/unless}}
     </div>
+
 </template>

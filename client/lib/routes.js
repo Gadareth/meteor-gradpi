@@ -8,11 +8,25 @@ FlowRouter.route('/', {
 });
 
 FlowRouter.route('/feedback-form', {
-  action: function(){
-    BlazeLayout.render('mainLayout', {content:'feedbackForm'});
-  }
+    name: 'contact',
+    action: function(){
+        BlazeLayout.render('mainLayout', {content:'feedbackForm'});
+    }
 });
 
+FlowRouter.route('/share-page', {
+    name: 'share',
+    action: function(){
+        BlazeLayout.render('mainLayout', {content:'sharePage'});
+    }
+});
+
+FlowRouter.route('/faq', {
+    name: 'faq',
+    action: function(){
+        BlazeLayout.render('mainLayout', {content:'faq'});
+    }
+});
 
 var loggedInRoutes = FlowRouter.group({
     name: 'loggedIn',
@@ -24,14 +38,14 @@ var loggedInRoutes = FlowRouter.group({
 });
 
 // loggedInRoutes.route('/schools', {
-//      name: '',    
+//      name: '',
 //      action: function(){
 //         BlazeLayout.render('mainLayout', {content:'schools'});
 //     }
 // });
 
 // loggedInRoutes.route('/student-bio', {
-//      name: '',    
+//      name: '',
 //      action: function(){
 //         BlazeLayout.render('mainLayout', {content:'studentBio'});
 //     }
@@ -47,7 +61,7 @@ loggedInRoutes.route('/advisors', {
 loggedInRoutes.route('/advisors/new', {
     name: 'advisors.new',
     action: function(){
-        BlazeLayout.render('mainLayout', {content:'advisorsForm'});
+        BlazeLayout.render('mainLayout', {content:'advisorsNew'});
     }
 });
 
@@ -62,7 +76,7 @@ loggedInRoutes.route('/advisors/:id', {
 });
 
 // loggedInRoutes.route('/choose-pi', {
-//      name: '',    
+//      name: '',
 //      action: function(){
 //         BlazeLayout.render('mainLayout', {content:'choose-pi'});
 //     }
