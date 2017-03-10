@@ -14,6 +14,9 @@
                             {{> advisorProfileCard advisor=advisor}}
 
                             <a href="{{pathFor 'advisors.rate' id=_id}}" class="btn btn-primary">{{#unless alreadyRated}}Rate PI{{else}}Edit feedback{{/unless}}</a>
+                            {{#if alreadyRated}}
+                            <button type="button" class="btn btn-primary" action="remove-rating" name="remove-rating">Remove feedback</button>
+                            {{/if}}
                             <br>
 
                         </div>
@@ -32,7 +35,7 @@
                                 </div>
                             </p>
                         </div>
-                        
+
                         <div class="col-sm-6">
                             <div class="pull-left">
                                 {{> ratingStars value=(averageRating key) readonly=true}}
