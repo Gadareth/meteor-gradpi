@@ -1,62 +1,98 @@
 Template.advisorsForm.onCreated(function(){
-    this.schoolSearchString = new ReactiveVar('');
-    this.departmentSearchString = new ReactiveVar('');
-    this.school = new ReactiveVar('');
+    this.searchableSelects = [
+        {
+            key:'school',
+            display: 'School',
+            placeholder: 'Full School Name (No acronyms please!)'
+        },
+        {
+            key:'dept',
+            display: 'Department',
+            placeholder: 'Full Department Name (No acronyms please!)'
+        },
+    ];
+
+    this.keyToCollectionsMap = {
+        school: window.Schools,
+        dept: window.Departments
+    }
+
+    this.searchableSelectsVariables = {};
+
+    this.searchableSelects.forEach((s)=> {
+        this.searchableSelectsVariables[s.key] = {
+            search: new ReactiveVar(''),
+            value: new ReactiveVar('')
+        }
+    });
+
+    this.autorun(()=>{
+        this.subscribe('schools:search', this.searchableSelectsVariables['school']['search'].get());
+        this.subscribe('departments:search', this.searchableSelectsVariables['school']['value'].get(), this.searchableSelectsVariables['dept']['search'].get());
+    });
+
     this.autorun(()=>{
         let advisor = Template.currentData().advisor;
         if(advisor) {
-            this.school.set(advisor.school);
-            this.schoolSearchString.set(advisor.school);
-            this.departmentSearchString.set(advisor.dept);
+            this.searchableSelects.forEach((s) => {
+                this.searchableSelectsVariables[s.key].search.set(advisor[s.key]),
+                this.searchableSelectsVariables[s.key].value.set(advisor[s.key])
+            });
         }
-    });
-    this.autorun(()=>{
-        this.subscribe('schools:search', this.schoolSearchString.get());
-        this.subscribe('departments:search', this.school.get(), this.departmentSearchString.get());
     });
 
 });
 
 Template.advisorsForm.helpers({
-    schools() {
-        let searchString = Template.instance().schoolSearchString.get();
+    searchableSelects() {
+        return Template.instance().searchableSelects;
+    },
 
-        return Schools.find({
+    getObjectValue(obj, key) {
+        if(typeof obj === 'object')
+            return obj[key];
+    },
+
+    searchByKey(key) {
+        let instance = Template.instance(); 
+        return function() {
+            return function(value = '') {
+                instance.searchableSelectsVariables[key]['search'].set(value);
+            }
+        }
+    },
+
+    setByKey(key) {
+        let instance = Template.instance(); 
+        return function() {
+            return function(doc){
+                console.log(doc)
+                if(!doc) return;
+                instance.searchableSelectsVariables[key]['value'].set(doc.name);
+            }
+        }
+    },
+
+    optionsByKey(key) {
+        let instance = Template.instance(); 
+        let searchString = instance.searchableSelectsVariables[key]['search'].get();
+        console.log(instance.searchableSelectsVariables[key])
+        let collection = instance.keyToCollectionsMap[key];
+        return collection.find({
             name: {
-                $regex: searchString,
+                $regex: searchString || '',
                 $options : 'i'
+            }
+        }, {
+            sort : {
+                name: 1
             }
         });
     },
-    departments() {
-        let searchString = Template.instance().departmentSearchString.get(),
-            school = Template.instance().school.get();
 
-        return Departments.find({
-            school,
-            name: {
-                $regex: searchString,
-                $options : 'i'
-            }
-        });
-    }
 });
 
 Template.advisorsForm.events({
-    'input [action=search-school]'(event, instance){
-        instance.schoolSearchString.set(event.currentTarget.value);
-    },
-    'input [action=search-department]'(event, instance){
-        instance.departmentSearchString.set(event.currentTarget.value);
-    },
-    'mousedown [action=set-school]'(event, instance) {
-        instance.school.set(this.name);
-        instance.$('input#school').val(this.name);
-    },
-    'mousedown [action=set-department]'(event, instance) {
-        instance.$('input#department').val(this.name);
-    },
-
     'change input[type="file"]#image'(event, template) {
         FS.Utility.eachFile(event, function(file) {
             if(file.size/1024/1024 > 1) {
@@ -84,7 +120,7 @@ Template.advisorsForm.events({
             firstName : form.firstName.value,
             lastName : form.lastName.value,
             school: form.school.value,
-            dept: form.department.value,
+            dept: form.dept.value,
             website: form.website.value,
         }
 
