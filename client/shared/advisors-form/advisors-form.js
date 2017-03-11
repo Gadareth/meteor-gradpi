@@ -35,7 +35,7 @@ Template.advisorsForm.onCreated(function(){
         let advisor = Template.currentData().advisor;
         if(advisor) {
             this.searchableSelects.forEach((s) => {
-                this.searchableSelectsVariables[s.key].search.set(advisor[s.key]),
+                // this.searchableSelectsVariables[s.key].search.set(advisor[s.key]),
                 this.searchableSelectsVariables[s.key].value.set(advisor[s.key])
             });
         }
@@ -44,6 +44,10 @@ Template.advisorsForm.onCreated(function(){
 });
 
 Template.advisorsForm.helpers({
+    advisor() {
+        return Template.instance().data.advisor;
+    },
+
     searchableSelects() {
         return Template.instance().searchableSelects;
     },
@@ -76,7 +80,6 @@ Template.advisorsForm.helpers({
     optionsByKey(key) {
         let instance = Template.instance(); 
         let searchString = instance.searchableSelectsVariables[key]['search'].get();
-        console.log(instance.searchableSelectsVariables[key])
         let collection = instance.keyToCollectionsMap[key];
         return collection.find({
             name: {
