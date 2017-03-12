@@ -127,10 +127,14 @@ Meteor.methods({
 
 
     'ratings.remove' (ratingId) {
-        if (!Roles.isAdmin()) {
+        let rating = Ratings.findOne(ratingId);
+
+        if(!rating) {
+            throw new Meteor.Error(500, "Rating not found", 'Rating id ${ratingId}');
+        }
+        if (Meteor.userId() !== rating.owner && !Roles.isAdmin()) {
             throw new Meteor.Error(500, "You don't have permissions for this operation");
         }
-
         Ratings.remove(ratingId);
     },
 
