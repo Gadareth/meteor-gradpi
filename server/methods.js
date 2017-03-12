@@ -259,6 +259,84 @@ Meteor.methods({
         });
     },
 
+    'universities.update'(query, formData) {
+        let university = Universities.findOne(query);
+        if(formData.name){
+            Advisors.update({
+                name: university.name
+            }, {
+                $set: {
+                    university: name
+                }
+            }, {
+                multi: true
+            });
+
+            Schools.update({
+                university: university.name
+            }, {
+                $set: {
+                    university: formData.name
+                }
+            });
+
+            Departments.update({
+                university: university.name
+            }, {
+                $set: {
+                    university: formData.name
+                }
+            });
+        }
+        Universities.update(query, {
+            $set: formData
+        });
+    },
+
+    'schools.update'(query, formData) {
+        let school = Schools.findOne(query);
+        if(formData.name){
+            Advisors.update({
+                name: school.name
+            }, {
+                $set: {
+                    school: name    
+                }
+            }, {
+                multi: true
+            });
+            Departments.update({
+                school: school.name
+            }, {
+                $set: {
+                    school: formData.name
+                }
+            });
+        }
+        Schools.update(query, {
+            $set: formData
+        });
+
+    },
+
+    'departments.update'(query, formData) {
+        let department = Departments.findOne(query);
+        if(formData.name){
+            Advisors.update({
+                name: department.name
+            }, {
+                $set: {
+                    department: name    
+                }
+            }, {
+                multi: true
+            });
+        }
+        Departments.update(query, {
+            $set: formData
+        });
+    }
+
 
     // 'clearDB'(pass) {
     //     if(pass === '9aGZCA27'){
