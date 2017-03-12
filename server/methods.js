@@ -113,17 +113,11 @@ Meteor.methods({
     },
 
 
-    'ratings.remove' (advisorId) {
-        if (Roles.isAdmin()) {
-            Ratings.remove({advisorId:advisorId});
-        }
-        else if(Meteor.user() && !Roles.isAdmin()){
-            let ratingId = Ratings.findOne({advisorId:advisorId, owner:Meteor.userId()});
-            Ratings.remove(ratingId);
-        }
-        else{
+    'ratings.remove' (ratingId) {
+        if (!Meteor.user() && !Roles.isAdmin()) {
             throw new Meteor.Error(500, "You don't have permissions for this operation");
         }
+        Ratings.remove(ratingId);
     },
 
     'ratings.update' (ratingId, formData) {

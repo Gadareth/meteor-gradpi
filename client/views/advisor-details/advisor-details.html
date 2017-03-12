@@ -15,7 +15,7 @@
 
                             <a href="{{pathFor 'advisors.rate' id=_id}}" class="btn btn-primary">{{#unless alreadyRated}}Rate PI{{else}}Edit feedback{{/unless}}</a>
                             {{#if alreadyRated}}
-                            <button type="button" class="btn btn-primary" action="remove-rating" name="remove-rating">Remove feedback</button>
+                            <button type="button" class="btn btn-primary" action="remove-own-rating" name="remove-own-rating">Remove feedback</button>
                             {{/if}}
                             <br>
 
