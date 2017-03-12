@@ -7,7 +7,17 @@
 				<!--First Column of About Section-->
 				<div class="col-sm-6 col-sm-offset-3">
 					<div class="form-group">
-						<label for="School">School</label>
+						<label for="universitySelect">University</label>
+						<select class="form-control" id="universitySelect">
+						 	<option class="school" value="" selected>All Universities</option>
+						    {{#each universities}}
+						    	<option class="school" value={{name}}>{{name}}</option>
+						    {{/each}}
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="schoolSelect">School</label>
 						<select class="form-control" id="schoolSelect">
 						 	<option class="school" value="" selected>All Schools</option>
 						    {{#each schools}}
@@ -17,11 +27,11 @@
 					</div>
 
 				    <div class="form-group">
-						<label for="Department">Department</label>
+						<label for="deptSelect">Department</label>
 						<select class="form-control" id="deptSelect">
-							<option class="dept" value="">All Departments</option>
+							<option class="department" value="">All Departments</option>
 							{{#each departments}}
-								<option class="dept" value="{{name}}">{{name}}</option>
+								<option class="department" value="{{name}}">{{name}}</option>
 							{{/each}}
 						</select>
 					</div>
@@ -37,9 +47,11 @@
 								</div>
 								<b>{{firstName}} {{lastName}}</b>
 								<p>
+									{{university}}
+									<br>
 									{{school}}
 									<br>
-									{{dept}}
+									{{department}}
 								</p>
 							</div>
 						{{/each}}

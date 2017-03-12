@@ -66,12 +66,28 @@ Meteor.publish('departments:search', function(query={}, searchString) {
 	});
 });
 
+Meteor.publish('universities', function(query={}) {
+	return Universities.find(query, {
+		sort: {
+			name:1
+		}
+	});
+});
+
 Meteor.publish('schools', function(query={}) {
-	return Schools.find(query);
+	return Schools.find(query, {
+		sort: {
+			name:1
+		}
+	});
 });
 
 Meteor.publish('departments', function(query={}) {
-	return Departments.find(query);
+	return Departments.find(query, {
+		sort: {
+			name:1
+		}
+	});
 });
 
 Meteor.publish('advisorsImages', function(advisorId){

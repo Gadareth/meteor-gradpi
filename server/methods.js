@@ -14,14 +14,14 @@ Meteor.methods({
             lastName,
             school,
             university,
-            dept
+            department
         } = formData;
 
         if (Advisors.findOne({
                 firstName,
                 lastName,
                 school,
-                dept
+                department
             })) {
             throw new Meteor.Error(`Advisor is already created!`);
         }
@@ -47,13 +47,13 @@ Meteor.methods({
         let departmentDoc = Departments.findOne({
             university,
             school,
-            name: dept
+            name: department
         });
         if (!departmentDoc) {
             Departments.insert({
                 university,
                 school,
-                name: dept
+                name: department
             });
         }
 
@@ -261,12 +261,14 @@ Meteor.methods({
 
     'universities.update'(query, formData) {
         let university = Universities.findOne(query);
+        if(!university) return
+
         if(formData.name){
             Advisors.update({
-                name: university.name
+                university: university.name
             }, {
                 $set: {
-                    university: name
+                    university: formData.name
                 }
             }, {
                 multi: true
@@ -286,6 +288,8 @@ Meteor.methods({
                 $set: {
                     university: formData.name
                 }
+            }, {
+                multi:true
             });
         }
         Universities.update(query, {
@@ -295,12 +299,13 @@ Meteor.methods({
 
     'schools.update'(query, formData) {
         let school = Schools.findOne(query);
+        if(!school) return
         if(formData.name){
             Advisors.update({
-                name: school.name
+                school: school.name
             }, {
                 $set: {
-                    school: name    
+                    school: formData.name    
                 }
             }, {
                 multi: true
@@ -311,6 +316,8 @@ Meteor.methods({
                 $set: {
                     school: formData.name
                 }
+            }, {
+                multi:true
             });
         }
         Schools.update(query, {
@@ -321,12 +328,14 @@ Meteor.methods({
 
     'departments.update'(query, formData) {
         let department = Departments.findOne(query);
+        if(!department) return
+
         if(formData.name){
             Advisors.update({
-                name: department.name
+                department: department.name
             }, {
                 $set: {
-                    department: name    
+                    department: formData.name    
                 }
             }, {
                 multi: true
