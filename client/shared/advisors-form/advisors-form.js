@@ -1,6 +1,11 @@
 Template.advisorsForm.onCreated(function(){
     this.searchableSelects = [
         {
+            key:'university',
+            display: 'University/College',
+            placeholder: 'Full University/College Name (No acronyms please!)'
+        },
+        {
             key:'school',
             display: 'School',
             placeholder: 'Full School Name (No acronyms please!)'
@@ -14,7 +19,8 @@ Template.advisorsForm.onCreated(function(){
 
     this.keyToCollectionsMap = {
         school: window.Schools,
-        dept: window.Departments
+        dept: window.Departments,
+        university: window.Universities
     }
 
     this.searchableSelectsVariables = {};
@@ -27,8 +33,18 @@ Template.advisorsForm.onCreated(function(){
     });
 
     this.autorun(()=>{
-        this.subscribe('schools:search', this.searchableSelectsVariables['school']['search'].get());
-        this.subscribe('departments:search', this.searchableSelectsVariables['school']['value'].get(), this.searchableSelectsVariables['dept']['search'].get());
+        let university = this.searchableSelectsVariables['university'],
+            school = this.searchableSelectsVariables['school'],
+            dept = this.searchableSelectsVariables['dept'];
+
+        this.subscribe('universities:search', {}, university['search'].get());
+        this.subscribe('schools:search', {
+            university: university['value'].get()
+        }, school['search'].get());
+        this.subscribe('departments:search', {
+            university: university['value'].get(),
+            school: school['value'].get(),
+        }, dept['search'].get());
     });
 
     this.autorun(()=>{

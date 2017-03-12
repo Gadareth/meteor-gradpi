@@ -13,6 +13,7 @@ Meteor.methods({
             firstName,
             lastName,
             school,
+            university,
             dept
         } = formData;
 
@@ -25,20 +26,32 @@ Meteor.methods({
             throw new Meteor.Error(`Advisor is already created!`);
         }
 
-        let schoolDoc = Schools.findOne({
-            name: school
+        let universityDoc = Universities.findOne({
+            name: university
         });
-        if (!schoolDoc) {
-            Schools.insert({
+        if (!universityDoc) {
+            Universities.insert({
                 name: school
             });
         }
+        let schoolDoc = Schools.findOne({
+            university,
+            name: school,
+        });
+        if (!schoolDoc) {
+            Schools.insert({
+                name: school,
+                university
+            });
+        }
         let departmentDoc = Departments.findOne({
+            university,
             school,
             name: dept
         });
         if (!departmentDoc) {
             Departments.insert({
+                university,
                 school,
                 name: dept
             });

@@ -21,21 +21,51 @@ Meteor.publish('rating', function(advisorId){
     return Ratings.find({advisorId, owner});
 });
 
-Meteor.publish('schools:search', function(searchString) {
-	return Schools.find({
+Meteor.publish('universities:search', function(query={}, searchString) {
+	let searchObj = {
 		name: {
 			$regex: searchString,
 			$options : 'i'
 		}
+	}
+
+	_.extend(query, searchObj);
+	return Universities.find(query, {
+		sort: {
+			name:1
+		}
 	});
 });
 
-Meteor.publish('departments:search', function(school, searchString) {
-	return Departments.find({
-		school, 
-		name:{
+Meteor.publish('schools:search', function(query={}, searchString) {
+	let searchObj = {
+		name: {
 			$regex: searchString,
 			$options : 'i'
+		}
+	}
+
+	_.extend(query, searchObj);
+
+	return Schools.find(query, {
+		sort: {
+			name:1
+		}
+	});
+});
+
+Meteor.publish('departments:search', function(query={}, searchString) {
+	let searchObj = {
+		name: {
+			$regex: searchString,
+			$options : 'i'
+		}
+	}
+
+	_.extend(query, searchObj);
+	return Departments.find(query, {
+		sort: {
+			name:1
 		}
 	});
 });
