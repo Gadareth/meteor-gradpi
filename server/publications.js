@@ -8,10 +8,6 @@ Meteor.publish('advisor', function(_id) {
     });
 });
 
-// Meteor.publish('images', function() {
-//     return Images.find({});
-// });
-
 Meteor.publish('ratings', function(advisorId){
     return Ratings.find({advisorId});
 });
@@ -76,13 +72,6 @@ Meteor.publish('schools', function(query={}) {
 
 Meteor.publish('departments', function(query={}) {
 	return Departments.find(query);
-});
-
-Meteor.publish('school', function(schoolId) {
-	return Schools.find({_id:schoolId});
-});
-Meteor.publish('department', function(departmentId) {
-	return Departments.find({_id:departmentId});
 });
 
 Meteor.publish('advisorsImages', function(advisorId){
