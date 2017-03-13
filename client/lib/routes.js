@@ -28,6 +28,12 @@ FlowRouter.route('/faq', {
     }
 });
 
+FlowRouter.triggers.enter([
+    function(){
+        $('body').scrollTop(0);
+    }
+]);
+
 var loggedInRoutes = FlowRouter.group({
     name: 'loggedIn',
     triggersEnter: [function() {
