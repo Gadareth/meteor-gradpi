@@ -1,0 +1,15 @@
+<template name="filterableSelect">
+	<div class="filterable-select">
+		<input type="text" id="{{name}}_display" name="{{name}}_display" class="form-control input-dropdown-toggler display-holder {{class}}" placeholder="{{placeholder}}" required={{required}} autocomplete="off" value="{{defaultValueDisplay}}" action="filter-options">
+
+		
+		<div class="input-dropdown">
+			{{#each options}}
+				<div class="input-dropdown-option">
+					{{getDisplayValue}}
+				</div>
+			{{/each}}
+		</div>
+		<input type="text" id="{{name}}" name="{{name}}" class="hide value-holder" required autocomplete="off" value="{{defaultValue}}">
+	</div>
+</template>

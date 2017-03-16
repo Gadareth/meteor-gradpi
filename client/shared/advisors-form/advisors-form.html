@@ -1,5 +1,5 @@
 <template name="advisorsForm">
-	<form id="advisorsForm">
+	<form id="advisorsForm" class="row">
 		<div class="col-sm-12 ">
 			<fieldset>
 				<label for="firstName">First Name</label>
@@ -9,28 +9,25 @@
 				<label for="lastName">Last Name</label>
 				<input type="text" id="lastName" value={{advisor.lastName}} name="lastName" class="form-control" placeholder="Last Name" required>
 			</fieldset>
-			<fieldset>
-				<label for="school">School</label>
-				<input type="text" id="school" value={{advisor.school}} name="school" class="form-control input-dropdown-toggler" placeholder="Full School Name (No acronyms please!)" action="search-school" required autocomplete="off">
-				<div class="input-dropdown">
-					{{#each schools}}
-						<div class="input-dropdown-option" action="set-school">
-							{{name}}
-						</div>
-					{{/each}}
-				</div>
-			</fieldset>
-			<fieldset>
-				<label for="department">Department</label>
-				<input type="text" id="department" value={{advisor.dept}} name="department" class="form-control input-dropdown-toggler" placeholder="Full Department Name (No acronyms please!)" action="search-department" required autocomplete="off">
-				<div class="input-dropdown">
-					{{#each departments}}
-						<div class="input-dropdown-option" action="set-department">
-							{{name}}
-						</div>
-					{{/each}}
-				</div>
-			</fieldset>
+
+			{{#each searchableSelects}}
+				<fieldset>
+					<label for="{{key}}_display">{{display}}</label>
+					{{> filterableSelect 
+						name=key 
+						placeholder=placeholder
+						options=(optionsByKey key)
+						displayKey="name"
+						valueKey="name"
+						required=true
+						defaultValue=(getObjectValue advisor key)
+						defaultValueDisplay=(getObjectValue advisor key)
+						onInput=(searchByKey key)
+						onSelect=(setByKey key)
+					}}
+				</fieldset>
+			{{/each}}
+			
 			<fieldset>
 				<label for="website">Website</label>
 				<input type="text" id="website" value={{advisor.website}} name="website" class="form-control" placeholder="Website">

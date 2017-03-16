@@ -68,7 +68,7 @@ Template.advisorDetails.helpers({
         });
     },
 
-});  
+});
 
 Template.advisorDetails.events({
     'click [action="remove-rating"]'(event, instance) {
@@ -91,6 +91,33 @@ Template.advisorDetails.events({
                 });
             }
         });
+    },
 
+    'click [action="remove-own-rating"]'(event, instance){
+        let advisorId = this._id;
+        let rating = Ratings.findOne({advisorId:advisorId, owner:Meteor.userId()});
+        let ratingId = rating._id || '';
+        BootstrapModalPrompt.prompt({
+            btnDismissText: 'Cancel',
+            btnOkText: 'Yes',
+            title: 'Confirm removing rating',
+            content: 'Are you sure you want to remove this rating?'
+        }, function(result) {
+            if (result) {
+                Meteor.call('ratings.remove', ratingId, function(error){
+                    if(error) {
+                        console.log(error);
+                        toastr.error(error.reason);
+                    }
+                    else {
+                        toastr.success('Successfully removed!');
+                    }
+                });
+            }
+        });
+    },
+
+    'click #reportShow'(event, instance){
+        Modal.show('reportModal');
     }
 })

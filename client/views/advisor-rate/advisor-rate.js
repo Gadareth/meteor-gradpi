@@ -65,15 +65,15 @@ Template.advisorRate.events({
 		let rating = {};
 		criterias.forEach((criteria) => {
 			const value = instance.$(`#rating-${criteria.key} input.rating`).val() - 0 // -0 means number from string
-			if(!value){
-				const errorMsg = `You didn't enter a rating for ${criteria.key}!`;
-				alert(errorMsg);
-				throw errorMsg;
-			}
+			// if(!value){
+			// 	const errorMsg = `You didn't enter a rating for ${criteria.key}!`;
+			// 	alert(errorMsg);
+			// 	throw errorMsg;
+			// }
 			rating[criteria.key] = value;
 		});
 
-		let comments = instance.find("#comments").value;
+		let comments = instance.find("#comments").value.trim();
 		const advisorId = FlowRouter.getParam('id');
 
 		let additionalFields = {
@@ -146,8 +146,3 @@ Template.advisorRate.helpers({
 		return val1 === val2;
 	}
 });
-
-function removeTextAreaWhiteSpace() {
-	var myTxtArea = document.getElementById('#comments');
-	myTxtArea.value = myTxtArea.value.replace(/^\s*|\s*$/g,'');
-}

@@ -7,7 +7,7 @@ Template.advisorProfileCard.onCreated(function(){
 });
 
 Template.advisorProfileCard.helpers({
-	
+
     canEditImage () {
         // return true;
         let userId = Meteor.userId();
@@ -32,7 +32,7 @@ Template.advisorProfileCard.helpers({
                     instance.state.set('view');
                 }
             });
-        }        
+        }
 
     },
 
@@ -81,5 +81,5 @@ Template.advisorProfileCard.events({
     'click [action=set-state]'(event,instance) {
         let state = event.currentTarget.dataset['state'];
         instance.state.set(state);
-    }
+    },
 });

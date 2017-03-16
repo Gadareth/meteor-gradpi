@@ -1,4 +1,5 @@
 <template name="advisorProfileCard">
+
     <div class="advisor-profile-card">
         <div class="advisor-image text-center">
             {{#if advisor.imageId}}
@@ -34,7 +35,7 @@
                 <br>
                 {{advisor.school}}
                 <br>
-                {{advisor.dept}}
+                {{advisor.department}}
                 <br>
                 {{advisor.website}}
                 {{#if isAdmin}}
@@ -49,4 +50,5 @@
             </div>
         {{/unless}}
     </div>
+
 </template>

@@ -13,34 +13,47 @@ Meteor.methods({
             firstName,
             lastName,
             school,
-            dept
+            university,
+            department
         } = formData;
 
         if (Advisors.findOne({
                 firstName,
                 lastName,
                 school,
-                dept
+                department
             })) {
             throw new Meteor.Error(`Advisor is already created!`);
         }
 
-        let schoolDoc = Schools.findOne({
-            name: school
+        let universityDoc = Universities.findOne({
+            name: university
         });
-        if (!schoolDoc) {
-            Schools.insert({
+        if (!universityDoc) {
+            Universities.insert({
                 name: school
             });
         }
+        let schoolDoc = Schools.findOne({
+            university,
+            name: school,
+        });
+        if (!schoolDoc) {
+            Schools.insert({
+                name: school,
+                university
+            });
+        }
         let departmentDoc = Departments.findOne({
+            university,
             school,
-            name: dept
+            name: department
         });
         if (!departmentDoc) {
             Departments.insert({
+                university,
                 school,
-                name: dept
+                name: department
             });
         }
 
@@ -87,14 +100,14 @@ Meteor.methods({
                     free_response
                 }
             });
-            Ratings.update(oldRating._id, { 
+            Ratings.update(oldRating._id, {
                 $set: additionalFields
             });
 
-            return oldRating._id;   
+            return oldRating._id;
         }
 
-        let ratingId =  Ratings.insert({
+        let ratingId = Ratings.insert({
             advisorId,
             owner,
             stature,
@@ -105,7 +118,7 @@ Meteor.methods({
             free_response
         });
 
-        Ratings.update(ratingId, { 
+        Ratings.update(ratingId, {
             $set: additionalFields
         });
 
@@ -114,11 +127,25 @@ Meteor.methods({
 
 
     'ratings.remove' (ratingId) {
-        if(!Roles.isAdmin()) {
+        let rating = Ratings.findOne(ratingId);
+
+        if(!rating) {
+            throw new Meteor.Error(500, "Rating not found", 'Rating id ${ratingId}');
+        }
+        if (Meteor.userId() !== rating.owner && !Roles.isAdmin()) {
+            throw new Meteor.Error(500, "You don't have permissions for this operation");
+        }
+        Ratings.remove(ratingId);
+    },
+
+    'ratings.update' (ratingId, formData) {
+        if (!Roles.isAdmin()) {
             throw new Meteor.Error(500, "You don't have permissions for this operation");
         }
 
-        Ratings.remove(ratingId);
+        Ratings.update(ratingId, {
+            $set: formData
+        });
     },
 
     'advisors.update' (advisorId, formData) {
@@ -145,7 +172,7 @@ Meteor.methods({
         } else {
             console.log('reCAPTCHA verification passed!');
         }
-        if(Meteor.userId()) {
+        if (Meteor.userId()) {
             formData.userId = Meteor.userId();
         }
 
@@ -159,7 +186,7 @@ Meteor.methods({
         } = formData;
 
         let to = 'gradpi.app@gmail.com',
-            from = `${fromName}<${fromEmail}>`; 
+            from = `${fromName}<${fromEmail}>`;
 
         message = `From: ${fromName} <${fromEmail}> \n\n\n${message}`;
         message = formData.userId ? `From user with id: ${formData.userId} \n${message}` : message;
@@ -175,23 +202,23 @@ Meteor.methods({
 
         return id;
     },
-    'sendBulkInvitations'(formData) {
+    'sendBulkInvitations' (formData) {
         // Let other method calls from the same client start running
         // without waiting for the email sending to complete.
         let subject = 'Grad PI invitation';
-        if(!formData.receivers || !formData.receivers.length){
+        if (!formData.receivers || !formData.receivers.length) {
             throw new Meteor.Error(500, 'There is no invitation receivers');
         }
 
         let senderName = formData.senderName;
-        if(!senderName){
-            if(Meteor.user() && Meteor.user().profile && Meteor.user().profile.name) senderName = Meteor.user().profile.name;
+        if (!senderName) {
+            if (Meteor.user() && Meteor.user().profile && Meteor.user().profile.name) senderName = Meteor.user().profile.name;
             else {
                 senderName = 'Anonymous';
             }
         }
 
-        formData.receivers.forEach((r)=>{
+        formData.receivers.forEach((r) => {
             let recieverName = r.name;
             let recieverEmail = r.email;
             let regexp = /@\S+\.edu/i;
@@ -199,7 +226,7 @@ Meteor.methods({
             if (recieverEmail.search(regexp) == -1) {
                 throw new Meteor.Error(`${recieverEmail}: Email domain must include .edu`);
             }
-            
+
             let message = `Hi ${recieverName}!
             I just rated a PI at www.gradpi.com! Check out the site to learn more about PIs or rate a few!
             Cheers!
@@ -214,8 +241,111 @@ Meteor.methods({
 
         });
 
-        
-  },
+
+    },
+    'inapropriateContentMessage' (advisorId,message) {
+        let subject = 'Inappropriate content notification';
+        let to = 'gradpi.app@gmail.com';
+        let from = Meteor.userId();
+        message = `From user with id: ${from};\nAdvisor Id: ${advisorId};\nMessage:\n${message}`;
+
+        console.log(`Sending email: ${subject} \n ${message}`);
+
+        Email.send({
+            to,
+            from,
+            subject,
+            text: message
+        });
+    },
+
+    'universities.update'(query, formData) {
+        let university = Universities.findOne(query);
+        if(!university) return
+
+        if(formData.name){
+            Advisors.update({
+                university: university.name
+            }, {
+                $set: {
+                    university: formData.name
+                }
+            }, {
+                multi: true
+            });
+
+            Schools.update({
+                university: university.name
+            }, {
+                $set: {
+                    university: formData.name
+                }
+            });
+
+            Departments.update({
+                university: university.name
+            }, {
+                $set: {
+                    university: formData.name
+                }
+            }, {
+                multi:true
+            });
+        }
+        Universities.update(query, {
+            $set: formData
+        });
+    },
+
+    'schools.update'(query, formData) {
+        let school = Schools.findOne(query);
+        if(!school) return
+        if(formData.name){
+            Advisors.update({
+                school: school.name
+            }, {
+                $set: {
+                    school: formData.name    
+                }
+            }, {
+                multi: true
+            });
+            Departments.update({
+                school: school.name
+            }, {
+                $set: {
+                    school: formData.name
+                }
+            }, {
+                multi:true
+            });
+        }
+        Schools.update(query, {
+            $set: formData
+        });
+
+    },
+
+    'departments.update'(query, formData) {
+        let department = Departments.findOne(query);
+        if(!department) return
+
+        if(formData.name){
+            Advisors.update({
+                department: department.name
+            }, {
+                $set: {
+                    department: formData.name    
+                }
+            }, {
+                multi: true
+            });
+        }
+        Departments.update(query, {
+            $set: formData
+        });
+    }
+
 
     // 'clearDB'(pass) {
     //     if(pass === '9aGZCA27'){
