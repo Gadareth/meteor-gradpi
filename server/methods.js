@@ -31,7 +31,7 @@ Meteor.methods({
         });
         if (!universityDoc) {
             Universities.insert({
-                name: school
+                name: university
             });
         }
         let schoolDoc = Schools.findOne({
