@@ -138,6 +138,7 @@ Template.advisorsForm.events({
         var formData = {
             firstName : form.firstName.value,
             lastName : form.lastName.value,
+            university: form.university.value,
             school: form.school.value,
             department: form.department.value,
             website: form.website.value,
